@@ -1,6 +1,9 @@
+import RbActionMenu from '../components/RbActionMenu.vue'
+import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
 import RbDataTable from '../components/RbDataTable.vue'
 
 export default ({ app }) => {
-  // we globally register our component in the app
+  app.component(RbActionMenu.name, RbActionMenu)
+  app.component(RbColumnAutoFilter.name, RbColumnAutoFilter)
   app.component(RbDataTable.name, RbDataTable)
 }
