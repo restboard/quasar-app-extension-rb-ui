@@ -1,6 +1,12 @@
 # quasar-app-extension-rb-ui
 
-Restboard UI components for [Quasar Framework](https://donate.quasar.dev)
+[Restboard](https://github.com/restboard/restboard) UI components for [Quasar Framework](https://donate.quasar.dev)
+
+## Getting started
+
+```bash
+quasar ext add rb-ui
+```
 
 ## License
 
