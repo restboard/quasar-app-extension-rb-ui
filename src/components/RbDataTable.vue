@@ -60,10 +60,10 @@
         >
           <rb-column-auto-filter
             :rows="rows"
-            :value="colFilters[props.col.field || props.col.name]"
+            :model-value="colFilters[props.col.field || props.col.name]"
             :field="props.col.field || props.col.name"
             :format="props.col.format"
-            @input="evt => onFilterChange(props.col.field || props.col.name, evt)"
+            @update:modelValue="evt => onFilterChange(props.col.field || props.col.name, evt)"
           />
         </q-btn>
         {{ props.col.label }}

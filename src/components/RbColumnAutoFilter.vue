@@ -64,7 +64,7 @@ export default defineComponent({
       required: true
     },
 
-    value: {
+    modelValue: {
       type: Object
     },
 
@@ -99,8 +99,8 @@ export default defineComponent({
         if (!rowKey) {
           continue
         }
-        if (rowKey in this.value) {
-          _filters[rowKey] = this.value[rowKey]
+        if (rowKey in this.modelValue) {
+          _filters[rowKey] = this.modelValue[rowKey]
         } else {
           _filters[rowKey] = true
         }
@@ -110,19 +110,19 @@ export default defineComponent({
       }
       this.filters = _filters
       this.labels = _labels
-      this.$emit('input', { ...this.filters })
+      this.$emit('update:modelValue', { ...this.filters })
     },
 
     resetFilters (value) {
       Object.keys(this.filters || {}).forEach(key => {
         this.filters[key] = value
       })
-      this.$emit('input', { ...this.filters })
+      this.$emit('update:modelValue', { ...this.filters })
     },
 
     toggleFilter (key) {
       this.filters[key] = !this.filters[key]
-      this.$emit('input', { ...this.filters })
+      this.$emit('update:modelValue', { ...this.filters })
     }
   },
 
@@ -139,7 +139,7 @@ export default defineComponent({
       this.reloadFilters()
     },
 
-    value: function () {
+    modelValue: function () {
       this.reloadFilters()
     }
   }
