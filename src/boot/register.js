@@ -4,6 +4,7 @@ import RbDataTable from '../components/RbDataTable.vue'
 import RbResourceLink from '../components/RbResourceLink.vue'
 import RbSidebar from '../components/RbSidebar.vue'
 import RbFormWrapper from '../components/RbFormWrapper.vue'
+import RbMainLayout from '../layouts/RbMainLayout.vue'
 
 export default ({ app }) => {
   app.component(RbActionMenu.name, RbActionMenu)
@@ -12,4 +13,5 @@ export default ({ app }) => {
   app.component(RbResourceLink.name, RbResourceLink)
   app.component(RbSidebar.name, RbSidebar)
   app.component(RbFormWrapper.name, RbFormWrapper)
+  app.component(RbMainLayout.name, RbMainLayout)
 }
