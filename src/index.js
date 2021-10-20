@@ -7,7 +7,10 @@
  */
 
  function extendConf (conf) {
-    // make sure my-ext boot file is registered
+    // make sure necessary plugins are injected:
+    conf.framework.plugins.push('Dialog')
+
+    // make sure boot file is registered
     conf.boot.push('~quasar-app-extension-rb-ui/src/boot/register.js')
   
     // make sure boot & component files get transpiled

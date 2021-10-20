@@ -5,6 +5,9 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },
+  "peerDependencies": {
+    "rb-vue-smart-components": "^0.0.7"
+  },
   "engines": {
     "node": ">= 8.9.0",
     "npm": ">= 5.6.0",
