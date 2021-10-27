@@ -4,20 +4,46 @@
     :view="view"
   >
     <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          {{ title }}
-        </q-toolbar-title>
-      </q-toolbar>
+      <slot
+        name="toolbar"
+        v-bind="$props"
+      >
+        <rb-toolbar
+          :is-menu-open="leftDrawerOpen"
+          :title="title"
+          @toggle-menu="toggleLeftDrawer"
+        >
+          <slot
+            name="toolbar:userarea"
+            v-bind="$props"
+          >
+            <div
+              class="q-ml-sm"
+              v-if="showIdentity && $q.screen.gt.sm"
+            >
+              {{ userIdentity }}
+            </div>
+            <q-btn
+              class="q-ml-sm"
+              flat
+              round
+              dense
+              icon="account_circle"
+            >
+              <slot
+                name="toolbar:userarea:menu"
+                v-bind="$props"
+              >
+                <rb-user-menu
+                  :avatar="userAvatar"
+                  :identity="userIdentity"
+                  :tenantIdentity="tenantIdentity"
+                />
+              </slot>
+            </q-btn>
+          </slot>
+        </rb-toolbar>
+      </slot>
     </q-header>
 
     <q-drawer
@@ -36,19 +62,37 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import RbToolbar from '../components/RbToolbar.vue'
+import RbUserMenu from '../components/RbUserMenu.vue'
 
 export default defineComponent({
   name: 'RbMainLayout',
+
+  components: {
+    RbToolbar,
+    RbUserMenu
+  },
 
   props: {
     view: {
       type: String,
       default: 'hHh Lpr lFf'
     },
-
     title: {
       type: String,
       default: 'Restboard'
+    },
+    showIdentity: {
+      type: Boolean
+    },
+    userAvatar: {
+      type: String
+    },
+    userIdentity: {
+      type: String
+    },
+    tenantIdentity: {
+      type: String
     }
   },
 
