@@ -1,3 +1,4 @@
+import RbContainer from '../components/RbContainer.vue'
 import RbActionMenu from '../components/RbActionMenu.vue'
 import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
 import RbDataTable from '../components/RbDataTable.vue'
@@ -8,6 +9,7 @@ import RbMainLayout from '../layouts/RbMainLayout.vue'
 import RbMasterDetailPage from '../pages/RbMasterDetailPage.vue'
 
 export default ({ app }) => {
+  app.component(RbContainer.name, RbContainer)
   app.component(RbActionMenu.name, RbActionMenu)
   app.component(RbColumnAutoFilter.name, RbColumnAutoFilter)
   app.component(RbDataTable.name, RbDataTable)
