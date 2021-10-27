@@ -3,8 +3,9 @@
     <q-splitter
       v-model="splitterModel"
       class="full-width"
-      before-class="q-pa-lg full-height"
-      after-class="q-pa-lg full-height"
+      before-class="full-height"
+      after-class="full-height"
+      separator-class="q-mx-lg"
     >
       <template v-slot:before>
         <rb-resource-collection :resource="resource" v-slot="props">
@@ -46,7 +47,7 @@
               class="column q-gutter-sm text-center"
               style="max-width: 200px"
             >
-              {{ $t("Select an item from the list or") }}
+              <p>{{ $t("Select an item from the list or") }}</p>
               <q-btn
                 color="primary"
                 icon="add"
@@ -68,7 +69,7 @@ export default defineComponent({
   name: 'RbMasterDetailPage',
 
   props: {
-    resource: Object,
+    resource: Object
   },
 
   data() {
