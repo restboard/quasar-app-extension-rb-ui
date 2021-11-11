@@ -87,13 +87,17 @@ export default defineComponent({
     },
     horizontal: {
       type: Boolean
+    },
+    ratio: {
+      type: Number,
+      default: 60
     }
   },
 
   data () {
     return {
       activeRow: null,
-      splitterModel: ref(70),
+      splitterModel: ref(this.ratio),
     };
   },
 
