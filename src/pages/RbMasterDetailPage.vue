@@ -3,13 +3,20 @@
     <q-splitter
       v-model="splitterModel"
       class="full-width"
-      before-class="full-height"
-      after-class="full-height"
-      separator-class="q-mx-lg"
+      :horizontal="horizontal"
+      :before-class="horizontal ? 'full-width' : 'full-height'"
+      :after-class="horizontal ? 'full-width' : 'full-height'"
+      :separator-class="horizontal ? 'q-my-lg' : 'q-mx-lg'"
     >
       <template v-slot:before>
-        <rb-resource-collection :resource="resource" v-slot="props">
-          <slot name="list" v-bind="{ ...$props, ...$attrs }">
+        <rb-resource-collection
+          :resource="resource"
+          v-slot="props"
+        >
+          <slot
+            name="list"
+            v-bind="{ ...$props, ...$attrs }"
+          >
             <rb-data-table
               :title="props.resource.label"
               :columns="props.resource.columns"
@@ -21,7 +28,10 @@
         </rb-resource-collection>
       </template>
       <template v-slot:after>
-        <slot name="detail" v-bind="{ ...$props, ...$attrs }">
+        <slot
+          name="detail"
+          v-bind="{ ...$props, ...$attrs }"
+        >
           <rb-resource-instance
             v-if="activeRow"
             ref="resourceInstance"
@@ -42,7 +52,10 @@
               @dismiss="onFormDismissed"
             />
           </rb-resource-instance>
-          <div v-else class="fit column items-center">
+          <div
+            v-else
+            class="fit column items-center"
+          >
             <div
               class="column q-gutter-sm text-center"
               style="max-width: 200px"
@@ -69,10 +82,15 @@ export default defineComponent({
   name: 'RbMasterDetailPage',
 
   props: {
-    resource: Object
+    resource: {
+      type: Object
+    },
+    horizontal: {
+      type: Boolean
+    }
   },
 
-  data() {
+  data () {
     return {
       activeRow: null,
       splitterModel: ref(70),
@@ -80,7 +98,7 @@ export default defineComponent({
   },
 
   methods: {
-    onRowClicked(evt, row) {
+    onRowClicked (evt, row) {
       this.activeRow = row;
     },
 
