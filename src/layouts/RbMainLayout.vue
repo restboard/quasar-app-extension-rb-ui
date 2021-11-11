@@ -50,6 +50,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      :mini="miniSidebar"
     >
       <rb-sidebar :resources="resources" />
     </q-drawer>
@@ -93,6 +94,9 @@ export default defineComponent({
     },
     tenantIdentity: {
       type: String
+    },
+    miniSidebar: {
+      type: Boolean
     }
   },
 
