@@ -9,6 +9,7 @@ import RbSidebar from '../components/RbSidebar.vue'
 import RbFormWrapper from '../components/RbFormWrapper.vue'
 import RbFullPageFormLayout from '../layouts/RbFullPageFormLayout.vue'
 import RbMainLayout from '../layouts/RbMainLayout.vue'
+import RbLoginPage from '../pages/RbLoginPage.vue'
 import RbMasterDetailPage from '../pages/RbMasterDetailPage.vue'
 import RbResourceTablePage from '../pages/RbResourceTablePage.vue'
 
@@ -24,6 +25,7 @@ export default ({ app }) => {
   app.component(RbFormWrapper.name, RbFormWrapper)
   app.component(RbFullPageFormLayout.name, RbFullPageFormLayout)
   app.component(RbMainLayout.name, RbMainLayout)
+  app.component(RbLoginPage.name, RbLoginPage)
   app.component(RbMasterDetailPage.name, RbMasterDetailPage)
   app.component(RbResourceTablePage.name, RbResourceTablePage)
 }
