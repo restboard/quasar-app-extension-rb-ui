@@ -7,7 +7,7 @@
         </q-avatar>
       </q-card-section>
       <q-card-section>
-        <div class="text-h6">{{ $t('sign_in') }}</div>
+        <div class="text-h6">{{ $t('Sign in') }}</div>
       </q-card-section>
     </slot>
 
@@ -17,14 +17,14 @@
           filled
           required
           v-model="username"
-          :label="$t('username')"
+          :label="$t('Username')"
         />
         <q-input
           filled
           required
           v-model="password"
           :type="isPwd ? 'password' : 'text'"
-          :label="$t('password')"
+          :label="$t('Password')"
         >
           <template v-slot:append>
             <q-icon
@@ -38,13 +38,13 @@
           <q-checkbox
             dense
             v-model="rememberMe"
-            :label="$t('remember_me')"
+            :label="$t('Remember me')"
           />
           <q-btn
             flat
             dense
             no-caps
-            :label="$t('forgot_password')"
+            :label="$t('Forgot password?')"
             @click="onForgotPassword"
           />
         </div>
@@ -59,7 +59,7 @@
         <q-btn
           class="q-mb-sm"
           color="primary"
-          :label="$t('sign_in')"
+          :label="$t('Sign in')"
           @click="onLoginClicked"
         />
       </q-card-actions>
