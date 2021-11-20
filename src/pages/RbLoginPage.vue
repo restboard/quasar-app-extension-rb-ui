@@ -37,7 +37,7 @@
         <div class="row justify-between">
           <q-checkbox
             dense
-            v-model="rememberMe"
+            v-model="keepLogged"
             :label="$t('Remember me')"
           />
           <q-btn
@@ -78,7 +78,7 @@ export default defineComponent({
       username: null,
       password: null,
       isPwd: true,
-      rememberMe: false
+      keepLogged: false
     }
   },
 
@@ -87,7 +87,7 @@ export default defineComponent({
       this.$emit('login', {
         username: this.username,
         password: this.password,
-        rememberMe: this.rememberMe
+        keepLogged: this.keepLogged
       });
     },
 
