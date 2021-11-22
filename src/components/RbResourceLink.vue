@@ -51,6 +51,10 @@ export default defineComponent({
       type: Object
     },
 
+    link: {
+      type: String
+    },
+
     links: {
       type: Array
     },
