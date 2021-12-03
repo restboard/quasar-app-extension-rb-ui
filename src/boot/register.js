@@ -1,5 +1,5 @@
-import RbResourceCollection from './components/RbResourceCollection.vue'
-import RbResourceInstance from './components/RbResourceInstance.vue'
+import RbResourceCollection from '../components/RbResourceCollection.vue'
+import RbResourceInstance from '../components/RbResourceInstance.vue'
 import RbContainer from '../components/RbContainer.vue'
 import RbActionMenu from '../components/RbActionMenu.vue'
 import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
