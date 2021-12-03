@@ -1,3 +1,5 @@
+import RbResourceCollection from './components/RbResourceCollection.vue'
+import RbResourceInstance from './components/RbResourceInstance.vue'
 import RbContainer from '../components/RbContainer.vue'
 import RbActionMenu from '../components/RbActionMenu.vue'
 import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
@@ -15,6 +17,8 @@ import RbMasterDetailPage from '../pages/RbMasterDetailPage.vue'
 import RbResourceTablePage from '../pages/RbResourceTablePage.vue'
 
 export default ({ app }) => {
+  app.component(RbResourceCollection.name, RbResourceCollection)
+  app.component(RbResourceInstance.name, RbResourceInstance)
   app.component(RbContainer.name, RbContainer)
   app.component(RbActionMenu.name, RbActionMenu)
   app.component(RbColumnAutoFilter.name, RbColumnAutoFilter)
