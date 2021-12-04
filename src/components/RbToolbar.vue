@@ -17,7 +17,7 @@
         :alt="title || 'logo'"
         @click="onGoHome"
       />
-      <div>{{ title }}</div>
+      <div class="gt-xs">{{ title }}</div>
     </q-toolbar-title>
 
     <slot
