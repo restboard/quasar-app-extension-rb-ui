@@ -32,7 +32,7 @@
     </q-list>
     <template v-else>
       <q-item-section avatar>
-        <q-icon :name="icon || resource.icon" />
+        <q-icon :name="icon || resource.ui.icon" />
       </q-item-section>
       <q-item-section>{{ label || resource.label || resource.name }}</q-item-section>
     </template>

@@ -11,7 +11,10 @@
             type="text"
             width="150px"
           />
-          <span v-else class="text-h6">{{ title }}</span>
+          <span
+            v-else
+            class="text-h6"
+          >{{ title }}</span>
         </q-toolbar-title>
         <q-btn
           v-if="dismissible"
@@ -136,14 +139,14 @@ export default defineComponent({
   computed: {
     title () {
       if (this.id) {
-        return this.$t(this.resource.updateTitle || 'Update')
+        return this.$t(this.resource.ui.updateTitle || 'Update')
       } else {
-        return this.$t(this.resource.createTitle || 'Create')
+        return this.$t(this.resource.ui.createTitle || 'Create')
       }
     },
 
     formComponent () {
-      return this.resource.getFormComponent(this.model)
+      return this.resource.ui.getFormComponent(this.model)
     },
 
     hasChanges () {
@@ -213,11 +216,9 @@ export default defineComponent({
             message: this.$t('All pending, unsaved changes will be permanently lost!'),
             cancel: true,
             persistent: true
-          }).onOk(() => {
-            resolve(true)
-          }).onCancel(() => {
-            resolve(false)
           })
+            .onOk(() => resolve(true))
+            .onCancel(() => resolve(false))
         } catch (err) {
           reject(err)
         }
