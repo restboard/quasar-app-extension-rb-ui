@@ -52,7 +52,13 @@
       bordered
       :mini="miniSidebar"
     >
-      <rb-sidebar :resources="resources" />
+      <slot
+        name="sidebar"
+        v-bind="$props"
+        :resources="resources"
+      >
+        <rb-sidebar :resources="resources" />
+      </slot>
     </q-drawer>
 
     <q-page-container>
