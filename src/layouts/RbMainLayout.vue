@@ -13,35 +13,51 @@
           :title="title"
           @toggle-menu="toggleLeftDrawer"
         >
-          <slot
-            name="toolbar:userarea"
-            v-bind="$props"
-          >
-            <div
-              class="q-ml-sm"
-              v-if="showIdentity && $q.screen.gt.sm"
+          <template v-slot:left>
+            <slot
+              name="toolbar:left"
+              v-bind="$props"
             >
-              {{ userIdentity }}
-            </div>
-            <q-btn
-              class="q-ml-sm"
-              flat
-              round
-              dense
-              icon="account_circle"
+            </slot>
+          </template>
+
+          <template>
+            <slot
+              name="toolbar:icons"
+              v-bind="$props"
             >
-              <slot
-                name="toolbar:userarea:menu"
-                v-bind="$props"
+            </slot>
+
+            <slot
+              name="toolbar:userarea"
+              v-bind="$props"
+            >
+              <div
+                class="q-ml-sm"
+                v-if="showIdentity && $q.screen.gt.sm"
               >
-                <rb-user-menu
-                  :avatar="userAvatar"
-                  :identity="userIdentity"
-                  :tenantIdentity="tenantIdentity"
-                />
-              </slot>
-            </q-btn>
-          </slot>
+                {{ userIdentity }}
+              </div>
+              <q-btn
+                class="q-ml-sm"
+                flat
+                round
+                dense
+                icon="account_circle"
+              >
+                <slot
+                  name="toolbar:userarea:menu"
+                  v-bind="$props"
+                >
+                  <rb-user-menu
+                    :avatar="userAvatar"
+                    :identity="userIdentity"
+                    :tenantIdentity="tenantIdentity"
+                  />
+                </slot>
+              </q-btn>
+            </slot>
+          </template>
         </rb-toolbar>
       </slot>
     </q-header>
