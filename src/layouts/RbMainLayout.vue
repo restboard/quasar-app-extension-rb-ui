@@ -21,7 +21,7 @@
             </slot>
           </template>
 
-          <template>
+          <div>
             <slot
               name="toolbar:icons"
               v-bind="$props"
@@ -57,7 +57,7 @@
                 </slot>
               </q-btn>
             </slot>
-          </template>
+          </div>
         </rb-toolbar>
       </slot>
     </q-header>
