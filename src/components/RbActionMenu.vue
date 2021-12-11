@@ -4,7 +4,7 @@
     v-if="visibleActions"
   >
     <slot name="before"></slot>
-    <template v-if="visibleActions.length < 3">
+    <template v-if="visibleActions.length <= collpaseAfter">
       <q-btn
         v-for="action in visibleActions"
         :key="action.name"
@@ -83,16 +83,21 @@ export default defineComponent({
     transitionHide: {
       type: String,
       default: 'scale'
+    },
+
+    collpaseAfter: {
+      type: Number,
+      default: 3
     }
   },
 
   computed: {
     actionParams () {
       return {
+        quasar: this.$q,
         router: this.$router,
         store: this.$store,
-        translate: this.$t.bind(this),
-        quasar: this.$q
+        translate: this.$t.bind(this)
       }
     },
 
