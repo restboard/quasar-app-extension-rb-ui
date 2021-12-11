@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="q-py-sm">
+  <q-toolbar>
     <q-btn
       flat
       dense
@@ -9,7 +9,7 @@
       @click="onToggleMenu"
     />
 
-    <q-toolbar-title class="row items-center q-gutter-md">
+    <q-toolbar-title class="row col-auto items-center q-gutter-md">
       <img
         src="~assets/logo.svg"
         class="cursor-pointer"
@@ -17,7 +17,7 @@
         :alt="title || 'logo'"
         @click="onGoHome"
       />
-      <div class="gt-xs">{{ title }}</div>
+      <span class="gt-xs">{{ title }}</span>
     </q-toolbar-title>
 
     <slot
