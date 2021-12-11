@@ -5,6 +5,7 @@ import RbActionMenu from '../components/RbActionMenu.vue'
 import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
 import RbDataTable from '../components/RbDataTable.vue'
 import RbResourceLink from '../components/RbResourceLink.vue'
+import RbUserArea from '../components/RbUserArea.vue'
 import RbUserMenu from '../components/RbUserMenu.vue'
 import RbToolbar from '../components/RbToolbar.vue'
 import RbSidebar from '../components/RbSidebar.vue'
@@ -17,6 +18,7 @@ import RbMasterDetailPage from '../pages/RbMasterDetailPage.vue'
 import RbResourceTablePage from '../pages/RbResourceTablePage.vue'
 
 export default ({ app }) => {
+  // Components
   app.component(RbResourceCollection.name, RbResourceCollection)
   app.component(RbResourceInstance.name, RbResourceInstance)
   app.component(RbContainer.name, RbContainer)
@@ -24,12 +26,17 @@ export default ({ app }) => {
   app.component(RbColumnAutoFilter.name, RbColumnAutoFilter)
   app.component(RbDataTable.name, RbDataTable)
   app.component(RbResourceLink.name, RbResourceLink)
+  app.component(RbUserArea.name, RbUserArea)
   app.component(RbUserMenu.name, RbUserMenu)
   app.component(RbToolbar.name, RbToolbar)
   app.component(RbSidebar.name, RbSidebar)
   app.component(RbFormWrapper.name, RbFormWrapper)
+
+  // Layouts
   app.component(RbFullPageFormLayout.name, RbFullPageFormLayout)
   app.component(RbMainLayout.name, RbMainLayout)
+
+  // Pages
   app.component(RbLoginPage.name, RbLoginPage)
   app.component(RbRecoverPasswordPage.name, RbRecoverPasswordPage)
   app.component(RbMasterDetailPage.name, RbMasterDetailPage)
