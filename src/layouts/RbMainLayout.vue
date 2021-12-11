@@ -1,8 +1,5 @@
 <template>
-  <q-layout
-    class="bg-grey-2"
-    :view="view"
-  >
+  <q-layout :view="view">
     <q-header elevated>
       <slot
         name="toolbar"
@@ -32,30 +29,22 @@
               name="toolbar:userarea"
               v-bind="$props"
             >
-              <div
-                class="q-ml-sm"
-                v-if="showIdentity && $q.screen.gt.sm"
+              <rb-user-area
+                :show-identity="showIdentity && $q.screen.gt.sm"
+                :user-avatar="userAvatar"
+                :user-identity="userIdentity"
+                :tenant-identity="tenantIdentity"
+                @profile="evt => $emit(evt)"
+                @logout="evt => $emit(evt)"
               >
-                {{ userIdentity }}
-              </div>
-              <q-btn
-                class="q-ml-sm"
-                flat
-                round
-                dense
-                icon="account_circle"
-              >
-                <slot
-                  name="toolbar:userarea:menu"
-                  v-bind="$props"
-                >
-                  <rb-user-menu
-                    :avatar="userAvatar"
-                    :identity="userIdentity"
-                    :tenantIdentity="tenantIdentity"
-                  />
-                </slot>
-              </q-btn>
+                <template v-slot:menu>
+                  <slot
+                    name="toolbar:userarea:menu"
+                    v-bind="$props"
+                  >
+                  </slot>
+                </template>
+              </rb-user-area>
             </slot>
           </div>
         </rb-toolbar>
@@ -86,14 +75,14 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import RbToolbar from '../components/RbToolbar.vue'
-import RbUserMenu from '../components/RbUserMenu.vue'
+import RbUserArea from '../components/RbUserArea.vue'
 
 export default defineComponent({
   name: 'RbMainLayout',
 
   components: {
     RbToolbar,
-    RbUserMenu
+    RbUserArea
   },
 
   props: {
@@ -106,7 +95,8 @@ export default defineComponent({
       default: 'Restboard'
     },
     showIdentity: {
-      type: Boolean
+      type: Boolean,
+      default: true
     },
     userAvatar: {
       type: String
