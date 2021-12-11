@@ -1,12 +1,10 @@
 <template>
   <q-card class="q-pa-xs-sm q-pa-md-lg shadow-1">
     <slot name="header">
-      <q-card-section class="flex flex-center">
+      <q-card-section class="column items-center q-gutter-md">
         <q-avatar size="128px">
           <img src="~assets/logo.svg">
         </q-avatar>
-      </q-card-section>
-      <q-card-section>
         <div class="text-h6">{{ $t('Sign in') }}</div>
       </q-card-section>
     </slot>
@@ -17,7 +15,7 @@
           filled
           required
           v-model="username"
-          :label="$t('Username')"
+          :label="$t('Username or email')"
         />
         <q-input
           filled

@@ -1,13 +1,11 @@
 <template>
   <q-card class="q-pa-xs-sm q-pa-md-lg shadow-1">
     <slot name="header">
-      <q-card-section class="flex flex-center">
+      <q-card-section class="column items-center q-gutter-md">
         <q-avatar size="128px">
           <img src="~assets/logo.svg">
         </q-avatar>
-      </q-card-section>
-      <q-card-section>
-        <div class="text-h6">{{ $t('Recover password') }}</div>
+        <div class="text-h6">{{ $t('Password recovery') }}</div>
       </q-card-section>
     </slot>
 
@@ -16,8 +14,8 @@
         <q-input
           filled
           required
-          v-model="email"
-          :label="$t('Email')"
+          v-model="username"
+          :label="$t('Username or email')"
         />
       </q-card-section>
     </slot>
@@ -30,8 +28,8 @@
         <q-btn
           class="q-mb-sm"
           color="primary"
-          :label="$t('Recover')"
-          @click="onRecoverPassword"
+          :label="$t('Recover password')"
+          @click="onRecoverPasswordRequest"
         />
       </q-card-actions>
     </slot>
@@ -46,13 +44,15 @@ export default defineComponent({
 
   data () {
     return {
-      email: null
+      username: null
     }
   },
 
   methods: {
-    onRecoverPassword () {
-      this.$emit('recover-password', this.email);
+    onRecoverPasswordRequest () {
+      this.$emit('recover-password', {
+        username: this.username
+      });
     }
   }
 })
