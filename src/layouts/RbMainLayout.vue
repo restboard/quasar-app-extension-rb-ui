@@ -1,13 +1,18 @@
 <template>
-  <q-layout :view="view">
+  <q-layout
+    :class="$attrs.class || 'bg-grey-1'"
+    :view="view"
+  >
     <q-header elevated>
       <slot
         name="toolbar"
         v-bind="$props"
       >
         <rb-toolbar
-          :is-menu-open="leftDrawerOpen"
+          :class="toolbarClass"
+          :style="toolbarStyle"
           :title="title"
+          :is-menu-open="leftDrawerOpen"
           @toggle-menu="toggleLeftDrawer"
         >
           <template v-slot:left>
@@ -56,6 +61,8 @@
       show-if-above
       bordered
       :mini="miniSidebar"
+      :class="sidebarClass"
+      :style="sidebarStyle"
     >
       <slot
         name="sidebar"
@@ -93,6 +100,18 @@ export default defineComponent({
     title: {
       type: String,
       default: 'Restboard'
+    },
+    toolbarClass: {
+      type: [String, Object, Array]
+    },
+    toolbarStyle: {
+      type: [String, Object, Array]
+    },
+    sidebarClass: {
+      type: [String, Object, Array]
+    },
+    sidebarStyle: {
+      type: [String, Object, Array]
     },
     showIdentity: {
       type: Boolean,
