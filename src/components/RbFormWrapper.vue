@@ -146,7 +146,10 @@ export default defineComponent({
     },
 
     formComponent () {
-      return this.resource.ui.getFormComponent(this.model)
+      const key = this.resource.getKey(this.model)
+      return key
+        ? this.resource.ui.updateFormComponent
+        : this.resource.ui.createFormComponent
     },
 
     hasChanges () {
