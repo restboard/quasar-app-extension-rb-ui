@@ -14,7 +14,7 @@
       v-else
       name="empty"
     >
-      Invalid or missing instance
+      {{ $t("Invalid or missing instance") }}
     </slot>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default defineComponent({
       this.loading = true
       try {
         if (this.id) {
-          const res = await this.resource.getOne({ id: this.id })
+          const res = await this.resource.getOne(this.id)
           this.instance = res.data
         } else {
           this.instance = {}
@@ -99,7 +99,7 @@ export default defineComponent({
       try {
         if (this.id) {
           data[this.resource.key || 'id'] = this.id
-          res = await this.resource.updateOne(data)
+          res = await this.resource.updateOne(this.id, data)
         } else {
           res = await this.resource.createOne(data)
         }
