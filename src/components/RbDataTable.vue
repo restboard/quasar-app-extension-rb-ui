@@ -165,10 +165,10 @@ export default defineComponent({
       if (this.selection) {
         cols.unshift({})
       }
-      if (this.actions && this.actions.length > 0) {
+      if (this.actions) {
         cols.push({
           name: 'actions',
-          label: this.$t('actions')
+          label: this.$t('Actions')
         })
       }
       return cols
