@@ -20,16 +20,6 @@
       <slot :name="name" />
     </template>
 
-    <template
-      v-for="(index, name) in $scopedSlots"
-      v-slot:[name]="data"
-    >
-      <slot
-        :name="name"
-        v-bind="data"
-      ></slot>
-    </template>
-
     <template v-slot:top>
       <div class="row full-width q-gutter-sm justify-end">
         <q-input
