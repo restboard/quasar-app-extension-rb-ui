@@ -31,6 +31,7 @@ export default defineComponent({
 
   props: {
     resource: Object,
+    required: true
   },
 
   methods: {
