@@ -21,14 +21,17 @@
     </slot>
 
     <slot name="actions">
-      <q-card-actions
-        vertical
-        class="q-pa-md"
-      >
+      <q-card-actions class="row justify-between">
         <q-btn
-          class="q-mb-sm"
+          flat
+          dense
+          no-caps
+          :label="$t('Back to sign in')"
+          @click="onCancel"
+        />
+        <q-btn
           color="primary"
-          :label="$t('Recover password')"
+          :label="$t('Recover')"
           @click="onRecoverPasswordRequest"
         />
       </q-card-actions>
@@ -49,10 +52,14 @@ export default defineComponent({
   },
 
   methods: {
+    onCancel () {
+      this.$emit('cancel')
+    },
+
     onRecoverPasswordRequest () {
       this.$emit('recover-password', {
         username: this.username
-      });
+      })
     }
   }
 })
