@@ -6,7 +6,10 @@
       :visibileResources="visibileResources"
     ></slot>
 
-    <slot name="root" v-if="!hideRootLink">
+    <slot
+      name="root"
+      v-if="!hideRootLink"
+    >
       <q-item
         clickable
         v-ripple
@@ -55,7 +58,7 @@ export default defineComponent({
 
   props: {
     resources: {
-      type: Object
+      type: Array
     },
 
     separator: {
@@ -71,8 +74,8 @@ export default defineComponent({
 
   computed: {
     visibileResources () {
-      return Object.values(this.resources || {})
-        .filter(resource => !resource.excludeSidebar)
+      return Array.from(this.resources || [])
+        .filter(resource => !resource.ui.excludeSidebar)
     }
   }
 })
