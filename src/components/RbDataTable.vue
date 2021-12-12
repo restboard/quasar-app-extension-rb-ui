@@ -123,8 +123,7 @@ export default defineComponent({
     },
 
     actions: {
-      type: Array,
-      default: []
+      type: Object
     },
 
     loading: {
