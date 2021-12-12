@@ -19,7 +19,7 @@
           >
             <rb-data-table
               :title="props.resource.label"
-              :columns="props.resource.columns"
+              :columns="props.resource.ui.columns"
               :rows="props.items"
               :actions="props.resource.actions"
               @row-click="onRowClicked"
