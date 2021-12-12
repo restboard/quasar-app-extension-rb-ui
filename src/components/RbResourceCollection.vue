@@ -13,7 +13,7 @@
       v-else
       name="empty"
     >
-      No results
+      {{ $t("No results") }}
     </slot>
   </div>
 </template>
