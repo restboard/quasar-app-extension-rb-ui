@@ -14,7 +14,7 @@
           v-slot="props"
         >
           <slot
-            name="list"
+            name="master"
             v-bind="{ ...$props, ...$attrs }"
           >
             <rb-data-table
