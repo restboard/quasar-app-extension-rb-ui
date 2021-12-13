@@ -104,16 +104,17 @@ export default defineComponent({
 
     columns: {
       type: Array,
-      default: []
+      default: () => []
     },
 
     rows: {
       type: Array,
-      default: []
+      default: () => []
     },
 
     actions: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
 
     loading: {
