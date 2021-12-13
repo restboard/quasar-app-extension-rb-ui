@@ -138,6 +138,10 @@ export default defineComponent({
   },
 
   computed: {
+    hasActions () {
+      return this.actions && Object.keys(this.actions).length > 0
+    },
+
     tableColumns () {
       const cols = (this.columns || []).map(col => {
         return {
@@ -155,7 +159,7 @@ export default defineComponent({
       if (this.selection) {
         cols.unshift({})
       }
-      if (this.actions) {
+      if (this.hasActions) {
         cols.push({
           name: 'actions',
           label: this.$t('Actions')
