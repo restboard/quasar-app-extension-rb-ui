@@ -30,8 +30,7 @@ export default defineComponent({
   name: "RbResourceTablePage",
 
   props: {
-    resource: Object,
-    required: true
+    resource: Object
   },
 
   methods: {

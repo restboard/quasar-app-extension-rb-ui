@@ -83,8 +83,7 @@ export default defineComponent({
 
   props: {
     resource: {
-      type: Object,
-      required: true
+      type: Object
     },
     horizontal: {
       type: Boolean
