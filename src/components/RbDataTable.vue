@@ -8,7 +8,6 @@
     :grid="$q.screen.xs"
     :filter="searchQuery"
     :selection="selection"
-    :selected.sync="selected"
     @request="onRequest"
     @row-click="onRowClicked"
     @update:selected="onSelectionChanged"
@@ -122,7 +121,7 @@ export default defineComponent({
       default: false
     },
 
-    selected: {
+    selection: {
       type: String
     },
 
