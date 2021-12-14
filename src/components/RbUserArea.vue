@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-gutter-sm">
+  <div class="row items-center q-gutter-sm">
     <div v-if="showIdentity">
       {{ userIdentity }}
     </div>
