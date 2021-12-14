@@ -13,7 +13,7 @@
           :style="toolbarStyle"
           :title="title"
           :is-menu-open="leftDrawerOpen"
-          @toggle-menu="toggleLeftDrawer"
+          @toggle-menu="onToggleLeftDrawer"
         >
           <template v-slot:left>
             <slot
@@ -39,8 +39,8 @@
                 :user-avatar="userAvatar"
                 :user-identity="userIdentity"
                 :tenant-identity="tenantIdentity"
-                @profile="evt => $emit(evt)"
-                @logout="evt => $emit(evt)"
+                @profile="onShowProfile"
+                @logout="onLogout"
               >
                 <template v-slot:menu>
                   <slot
@@ -131,20 +131,30 @@ export default defineComponent({
     }
   },
 
-  setup () {
-    const leftDrawerOpen = ref(false)
-
+  data () {
     return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      leftDrawerOpen: false
     }
   },
 
   computed: {
     resources () {
       return this.$rb.getAllResources()
+    }
+  },
+
+  methods: {
+    onToggleLeftDrawer () {
+      this.leftDrawerOpen = !this.leftDrawerOpen
+    },
+
+    onShowProfile () {
+      this.$router.push('/profile')
+    },
+
+    onLogout () {
+      this.$store.dispatch('core/logout')
+        .then(() => this.$router.push('/auth/login'))
     }
   }
 })
