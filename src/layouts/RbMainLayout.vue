@@ -39,8 +39,8 @@
                 :user-avatar="userAvatar"
                 :user-identity="userIdentity"
                 :tenant-identity="tenantIdentity"
-                @profile="onShowProfile"
-                @logout="onLogout"
+                @profile="evt => $emit('profile', evt)"
+                @logout="evt => $emit('logout', evt)"
               >
                 <template v-slot:menu>
                   <slot
@@ -146,15 +146,6 @@ export default defineComponent({
   methods: {
     onToggleLeftDrawer () {
       this.leftDrawerOpen = !this.leftDrawerOpen
-    },
-
-    onShowProfile () {
-      this.$router.push('/profile')
-    },
-
-    onLogout () {
-      this.$store.dispatch('core/logout')
-        .then(() => this.$router.push('/auth/login'))
     }
   }
 })
