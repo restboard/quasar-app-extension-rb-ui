@@ -18,8 +18,8 @@
           :avatar="userAvatar"
           :identity="userIdentity"
           :tenantIdentity="tenantIdentity"
-          @profile="evt => $emit(evt)"
-          @logout="evt => $emit(evt)"
+          @profile="evt => $emit('profile', evt)"
+          @logout="evt => $emit('logout', evt)"
         />
       </slot>
     </q-btn>
