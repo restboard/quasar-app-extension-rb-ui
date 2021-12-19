@@ -139,7 +139,7 @@ export default defineComponent({
 
   computed: {
     resources () {
-      return this.$rb.getAllResources()
+      return Object.values(this.$rb)
     }
   },
 
