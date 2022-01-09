@@ -83,13 +83,15 @@
 import { defineComponent, ref } from 'vue'
 import RbToolbar from '../components/RbToolbar.vue'
 import RbUserArea from '../components/RbUserArea.vue'
+import RbSidebar from '../components/RbSidebar.vue'
 
 export default defineComponent({
   name: 'RbMainLayout',
 
   components: {
     RbToolbar,
-    RbUserArea
+    RbUserArea,
+    RbSidebar,
   },
 
   props: {
