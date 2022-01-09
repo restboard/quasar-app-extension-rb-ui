@@ -18,6 +18,7 @@
             v-bind="{ ...$props, ...$attrs }"
           >
             <rb-data-table
+              :loading="props.loading"
               :title="props.resource.label"
               :columns="props.resource.ui.columns"
               :rows="props.items"
