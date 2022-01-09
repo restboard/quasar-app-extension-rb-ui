@@ -8,9 +8,6 @@
     :grid="$q.screen.xs"
     :filter="searchQuery"
     :selection="selection"
-    @request="onRequest"
-    @row-click="onRowClicked"
-    @update:selected="onSelectionChanged"
   >
     <template
       v-for="(index, name) in $slots"
@@ -169,13 +166,24 @@ export default defineComponent({
 
     columnsWithFilters () {
       return this.tableColumns.filter(col => !!col.filterable)
+    },
+
+    filteredRows () {
+      let rows = [...this.rows]
+      this.columnsWithFilters.forEach(col => {
+        const filters = this.colFilters[col.field] || {}
+        rows = rows.filter(row => {
+          const key = row[col.field]
+          return key === null || !!filters[key]
+        })
+      })
+      return rows
     }
   },
 
   data () {
     return {
       searchQuery: '',
-      filteredRows: [],
       colFilters: {}
     }
   },
@@ -193,18 +201,6 @@ export default defineComponent({
           this.colFilters[col.field][key] = true
         })
       })
-      this.filterRows()
-    },
-
-    filterRows () {
-      this.filteredRows = [...this.rows]
-      this.columnsWithFilters.forEach(col => {
-        const filters = this.colFilters[col.field] || {}
-        this.filteredRows = this.filteredRows.filter(row => {
-          const key = row[col.field]
-          return !!filters[key]
-        })
-      })
     },
 
     onRowClicked (evt, row) {
@@ -220,14 +216,17 @@ export default defineComponent({
       const old = this.colFilters[columnName]
       if (JSON.stringify(val) !== JSON.stringify(old)) {
         this.colFilters[columnName] = val
-        this.filterRows()
       }
     }
   },
 
   watch: {
+    columns () {
+      this.reloadColFilters()
+    },
+
     rows () {
-      this.filterRows()
+      this.reloadColFilters()
     }
   }
 })
