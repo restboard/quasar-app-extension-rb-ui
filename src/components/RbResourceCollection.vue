@@ -93,7 +93,7 @@ export default defineComponent({
         newItems = res.data || []
         this.hasMore = newItems.length === opts.limit
         if (this.paginated) {
-          this.items.splice(this.itemCount, 0, newItems)
+          this.items = this.items.concat(newItems)
         } else {
           this.items = newItems
         }
@@ -124,10 +124,6 @@ export default defineComponent({
     },
 
     limit: function () {
-      this.clearAndReloadData()
-    },
-
-    '$route.query': function () {
       this.clearAndReloadData()
     }
   }
