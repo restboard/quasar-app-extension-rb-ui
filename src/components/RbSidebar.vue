@@ -7,34 +7,41 @@
     ></slot>
 
     <slot
-      name="root"
-      v-if="!hideRootLink"
+      name="menu"
+      :resources="resources"
+      :visibileResources="visibileResources"
     >
-      <q-item
-        clickable
-        v-ripple
-        to="/"
-        exact
-      >
-        <slot name="root-link">
+      <slot name="menu-root-item">
+        <q-item
+          clickable
+          v-ripple
+          to="/"
+          exact
+          v-if="!hideRootLink"
+        >
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
           <q-item-section>{{ $t('Dashboard') }}</q-item-section>
-        </slot>
-      </q-item>
-    </slot>
-
-    <slot
-      name="resources"
-      :resources="resources"
-      :visibileResources="visibileResources"
-    >
-      <rb-resource-link
+        </q-item>
+      </slot>
+      <slot
         v-for="resource in visibileResources"
         :key="resource.name"
+        :name="`menu-resource-${resource.name}-item`"
         :resource="resource"
-      />
+      >
+        <q-item
+          :to="resource.path"
+          clickable
+          v-ripple
+        >
+          <q-item-section avatar>
+            <q-icon :name="resource.ui.icon" />
+          </q-item-section>
+          <q-item-section>{{ resource.label || resource.name }}</q-item-section>
+        </q-item>
+      </slot>
     </slot>
 
     <slot
@@ -47,14 +54,9 @@
 
 <script>
 import { defineComponent } from 'vue'
-import RbResourceLink from '../components/RbResourceLink.vue'
 
 export default defineComponent({
   name: 'RbSidebar',
-
-  components: {
-    RbResourceLink
-  },
 
   props: {
     resources: {
