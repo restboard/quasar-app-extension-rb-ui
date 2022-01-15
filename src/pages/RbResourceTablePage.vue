@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex justify-center">
-    <rb-container>
+    <rb-container :full-width="fullWidth">
       <rb-resource-collection
         :resource="resource"
         v-slot="props"
@@ -30,7 +30,13 @@ export default defineComponent({
   name: "RbResourceTablePage",
 
   props: {
-    resource: Object
+    resource: {
+      type: Object
+    },
+
+    fullWidth: {
+      type: Boolean
+    },
   },
 
   methods: {

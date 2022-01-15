@@ -1,7 +1,7 @@
 <template>
   <div
     class="full-width"
-    :style="`max-width:${maxWidth}`"
+    :style="style"
   >
     <slot></slot>
   </div>
@@ -17,6 +17,17 @@ export default defineComponent({
     maxWidth: {
       type: String,
       default: '1000px'
+    },
+
+    fullWidth: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  computed: {
+    style () {
+      return !this.fullWidth && `max-width:${this.maxWidth}`
     }
   }
 })
