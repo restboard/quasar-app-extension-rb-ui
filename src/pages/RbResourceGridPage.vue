@@ -1,0 +1,110 @@
+<template>
+  <q-page class="flex justify-center">
+    <rb-container :full-width="fullWidth">
+      <rb-resource-collection
+        :resource="resource"
+        v-slot="props"
+      >
+        <slot
+          name="grid"
+          v-bind="{ ...$props, ...$attrs }"
+        >
+          <rb-data-grid
+            class="full-width"
+            :items="props.items"
+            :itemsPerRow="itemsPerRow"
+            :loading="props.loading"
+            :slide="slide"
+          >
+            <template v-slot:default="slotProps">
+              <rb-data-card
+                class="fit"
+                :title="resource.stringify(slotProps.item)"
+              >
+                <template v-slot:actions>
+                  <rb-action-menu
+                    :actions="resource.actions"
+                    :instance="slotProps.item"
+                  />
+                </template>
+              </rb-data-card>
+            </template>
+            <template v-slot:skeleton>
+              <rb-data-card
+                class="fit"
+                loading
+              />
+            </template>
+          </rb-data-grid>
+        </slot>
+      </rb-resource-collection>
+    </rb-container>
+  </q-page>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "RbResourceGridPage",
+
+  props: {
+    resource: {
+      type: Object
+    },
+
+    fullWidth: {
+      type: Boolean
+    },
+
+    xs: {
+      type: Number,
+      default: 1
+    },
+
+    sm: {
+      type: Number,
+      default: 2
+    },
+
+    md: {
+      type: Number,
+      default: 3
+    },
+
+    lg: {
+      type: Number,
+      default: 4
+    },
+
+    xl: {
+      type: Number,
+      default: 4
+    }
+  },
+
+  computed: {
+    itemsPerRow () {
+      if (this.$q.screen.xs) {
+        return this.xs
+      }
+      if (this.$q.screen.sm) {
+        return this.sm
+      }
+      if (this.$q.screen.md) {
+        return this.md
+      }
+      if (this.$q.screen.lg) {
+        return this.lg
+      }
+      return this.xl
+    }
+  },
+
+  data () {
+    return {
+      slide: 0
+    }
+  }
+});
+</script>

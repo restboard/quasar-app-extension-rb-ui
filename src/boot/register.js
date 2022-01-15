@@ -4,6 +4,8 @@ import RbContainer from '../components/RbContainer.vue'
 import RbActionMenu from '../components/RbActionMenu.vue'
 import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
 import RbDataTable from '../components/RbDataTable.vue'
+import RbDataGrid from '../components/RbDataGrid.vue'
+import RbDataCard from '../components/RbDataCard.vue'
 import RbUserArea from '../components/RbUserArea.vue'
 import RbUserMenu from '../components/RbUserMenu.vue'
 import RbToolbar from '../components/RbToolbar.vue'
@@ -15,6 +17,7 @@ import RbLoginPage from '../pages/RbLoginPage.vue'
 import RbRecoverPasswordPage from '../pages/RbRecoverPasswordPage.vue'
 import RbMasterDetailPage from '../pages/RbMasterDetailPage.vue'
 import RbResourceTablePage from '../pages/RbResourceTablePage.vue'
+import RbResourceGridPage from '../pages/RbResourceGridPage.vue'
 
 export default ({ app }) => {
   // Components
@@ -24,6 +27,8 @@ export default ({ app }) => {
   app.component(RbActionMenu.name, RbActionMenu)
   app.component(RbColumnAutoFilter.name, RbColumnAutoFilter)
   app.component(RbDataTable.name, RbDataTable)
+  app.component(RbDataGrid.name, RbDataGrid)
+  app.component(RbDataCard.name, RbDataCard)
   app.component(RbUserArea.name, RbUserArea)
   app.component(RbUserMenu.name, RbUserMenu)
   app.component(RbToolbar.name, RbToolbar)
@@ -39,4 +44,5 @@ export default ({ app }) => {
   app.component(RbRecoverPasswordPage.name, RbRecoverPasswordPage)
   app.component(RbMasterDetailPage.name, RbMasterDetailPage)
   app.component(RbResourceTablePage.name, RbResourceTablePage)
+  app.component(RbResourceGridPage.name, RbResourceGridPage)
 }
