@@ -1,5 +1,5 @@
 <template>
-  <q-card class="q-pa-xs-sm q-pa-md-lg shadow-1">
+  <q-card class="q-pa-sm shadow-1">
     <slot name="header">
       <q-card-section class="column items-center q-gutter-md">
         <q-avatar size="128px">
