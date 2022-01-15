@@ -4,8 +4,8 @@
       v-model="splitterModel"
       class="full-width"
       :horizontal="horizontal"
-      :before-class="horizontal ? 'full-width' : 'full-height'"
-      :after-class="horizontal ? 'full-width' : 'full-height'"
+      :before-class="horizontal ? 'full-width q-pa-xs' : 'full-height q-pa-xs'"
+      :after-class="horizontal ? 'full-width q-pa-xs' : 'full-height q-pa-xs'"
       :separator-class="horizontal ? 'q-my-lg' : 'q-mx-lg'"
     >
       <template v-slot:before>
