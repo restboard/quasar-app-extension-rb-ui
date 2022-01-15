@@ -14,7 +14,6 @@
             :items="props.items"
             :itemsPerRow="itemsPerRow"
             :loading="props.loading"
-            :slide="slide"
           >
             <template v-slot:default="slotProps">
               <rb-data-card
@@ -98,12 +97,6 @@ export default defineComponent({
         return this.lg
       }
       return this.xl
-    }
-  },
-
-  data () {
-    return {
-      slide: 0
     }
   }
 });
