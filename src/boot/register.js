@@ -11,6 +11,7 @@ import RbUserMenu from '../components/RbUserMenu.vue'
 import RbToolbar from '../components/RbToolbar.vue'
 import RbSidebar from '../components/RbSidebar.vue'
 import RbFormWrapper from '../components/RbFormWrapper.vue'
+import RbResourceCard from '../components/RbResourceCard.vue'
 import RbFullPageFormLayout from '../layouts/RbFullPageFormLayout.vue'
 import RbMainLayout from '../layouts/RbMainLayout.vue'
 import RbLoginPage from '../pages/RbLoginPage.vue'
@@ -34,6 +35,7 @@ export default ({ app }) => {
   app.component(RbToolbar.name, RbToolbar)
   app.component(RbSidebar.name, RbSidebar)
   app.component(RbFormWrapper.name, RbFormWrapper)
+  app.component(RbResourceCard.name, RbResourceCard)
 
   // Layouts
   app.component(RbFullPageFormLayout.name, RbFullPageFormLayout)
