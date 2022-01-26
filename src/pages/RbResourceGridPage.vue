@@ -16,22 +16,19 @@
             :loading="props.loading"
           >
             <template v-slot:default="slotProps">
-              <rb-data-card
+              <component
+                :is="cardComponent"
                 class="fit"
-                :title="resource.stringify(slotProps.item)"
-              >
-                <template v-slot:actions>
-                  <rb-action-menu
-                    :actions="resource.actions"
-                    :instance="slotProps.item"
-                  />
-                </template>
-              </rb-data-card>
+                :resource="resource"
+                :item="slotProps.item"
+              />
             </template>
             <template v-slot:skeleton>
-              <rb-data-card
+              <component
+                :is="cardComponent"
                 class="fit"
                 loading
+                :resource="resource"
               />
             </template>
           </rb-data-grid>
@@ -97,6 +94,10 @@ export default defineComponent({
         return this.lg
       }
       return this.xl
+    },
+
+    cardComponent () {
+      return this.resource.ui.cardComponent || 'rb-resource-card'
     }
   }
 });
