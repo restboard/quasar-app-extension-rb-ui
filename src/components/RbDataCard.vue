@@ -2,26 +2,38 @@
   <q-card>
     <q-card-section>
       <div class="row no-wrap q-col-gutter-sm">
-        <div
-          v-if="loading"
-          class="col"
-        >
-          <q-skeleton
-            type="text"
-            style="max-width:200px"
-          />
-        </div>
-        <template v-else>
-          <div class="col">
+        <div class="col">
+          <slot
+            name="skeleton"
+            v-if="loading"
+          >
+            <q-skeleton
+              type="rect"
+              style="max-width:200px"
+            />
+          </slot>
+          <template v-else>
+            <slot
+              v-if="overline"
+              name="overline"
+            >
+              <div class="text-overline">{{ overline }}</div>
+            </slot>
             <slot name="title">
-              <div class="text-caption">{{ title }}</div>
+              <div class="text-h6">{{ title }}</div>
             </slot>
-          </div>
-          <div class="col-auto">
-            <slot name="actions">
+            <slot
+              v-if="subtitle"
+              name="subtitle"
+            >
+              <div class="text-subtitle1">{{ subtitle }}</div>
             </slot>
-          </div>
-        </template>
+          </template>
+        </div>
+        <div class="col-auto">
+          <slot name="actions">
+          </slot>
+        </div>
       </div>
     </q-card-section>
     <slot></slot>
@@ -35,7 +47,15 @@ export default defineComponent({
   name: "RbDataCard",
 
   props: {
+    overline: {
+      type: String
+    },
+
     title: {
+      type: String
+    },
+
+    subtitle: {
       type: String
     },
 
