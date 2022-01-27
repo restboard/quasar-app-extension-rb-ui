@@ -8,11 +8,12 @@
       <q-btn
         v-for="action in visibleActions"
         :key="action.name"
-        dense
         flat
+        class="action-color"
+        :size="size"
         :round="!action.alwaysShowLabel || !action.label"
         :rounded="!!(action.alwaysShowLabel && action.label)"
-        :class="action.class"
+        :class="action.class || actionClass"
         :disable="action.disable"
         :icon="action.icon"
         :label="action.alwaysShowLabel && $t(action.label)"
@@ -22,9 +23,11 @@
     <q-btn
       v-else
       round
-      dense
       flat
       icon="more_vert"
+      class="action-color"
+      :class="actionClass"
+      :size="size"
       @click.stop
     >
       <q-popup-proxy
@@ -88,6 +91,15 @@ export default defineComponent({
     collpaseAfter: {
       type: Number,
       default: 3
+    },
+
+    size: {
+      type: String,
+      default: 'sm'
+    },
+
+    actionClass: {
+      type: [String, Object]
     }
   },
 
@@ -143,3 +155,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped lang="sass">
+.action-color
+  color: $input-label-color
+  :hover
+    color: $primary
+</style>
