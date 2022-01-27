@@ -12,7 +12,10 @@
     <template v-slot:default>
       <slot>
         <q-separator />
-        <q-list separator>
+        <q-list
+          separator
+          v-if="resource.ui.columns"
+        >
           <q-item
             v-for="col of resource.ui.columns"
             :key="col.name"
