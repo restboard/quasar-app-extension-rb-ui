@@ -32,7 +32,7 @@
         :resource="resource"
       >
         <q-item
-          :to="resource.name"
+          :to="`/${resource.name}`"
           clickable
           v-ripple
         >
