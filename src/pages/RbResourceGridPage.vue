@@ -3,6 +3,9 @@
     <rb-container :full-width="fullWidth">
       <rb-resource-collection
         :resource="resource"
+        :filters="filters"
+        :offset="offset"
+        :limit="limit"
         v-slot="props"
       >
         <slot
@@ -47,6 +50,19 @@ export default defineComponent({
   props: {
     resource: {
       type: Object
+    },
+
+    filters: {
+      type: Object
+    },
+
+    offset: {
+      type: Number,
+      default: 0
+    },
+
+    limit: {
+      type: Number
     },
 
     fullWidth: {
