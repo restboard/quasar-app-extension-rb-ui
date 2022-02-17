@@ -11,6 +11,9 @@
       <template v-slot:before>
         <rb-resource-collection
           :resource="resource"
+          :filters="filters"
+          :offset="offset"
+          :limit="limit"
           v-slot="props"
         >
           <slot
@@ -86,9 +89,24 @@ export default defineComponent({
     resource: {
       type: Object
     },
+
+    filters: {
+      type: Object
+    },
+
+    offset: {
+      type: Number,
+      default: 0
+    },
+
+    limit: {
+      type: Number
+    },
+
     horizontal: {
       type: Boolean
     },
+
     ratio: {
       type: Number,
       default: 60
