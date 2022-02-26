@@ -13,6 +13,7 @@ import RbSidebar from '../components/RbSidebar.vue'
 import RbFormWrapper from '../components/RbFormWrapper.vue'
 import RbResourceCard from '../components/RbResourceCard.vue'
 import RbMedia from '../components/RbMedia.vue'
+import RbUploadArea from '../components/RbUploadArea.vue'
 import RbFullPageFormLayout from '../layouts/RbFullPageFormLayout.vue'
 import RbMainLayout from '../layouts/RbMainLayout.vue'
 import RbLoginPage from '../pages/RbLoginPage.vue'
@@ -38,6 +39,7 @@ export default ({ app }) => {
   app.component(RbFormWrapper.name, RbFormWrapper)
   app.component(RbResourceCard.name, RbResourceCard)
   app.component(RbMedia.name, RbMedia)
+  app.component(RbUploadArea.name, RbUploadArea)
 
   // Layouts
   app.component(RbFullPageFormLayout.name, RbFullPageFormLayout)
