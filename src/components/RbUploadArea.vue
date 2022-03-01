@@ -15,8 +15,9 @@
           cover
           mute
           autoplay
+          loop
           class="fit absolute-center"
-          style="opacity:.3"
+          style="opacity:.4"
           :src="previewSrc"
           :type="type"
         />

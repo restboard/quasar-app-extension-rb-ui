@@ -8,6 +8,7 @@
       >
         <video
           :autoplay="autoplay"
+          :loop="loop"
           :mute="mute"
           :controls="controls"
           :poster="poster"
@@ -56,6 +57,11 @@ export default defineComponent({
     },
 
     autoplay: {
+      auto: Boolean,
+      default: false
+    },
+
+    loop: {
       auto: Boolean,
       default: false
     },
