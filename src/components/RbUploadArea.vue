@@ -1,7 +1,6 @@
 <template>
   <q-file
     ref="fileInput"
-    filled
     input-style="min-height:200px;min-width:200px"
     @update:model-value="onFileSelection"
   >
@@ -9,6 +8,7 @@
       <div
         v-if="previewSrc"
         class="fit relative no-pointer-events"
+        style="opacity:.7"
       >
         <rb-media
           v-if="isVideoOrImage"
@@ -17,7 +17,6 @@
           autoplay
           loop
           class="fit absolute-center"
-          style="opacity:.4"
           :src="previewSrc"
           :type="type"
         />
@@ -26,7 +25,6 @@
           name="description"
           size="xl"
           class="absolute-center"
-          style="opacity:.5"
         />
       </div>
       <q-btn
