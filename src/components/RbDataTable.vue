@@ -119,7 +119,8 @@ export default defineComponent({
     },
 
     selection: {
-      type: String
+      type: String,
+      default: null
     },
 
     searchDebounce: {
