@@ -10,14 +10,19 @@
       >
         <slot
           name="table"
-          v-bind="{ ...$props, ...$attrs }"
+          v-bind="{ ...$props, ...$attrs, ...props }"
         >
           <rb-data-table
             class="full-width"
             :title="props.resource.label"
             :columns="props.resource.ui.columns"
+            :row-key="props.resource.key"
             :rows="props.items"
             :actions="props.resource.actions"
+            :selection="selection"
+            :selected="selected"
+            :pagination="props.pagination"
+            @update:selected="onUpdateSelected"
             @row-click="onRowClicked"
           />
         </slot>
@@ -53,11 +58,24 @@ export default defineComponent({
     fullWidth: {
       type: Boolean
     },
+
+    selection: {
+      type: String,
+      default: null
+    },
+
+    selected: {
+      type: Array
+    }
   },
 
   methods: {
+    onUpdateSelected (evt) {
+      this.$emit('update:selected', evt)
+    },
+
     onRowClicked (evt, row) {
-      this.$emit('click-row', row);
+      this.$emit('row-click', row);
     }
   },
 });
