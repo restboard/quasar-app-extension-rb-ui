@@ -1,12 +1,13 @@
 <template>
   <div>
     <slot
-      v-if="items.length || loading"
+      v-if="itemCount || loading || keepOnEmpty"
       name="default"
       v-bind="$props"
       :items="items"
       :loading="loading"
       :hasMore="hasMore"
+      :pagination="pagination"
     >
     </slot>
     <slot
@@ -43,7 +44,11 @@ export default defineComponent({
       type: Number
     },
 
-    paginated: {
+    infinite: {
+      type: Boolean
+    },
+
+    keepOnEmpty: {
       type: Boolean
     }
   },
@@ -51,6 +56,19 @@ export default defineComponent({
   computed: {
     key () {
       return this.resource.key || 'id'
+    },
+
+    itemCount () {
+      return this.items ? this.items.length : 0
+    },
+
+    pagination () {
+      return {
+        rowsPerPage: this.limit,
+        page: this.limit
+          ? (Math.ceil(this.offset / this.limit) + 1)
+          : 1
+      }
     }
   },
 
@@ -83,7 +101,7 @@ export default defineComponent({
             ...this.resource.defaultParams.filters
           }
         }
-        if (this.paginated) {
+        if (this.infinite) {
           opts.offset += this.itemCount
         }
         if (this.limit) {
@@ -92,7 +110,7 @@ export default defineComponent({
         const res = await this.resource.getMany(opts)
         newItems = res.data || []
         this.hasMore = newItems.length === opts.limit
-        if (this.paginated) {
+        if (this.infinite) {
           this.items = this.items.concat(newItems)
         } else {
           this.items = newItems
