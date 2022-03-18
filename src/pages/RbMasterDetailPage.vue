@@ -18,12 +18,13 @@
         >
           <slot
             name="master"
-            v-bind="{ ...$props, ...$attrs }"
+            v-bind="{ ...$props, ...$attrs, ...props }"
           >
             <rb-data-table
               :loading="props.loading"
               :title="props.resource.label"
               :columns="props.resource.ui.columns"
+              :row-key="props.resource.key"
               :rows="props.items"
               :actions="props.resource.actions"
               @row-click="onRowClicked"
