@@ -10,7 +10,7 @@
       >
         <slot
           name="grid"
-          v-bind="{ ...$props, ...$attrs }"
+          v-bind="{ ...$props, ...$attrs, ...props }"
         >
           <rb-data-grid
             class="full-width"
