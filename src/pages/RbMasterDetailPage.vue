@@ -41,7 +41,9 @@
             <slot
               name="empty"
               v-bind="{ ...$props, ...$attrs, ...props }"
-            >{{ $t('No results') }}</slot>
+            >
+              <rb-empty-banner>{{ $t('No results') }}</rb-empty-banner>
+            </slot>
           </template>
         </rb-resource-collection>
       </template>
@@ -95,9 +97,14 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import RbEmptyBanner from "../components/RbEmptyBanner.vue";
 
 export default defineComponent({
   name: 'RbMasterDetailPage',
+
+  components: {
+    RbEmptyBanner
+  },
 
   props: {
     resource: {

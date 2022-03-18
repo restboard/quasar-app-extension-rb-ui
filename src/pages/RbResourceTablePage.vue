@@ -33,7 +33,9 @@
           <slot
             name="empty"
             v-bind="{ ...$props, ...$attrs, ...props }"
-          >{{ $t('No results') }}</slot>
+          >
+            <rb-empty-banner>{{ $t('No results') }}</rb-empty-banner>
+          </slot>
         </template>
       </rb-resource-collection>
     </rb-container>
@@ -42,9 +44,14 @@
 
 <script>
 import { defineComponent } from "vue";
+import RbEmptyBanner from "../components/RbEmptyBanner.vue";
 
 export default defineComponent({
   name: "RbResourceTablePage",
+
+  components: {
+    RbEmptyBanner
+  },
 
   props: {
     resource: {

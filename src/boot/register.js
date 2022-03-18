@@ -6,6 +6,7 @@ import RbColumnAutoFilter from '../components/RbColumnAutoFilter.vue'
 import RbDataTable from '../components/RbDataTable.vue'
 import RbDataGrid from '../components/RbDataGrid.vue'
 import RbDataCard from '../components/RbDataCard.vue'
+import RbEmptyBanner from '../components/RbEmptyBanner.vue'
 import RbUserArea from '../components/RbUserArea.vue'
 import RbUserMenu from '../components/RbUserMenu.vue'
 import RbToolbar from '../components/RbToolbar.vue'
@@ -34,6 +35,7 @@ export default ({ app }) => {
   app.component(RbDataTable.name, RbDataTable)
   app.component(RbDataGrid.name, RbDataGrid)
   app.component(RbDataCard.name, RbDataCard)
+  app.component(RbEmptyBanner.name, RbEmptyBanner)
   app.component(RbUserArea.name, RbUserArea)
   app.component(RbUserMenu.name, RbUserMenu)
   app.component(RbToolbar.name, RbToolbar)
