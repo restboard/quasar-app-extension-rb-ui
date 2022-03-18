@@ -122,8 +122,7 @@ export default defineComponent({
     },
 
     selection: {
-      type: String,
-      default: null
+      type: String
     },
 
     selected: {
@@ -143,7 +142,7 @@ export default defineComponent({
   data () {
     return {
       activeRow: null,
-      selectedRows: [...(this.selected || [])],
+      selectedRows: this.selected || undefined,
       splitterModel: ref(this.ratio),
     };
   },
@@ -173,7 +172,7 @@ export default defineComponent({
 
   watch: {
     selected (val) {
-      this.selectedRows = [...(val || [])]
+      this.selectedRows = val || undefined
     }
   }
 });

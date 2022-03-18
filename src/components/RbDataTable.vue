@@ -119,8 +119,7 @@ export default defineComponent({
     },
 
     selection: {
-      type: String,
-      default: null
+      type: String
     },
 
     searchDebounce: {
@@ -153,9 +152,6 @@ export default defineComponent({
           filterable: col.filterable
         }
       })
-      if (this.selection) {
-        cols.unshift({})
-      }
       if (this.hasActions) {
         cols.push({
           name: 'actions',
