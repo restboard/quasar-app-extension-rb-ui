@@ -64,7 +64,7 @@ export default defineComponent({
 
     pagination () {
       return {
-        rowsPerPage: this.limit,
+        rowsPerPage: this.limit || 0,
         page: this.limit
           ? (Math.ceil(this.offset / this.limit) + 1)
           : 1
