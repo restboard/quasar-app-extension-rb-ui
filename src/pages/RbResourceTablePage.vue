@@ -2,30 +2,39 @@
   <q-page class="flex justify-center">
     <rb-container :full-width="fullWidth">
       <rb-resource-collection
+        :keep-on-empty="keepOnEmpty"
         :resource="resource"
         :filters="filters"
         :offset="offset"
         :limit="limit"
-        v-slot="props"
       >
-        <slot
-          name="table"
-          v-bind="{ ...$props, ...$attrs, ...props }"
-        >
-          <rb-data-table
-            class="full-width"
-            :title="props.resource.label"
-            :columns="props.resource.ui.columns"
-            :row-key="props.resource.key"
-            :rows="props.items"
-            :actions="props.resource.actions"
-            :selection="selection"
-            :selected="selected"
-            :pagination="props.pagination"
-            @update:selected="onUpdateSelected"
-            @row-click="onRowClicked"
-          />
-        </slot>
+        <template #default="props">
+          <slot
+            name="table"
+            v-bind="{ ...$props, ...$attrs, ...props }"
+          >
+            <rb-data-table
+              class="full-width"
+              :title="props.resource.label"
+              :columns="props.resource.ui.columns"
+              :row-key="props.resource.key"
+              :rows="props.items"
+              :actions="props.resource.actions"
+              :selection="selection"
+              :selected="selectedRows"
+              :pagination="props.pagination"
+              @update:selected="onUpdateSelected"
+              @row-click="onRowClicked"
+            />
+          </slot>
+        </template>
+
+        <template #empty>
+          <slot
+            name="empty"
+            v-bind="{ ...$props, ...$attrs, ...props }"
+          >{{ $t('No results') }}</slot>
+        </template>
       </rb-resource-collection>
     </rb-container>
   </q-page>
@@ -59,6 +68,10 @@ export default defineComponent({
       type: Boolean
     },
 
+    keepOnEmpty: {
+      type: Boolean
+    },
+
     selection: {
       type: String,
       default: null
@@ -69,8 +82,15 @@ export default defineComponent({
     }
   },
 
+  data () {
+    return {
+      selectedRows: [...(this.selected || [])]
+    }
+  },
+
   methods: {
     onUpdateSelected (evt) {
+      this.selectedRows = evt
       this.$emit('update:selected', evt)
     },
 
@@ -78,5 +98,11 @@ export default defineComponent({
       this.$emit('row-click', row);
     }
   },
+
+  watch: {
+    selected (val) {
+      this.selectedRows = [...(val || [])]
+    }
+  }
 });
 </script>

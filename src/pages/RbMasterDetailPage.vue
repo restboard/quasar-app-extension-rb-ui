@@ -10,26 +10,39 @@
     >
       <template v-slot:before>
         <rb-resource-collection
+          :keep-on-empty="keepOnEmpty"
           :resource="resource"
           :filters="filters"
           :offset="offset"
           :limit="limit"
-          v-slot="props"
         >
-          <slot
-            name="master"
-            v-bind="{ ...$props, ...$attrs, ...props }"
-          >
-            <rb-data-table
-              :loading="props.loading"
-              :title="props.resource.label"
-              :columns="props.resource.ui.columns"
-              :row-key="props.resource.key"
-              :rows="props.items"
-              :actions="props.resource.actions"
-              @row-click="onRowClicked"
-            />
-          </slot>
+          <template #default="props">
+            <slot
+              name="master"
+              v-bind="{ ...$props, ...$attrs, ...props }"
+            >
+              <rb-data-table
+                :loading="props.loading"
+                :title="props.resource.label"
+                :columns="props.resource.ui.columns"
+                :row-key="props.resource.key"
+                :rows="props.items"
+                :actions="props.resource.actions"
+                :selection="selection"
+                :selected="selectedRows"
+                :pagination="props.pagination"
+                @update:selected="onUpdateSelected"
+                @row-click="onRowClicked"
+              />
+            </slot>
+          </template>
+
+          <template #empty>
+            <slot
+              name="empty"
+              v-bind="{ ...$props, ...$attrs, ...props }"
+            >{{ $t('No results') }}</slot>
+          </template>
         </rb-resource-collection>
       </template>
       <template v-slot:after>
@@ -104,6 +117,19 @@ export default defineComponent({
       type: Number
     },
 
+    keepOnEmpty: {
+      type: Boolean
+    },
+
+    selection: {
+      type: String,
+      default: null
+    },
+
+    selected: {
+      type: Array
+    },
+
     horizontal: {
       type: Boolean
     },
@@ -117,11 +143,17 @@ export default defineComponent({
   data () {
     return {
       activeRow: null,
+      selectedRows: [...(this.selected || [])],
       splitterModel: ref(this.ratio),
     };
   },
 
   methods: {
+    onUpdateSelected (evt) {
+      this.selectedRows = evt
+      this.$emit('update:selected', evt)
+    },
+
     onRowClicked (evt, row) {
       this.activeRow = row;
     },
@@ -138,5 +170,11 @@ export default defineComponent({
       this.activeRow = null;
     },
   },
+
+  watch: {
+    selected (val) {
+      this.selectedRows = [...(val || [])]
+    }
+  }
 });
 </script>

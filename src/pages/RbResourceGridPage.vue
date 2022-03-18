@@ -2,40 +2,49 @@
   <q-page class="flex justify-center">
     <rb-container :full-width="fullWidth">
       <rb-resource-collection
+        :keep-on-empty="keepOnEmpty"
         :resource="resource"
         :filters="filters"
         :offset="offset"
         :limit="limit"
-        v-slot="props"
       >
-        <slot
-          name="grid"
-          v-bind="{ ...$props, ...$attrs, ...props }"
-        >
-          <rb-data-grid
-            class="full-width"
-            :items="props.items"
-            :itemsPerRow="itemsPerRow"
-            :loading="props.loading"
+        <template #default="props">
+          <slot
+            name="grid"
+            v-bind="{ ...$props, ...$attrs, ...props }"
           >
-            <template v-slot:default="slotProps">
-              <component
-                :is="cardComponent"
-                class="fit"
-                :resource="resource"
-                :item="slotProps.item"
-              />
-            </template>
-            <template v-slot:skeleton>
-              <component
-                :is="cardComponent"
-                class="fit"
-                loading
-                :resource="resource"
-              />
-            </template>
-          </rb-data-grid>
-        </slot>
+            <rb-data-grid
+              class="full-width"
+              :items="props.items"
+              :itemsPerRow="itemsPerRow"
+              :loading="props.loading"
+            >
+              <template v-slot:default="slotProps">
+                <component
+                  :is="cardComponent"
+                  class="fit"
+                  :resource="resource"
+                  :item="slotProps.item"
+                />
+              </template>
+              <template v-slot:skeleton>
+                <component
+                  :is="cardComponent"
+                  class="fit"
+                  loading
+                  :resource="resource"
+                />
+              </template>
+            </rb-data-grid>
+          </slot>
+        </template>
+
+        <template #empty>
+          <slot
+            name="empty"
+            v-bind="{ ...$props, ...$attrs, ...props }"
+          >{{ $t('No results') }}</slot>
+        </template>
       </rb-resource-collection>
     </rb-container>
   </q-page>
@@ -66,6 +75,10 @@ export default defineComponent({
     },
 
     fullWidth: {
+      type: Boolean
+    },
+
+    keepOnEmpty: {
       type: Boolean
     },
 
