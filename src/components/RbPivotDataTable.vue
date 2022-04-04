@@ -56,12 +56,6 @@ export default defineComponent({
       const rows = {}
       const cols = new Set()
 
-      cols.add(JSON.stringify({
-        name: `${this.rowKey} / ${this.columnKey}`,
-        field: `${this.rowKey}`,
-        required: true,
-      }))
-
       for (const row of this.modelValue) {
         const rowValue = row[this.rowKey]
         const colValue = row[this.columnKey]
@@ -74,11 +68,25 @@ export default defineComponent({
         rows[rowValue][`${colValue}`] = row[this.cellKey]
       }
 
-      this.columns = Array.from(cols).map(JSON.parse)
-      this.rows = Array.from(Object.keys(rows).map(rowKey => ({
+      const colList = Array.from(cols).map(JSON.parse)
+      colList.sort(function (a, b) {
+        return (a.name || '') - (b.name || '');
+      })
+      colList.unshift({
+        name: `${this.rowKey} / ${this.columnKey}`,
+        field: `${this.rowKey}`,
+        required: true,
+      })
+      const rowList = Array.from(Object.keys(rows).map(rowKey => ({
         [this.rowKey]: rowKey,
         ...rows[rowKey]
       })))
+
+      console.log(colList)
+      console.log(rowList)
+
+      this.columns = colList
+      this.rows = rowList
     }
   },
 
