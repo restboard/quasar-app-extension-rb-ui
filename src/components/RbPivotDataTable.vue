@@ -53,7 +53,7 @@ export default defineComponent({
 
   methods: {
     reloadColumnsAndRows () {
-      const rows = new Set()
+      const rows = {}
       const cols = new Set()
 
       cols.add(JSON.stringify({
@@ -68,14 +68,17 @@ export default defineComponent({
         cols.add(JSON.stringify({
           name: `${colValue}`
         }))
-        rows.add(JSON.stringify({
-          [`${this.rowKey}`]: rowValue,
-          [`${colValue}`]: row[this.cellKey]
-        }))
+        if (!(rowValue in rows)) {
+          rows[rowValue] = []
+        }
+        rows[rowValue][`${colValue}`] = row[this.cellKey]
       }
 
       this.columns = Array.from(cols).map(JSON.parse)
-      this.rows = Array.from(rows).map(JSON.parse)
+      this.rows = Array.from(Object.keys(rows).map(rowKey => ({
+        [this.rowKey]: rowKey,
+        ...rows[rowKey]
+      })))
     }
   },
 
