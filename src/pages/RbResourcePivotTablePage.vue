@@ -21,6 +21,8 @@
               :column-key="columnKey"
               :row-key="rowKey"
               :cell-key="cellKey"
+              :with-column-total="withColumnTotal"
+              :with-row-total="withRowTotal"
             />
           </slot>
         </template>
@@ -85,6 +87,14 @@ export default defineComponent({
 
     cellKey: {
       type: String
+    },
+
+    withRowTotal: {
+      type: Boolean
+    },
+
+    withColumnTotal: {
+      type: Boolean
     }
   }
 });
