@@ -2,23 +2,24 @@
   <rb-data-table
     class="rb-pivot-data-table"
     dense
-    :class="{ 'with-row-total': withRowTotal, 'with-col-total': withColumnTotal}"
+    :class="{ 'with-row-total': withRowTotal || withTotal, 'with-col-total': withColumnTotal || withTotal}"
     :rows-per-page-options="[0]"
     :row-key="rowKey"
     :rows="rows"
     :columns="columns"
   >
     <template
-      v-if="withColumnTotal"
+      v-if="withColumnTotal || withTotal"
       #bottom-row
     >
       <q-tr>
-        <q-th
+        <q-td
           v-for="column in columns"
           :key="column.name"
+          class="text-right"
         >
           {{ colTotals[column.field || column.name] }}
-        </q-th>
+        </q-td>
       </q-tr>
     </template>
   </rb-data-table>
@@ -41,18 +42,23 @@ export default defineComponent({
       default: () => []
     },
 
-    rowKey: {
+    header: {
       type: String,
+      default: null
+    },
+
+    rowKey: {
+      type: [String, Function],
       default: 'id'
     },
 
     columnKey: {
-      type: String,
+      type: [String, Function],
       default: 'id'
     },
 
     cellKey: {
-      type: String,
+      type: [String, Function],
       default: 'id'
     },
 
@@ -61,6 +67,10 @@ export default defineComponent({
     },
 
     withColumnTotal: {
+      type: Boolean
+    },
+
+    withTotal: {
       type: Boolean
     }
   },
@@ -81,48 +91,63 @@ export default defineComponent({
     reloadColumnsAndRows () {
       const rows = {}
       const cols = new Set()
-
       const colTotals = {}
 
       for (const row of this.modelValue) {
-        const rowValue = row[this.rowKey]
-        const colValue = row[this.columnKey]
-        cols.add(JSON.stringify({
-          name: `${colValue}`
-        }))
-        if (!(rowValue in rows)) {
-          rows[rowValue] = {}
-        }
+        const rowValue = typeof this.rowKey === 'function'
+          ? this.rowKey(row)
+          : row[this.rowKey]
+        const colValue = typeof this.columnKey === 'function'
+          ? this.columnKey(row)
+          : row[this.columnKey]
+        const cellValue = typeof this.cellKey === 'function'
+          ? this.cellKey(row)
+          : row[this.cellKey]
+
         const colKey = `${colValue}`
-        const cellValue = row[this.cellKey]
-        rows[rowValue][colKey] = cellValue
+        cols.add(colKey)
+
+        rows[rowValue] = rows[rowValue] || {}
+        rows[rowValue][colKey] = (rows[rowValue][colKey] || 0) + cellValue
+
         if (this.withRowTotal) {
           if ('row-total' in rows[rowValue]) {
             rows[rowValue]['row-total'] += cellValue
           } else {
             rows[rowValue]['row-total'] = cellValue
           }
+        } else {
+          rows[rowValue]['row-total'] = ''
         }
+
         if (this.withColumnTotal) {
           if (colKey in colTotals) {
-            this.colTotals[colKey] += cellValue
+            colTotals[colKey] += cellValue
           } else {
-            this.colTotals[colKey] = cellValue
+            colTotals[colKey] = cellValue
           }
+        } else {
+          colTotals[colKey] = ''
+        }
+
+        if (this.withTotal) {
+          colTotals['row-total'] = (colTotals['row-total'] || 0) + cellValue
         }
       }
 
-      const colList = Array.from(cols).map(JSON.parse)
-      colList.sort(function (a, b) {
-        return (a.name || '') - (b.name || '');
-      })
+      let colList = Array.from(cols)
+      colList.sort()
+      colList = colList.map(name => ({
+        name,
+        align: 'right'
+      }))
       colList.unshift({
-        name: `${this.rowKey} / ${this.columnKey}`,
+        name: this.header || `${this.rowKey} / ${this.columnKey}`,
         field: `${this.rowKey}`,
         required: true,
       })
 
-      if (this.withRowTotal) {
+      if (this.withRowTotal || this.withTotal) {
         colList.push({
           name: 'total',
           align: 'right',
@@ -135,8 +160,9 @@ export default defineComponent({
         ...rows[rowKey]
       })))
 
+      this.rows =  rowList
+      this.colTotals = colTotals
       this.columns = colList
-      this.rows = rowList
     }
   },
 
