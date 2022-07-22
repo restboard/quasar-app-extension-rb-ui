@@ -8,17 +8,36 @@
     :rows="rows"
     :columns="columns"
   >
+    <template #body-cell="props">
+      <td v-bind="props.col">
+        <slot v-if="props.col.field !== rowKey && props.col.name !== rowKey" name="body-cell-cellKey" v-bind="props">
+          <div v-if="props.row[props.col.field || props.col.name]" class="row">
+            <div v-for="key in Object.keys(props.row[props.col.field || props.col.name])" :key="key" class="col">
+              {{ props.row[props.col.field || props.col.name][key] }}
+            </div>
+          </div>
+        </slot>
+        <slot v-else name="body-cell-rowKey" v-bind="props">
+          {{ props.row[props.col.field || props.col.name] }}
+        </slot>
+      </td>
+    </template>
+
     <template
       v-if="withColumnTotal || withTotal"
-      #bottom-row
+      #bottom-row="props"
     >
-      <q-tr>
+      <q-tr :props="props">
         <q-td
           v-for="column in columns"
           :key="column.name"
           class="text-right"
         >
-          {{ colTotals[column.field || column.name] }}
+          <div v-if="colTotals[column.field || column.name]" class="row">
+            <div v-for="key in Object.keys(colTotals[column.field || column.name])" :key="key" class="col">
+              {{ colTotals[column.field || column.name][key] }}
+            </div>
+          </div>
         </q-td>
       </q-tr>
     </template>
@@ -42,6 +61,11 @@ export default defineComponent({
       default: () => []
     },
 
+    accumulate: {
+      type: Boolean,
+      default: false
+    },
+
     header: {
       type: String,
       default: null
@@ -58,7 +82,7 @@ export default defineComponent({
     },
 
     cellKey: {
-      type: [String, Function],
+      type: [String, Function, Array],
       default: 'id'
     },
 
@@ -91,7 +115,9 @@ export default defineComponent({
     reloadColumnsAndRows () {
       const rows = {}
       const cols = new Set()
-      const colTotals = {}
+      const colTotals = {
+        'row-total': {}
+      }
 
       for (const row of this.modelValue) {
         const rowValue = typeof this.rowKey === 'function'
@@ -102,36 +128,52 @@ export default defineComponent({
           : row[this.columnKey]
         const cellValue = typeof this.cellKey === 'function'
           ? this.cellKey(row)
-          : row[this.cellKey]
+          : Array.isArray(this.cellKey)
+            ? Object.fromEntries(this.cellKey.map(key => [key, row[key]]))
+            : { [this.cellKey]: row[this.cellKey] }
 
         const colKey = `${colValue}`
         cols.add(colKey)
 
         rows[rowValue] = rows[rowValue] || {}
-        rows[rowValue][colKey] = (rows[rowValue][colKey] || 0) + cellValue
+        rows[rowValue][colKey] = rows[rowValue][colKey] || {}
+        rows[rowValue]['row-total'] = rows[rowValue]['row-total'] || {}
 
-        if (this.withRowTotal) {
-          if ('row-total' in rows[rowValue]) {
-            rows[rowValue]['row-total'] += cellValue
+        for (const key of Object.keys(cellValue)) {
+          const value = cellValue[key]
+
+          if (key in rows[rowValue][colKey] && this.accumulate) {
+            rows[rowValue][colKey][key] += value
           } else {
-            rows[rowValue]['row-total'] = cellValue
+            rows[rowValue][colKey][key] = value
           }
-        } else {
-          rows[rowValue]['row-total'] = ''
-        }
 
-        if (this.withColumnTotal) {
-          if (colKey in colTotals) {
-            colTotals[colKey] += cellValue
+
+          if (this.withRowTotal) {
+            rows[rowValue]['row-total'][key] = rows[rowValue]['row-total'][key]
+              ? rows[rowValue]['row-total'][key] + value
+              : value
           } else {
-            colTotals[colKey] = cellValue
+            rows[rowValue]['row-total'][key] = ''
           }
-        } else {
-          colTotals[colKey] = ''
-        }
 
-        if (this.withTotal) {
-          colTotals['row-total'] = (colTotals['row-total'] || 0) + cellValue
+          if (this.withColumnTotal) {
+            if (colKey in colTotals) {
+              colTotals[colKey][key] = colTotals[colKey][key]
+                ? colTotals[colKey][key] + value
+                : value
+            } else {
+              colTotals[colKey] = { [key]: value }
+            }
+          } else {
+            colTotals[colKey] = ''
+          }
+
+          if (this.withTotal) {
+            colTotals['row-total'][key] = colTotals['row-total'][key]
+                ? colTotals['row-total'][key] + value
+                : value
+          }
         }
       }
 
@@ -149,7 +191,7 @@ export default defineComponent({
 
       if (this.withRowTotal || this.withTotal) {
         colList.push({
-          name: 'total',
+          name: '',
           align: 'right',
           field: 'row-total',
         })
