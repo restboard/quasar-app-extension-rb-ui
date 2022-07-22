@@ -11,62 +11,69 @@
   >
     <template
       v-for="(index, name) in $slots"
+      :key="index"
       v-slot:[name]="props"
     >
       <slot :name="name" v-bind="props"/>
     </template>
 
-    <template v-slot:top>
-      <div class="row full-width q-gutter-sm justify-end">
-        <q-input
-          v-if="showSearch"
-          dense
-          clearable
-          clear-icon="close"
-          :debounce="searchDebounce"
-          v-model="searchQuery"
-          :placeholder="$t('Search')"
-        >
-          <template v-slot:prepend>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </div>
+    <template v-slot:top="props">
+      <slot name="top" v-bind="props">
+        <div class="row full-width q-gutter-sm justify-end">
+          <q-input
+            v-if="showSearch"
+            dense
+            clearable
+            clear-icon="close"
+            :debounce="searchDebounce"
+            v-model="searchQuery"
+            :placeholder="$t('Search')"
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </div>
+      </slot>
     </template>
 
     <template v-slot:header-cell="props">
-      <q-th :props="props">
-        <q-btn
-          flat
-          round
-          dense
-          icon="filter_list"
-          v-if="props.col.filterable && colFilters[props.col.field]"
-          @click.stop
-        >
-          <rb-column-auto-filter
-            :rows="rows"
-            :model-value="colFilters[props.col.field || props.col.name]"
-            :field="props.col.field || props.col.name"
-            :format="props.col.format"
-            @update:modelValue="evt => onFilterChange(props.col.field || props.col.name, evt)"
-          />
-        </q-btn>
-        {{ props.col.label }}
-      </q-th>
+      <slot name="header-cell" v-bind="props">
+        <q-th :props="props">
+          <q-btn
+            flat
+            round
+            dense
+            icon="filter_list"
+            v-if="props.col.filterable && colFilters[props.col.field]"
+            @click.stop
+          >
+            <rb-column-auto-filter
+              :rows="rows"
+              :model-value="colFilters[props.col.field || props.col.name]"
+              :field="props.col.field || props.col.name"
+              :format="props.col.format"
+              @update:modelValue="evt => onFilterChange(props.col.field || props.col.name, evt)"
+            />
+          </q-btn>
+          {{ props.col.label }}
+        </q-th>
+      </slot>
     </template>
 
     <template v-slot:body-cell-actions="props">
-      <q-td
-        v-if="actions"
-        auto-width
-        :props="props"
-      >
-        <rb-action-menu
-          :actions="actions"
-          :instance="props.row"
-        />
-      </q-td>
+      <slot name="body-cell-actions" v-bind="props">
+        <q-td
+          v-if="actions"
+          auto-width
+          :props="props"
+        >
+          <rb-action-menu
+            :actions="actions"
+            :instance="props.row"
+          />
+        </q-td>
+      </slot>
     </template>
   </q-table>
 </template>

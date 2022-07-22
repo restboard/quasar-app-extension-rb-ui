@@ -8,6 +8,17 @@
     :rows="rows"
     :columns="columns"
   >
+    <template #header-cell="props">
+      <th v-bind="props.col">
+        {{ props.col.label }}
+        <div class="row" v-if="cellKeys.length > 1 && props.col.name !== rowKey && props.col.field !== rowKey">
+          <div v-for="key in cellKeys" :key="key" class="col">
+            {{ key }}
+          </div>
+        </div>
+      </th>
+    </template>
+
     <template #body-cell="props">
       <td v-bind="props.col">
         <slot v-if="props.col.field !== rowKey && props.col.name !== rowKey" name="body-cell-cellKey" v-bind="props">
@@ -99,6 +110,12 @@ export default defineComponent({
     }
   },
 
+  computed: {
+    cellKeys () {
+      return Array.isArray(this.cellKey) ? this.cellKey : [this.cellKey]
+    }
+  },
+
   mounted () {
     this.reloadColumnsAndRows()
   },
@@ -128,9 +145,7 @@ export default defineComponent({
           : row[this.columnKey]
         const cellValue = typeof this.cellKey === 'function'
           ? this.cellKey(row)
-          : Array.isArray(this.cellKey)
-            ? Object.fromEntries(this.cellKey.map(key => [key, row[key]]))
-            : { [this.cellKey]: row[this.cellKey] }
+          : Object.fromEntries(this.cellKeys.map(key => [key, row[key]]))
 
         const colKey = `${colValue}`
         cols.add(colKey)
@@ -265,7 +280,12 @@ export default defineComponent({
     position: sticky
     z-index: 1
     bottom: 0
+    font-style: italic
 
   tbody tr:last-child th:first-child
     z-index: 2
+
+.rb-pivot-data-table.with-row-total tbody tr td:last-child,
+.rb-pivot-data-table.with-col-total tbody tr:last-child td
+  font-weight: bold
 </style>
