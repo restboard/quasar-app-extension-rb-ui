@@ -11,9 +11,9 @@
   >
     <template
       v-for="(index, name) in $slots"
-      v-slot:[name]
+      v-slot:[name]="props"
     >
-      <slot :name="name" />
+      <slot :name="name" v-bind="props"/>
     </template>
 
     <template v-slot:top>
