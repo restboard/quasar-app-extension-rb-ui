@@ -24,7 +24,9 @@
         <slot v-if="props.col.field !== rowKey && props.col.name !== rowKey" name="body-cell-cellKey" v-bind="props">
           <div v-if="props.row[props.col.field || props.col.name]" class="row">
             <div v-for="key in Object.keys(props.row[props.col.field || props.col.name])" :key="key" class="col">
-              {{ props.row[props.col.field || props.col.name][key] }}
+              <slot :name="`body-cell-cellKey-${key}`">
+                {{ props.row[props.col.field || props.col.name][key] }}
+              </slot>
             </div>
           </div>
         </slot>
