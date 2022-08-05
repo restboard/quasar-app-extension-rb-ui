@@ -173,7 +173,7 @@ export default defineComponent({
     },
 
     filteredRows () {
-      let rows = [...this.rows]
+      let rows = this.rows ? [...this.rows] : []
       this.columnsWithFilters.forEach(col => {
         const filters = this.colFilters[col.field] || {}
         rows = rows.filter(row => {
