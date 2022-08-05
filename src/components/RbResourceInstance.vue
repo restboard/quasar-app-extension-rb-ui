@@ -71,12 +71,11 @@ export default defineComponent({
     }
   },
 
-  mounted () {
-    this.reloadData()
-  },
-
   methods: {
     async reloadData () {
+      if (!this.resource) {
+        return
+      }
       this.loading = true
       try {
         if (this.id) {
@@ -94,6 +93,9 @@ export default defineComponent({
     },
 
     async saveData (data) {
+      if (!this.resource) {
+        return
+      }
       this.saving = true
       let res = {}
       try {
@@ -114,8 +116,16 @@ export default defineComponent({
   },
 
   watch: {
-    resource: function () {
-      this.reloadData()
+    resource: {
+      handler (val, old) {
+        if (val !== old) {
+          val && val.addListener(this.reloadData)
+          old && old.removeListener(this.reloadData)
+          this.reloadData()
+        }
+      },
+      // force registering listener on first load
+      immediate: true
     },
 
     id () {

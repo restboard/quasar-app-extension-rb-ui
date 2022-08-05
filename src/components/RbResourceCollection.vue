@@ -80,10 +80,6 @@ export default defineComponent({
     }
   },
 
-  mounted () {
-    this.clearAndReloadData()
-  },
-
   methods: {
     clear () {
       this.items = []
@@ -91,6 +87,9 @@ export default defineComponent({
     },
 
     async reloadData () {
+      if (!this.resource) {
+        return
+      }
       this.loading = true
       let newItems = []
       try {
@@ -129,8 +128,16 @@ export default defineComponent({
   },
 
   watch: {
-    resource: function () {
-      this.clearAndReloadData()
+    resource: {
+      handler (val, old) {
+        if (val !== old) {
+          val && val.addListener(this.clearAndReloadData)
+          old && old.removeListener(this.clearAndReloadData)
+          this.clearAndReloadData()
+        }
+      },
+      // force registering listener on first load
+      immediate: true
     },
 
     filters: function () {
