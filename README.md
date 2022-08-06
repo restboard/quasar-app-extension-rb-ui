@@ -8,6 +8,31 @@
 quasar ext add rb-ui
 ```
 
+## Components
+
+| Name                          | Description                                 |
+|-------------------------------|---------------------------------------------|
+| `RbActionMenu`                | A collapsible menu for quick actions        |
+| `RbColumnAutoFilter`          | An Excel-like dyanmic column filter         |
+| `RbContainer`                 | A responsive horizontal container           |
+| `RbDataCard`                  | A default card with header, content and footer |
+| `RbDataGrid`                  | A grid layout, usually used with `RbDataCard` |
+| `RbDataTable`                 | A data table with column filters            |
+| `RbEmptyBanner`               | A banner to be used to show "empty" status  |
+| `RbFormWrapper`               | A default card-based form wrapper           |
+| `RbMedia`                     | Used to show a media file preview           |
+| `RbPivotDataTable`            | A cross-table useful to show value distribution |
+| `RbResourceCard`              | A card representation of a resource instance |
+| `RbResourceCollection`        | Used to fetch a collection from an API resource |
+| `RbResourceInstance`          | Used to fetch an instance from an API resource |
+| `RbResourceSelect`            | A specific resource instance selector       |
+| `RbSelect`                    | A filterable selector widget                |    
+| `RbSidebar`                   | A sidebar populated with links to resources |
+| `RbToolbar`                   | A page toolbar with a built-in user area    |
+| `RbUploadArea`                | Used to upload a new media file             |
+| `RbUserArea`                  | An area used to show user details           |
+| `RbUserMenu`                  | A menu used to show user-related actions    |
+
 ## Contribute
 
 If you want, you can also freely donate to fund the project development:
