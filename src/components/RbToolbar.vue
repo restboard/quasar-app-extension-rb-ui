@@ -11,7 +11,7 @@
 
     <q-toolbar-title class="row col-auto items-center q-gutter-md">
       <img
-        :src="logoSrc || '~assets/logo.svg'"
+        :src="logoSrc"
         class="cursor-pointer"
         height="40"
         :alt="title || 'logo'"

@@ -4,14 +4,10 @@
     transition-hide="jump-up"
   >
     <div class="user-details column items-center q-pa-md">
-      <q-avatar size="80px">
+      <q-avatar v-if="avatar" size="80px">
         <img
-          v-if="avatar"
+          alt="avatar"
           :src="avatar"
-        />
-        <img
-          v-else
-          src="~assets/logo.svg"
         />
       </q-avatar>
       <div class="text-subtitle2 q-mt-sm q-mb-xs">
