@@ -11,7 +11,7 @@
 
     <q-toolbar-title class="row col-auto items-center q-gutter-md">
       <img
-        src="~assets/logo.svg"
+        :src="logoSrc || '~assets/logo.svg'"
         class="cursor-pointer"
         height="40"
         :alt="title || 'logo'"
@@ -45,6 +45,9 @@ export default {
       type: Boolean
     },
     title: {
+      type: String
+    },
+    logoSrc: {
       type: String
     }
   },
