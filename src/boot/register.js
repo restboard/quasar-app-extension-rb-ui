@@ -18,6 +18,7 @@ import RbMedia from '../components/RbMedia.vue'
 import RbUploadArea from '../components/RbUploadArea.vue'
 import RbSelect from '../components/RbSelect.vue'
 import RbResourceSelect from '../components/RbResourceSelect.vue'
+import RbDateTimeInput from '../components/RbDateTimeInput.vue'
 
 export default ({ app }) => {
   app.component(RbResourceCollection.name, RbResourceCollection)
@@ -40,4 +41,5 @@ export default ({ app }) => {
   app.component(RbUploadArea.name, RbUploadArea)
   app.component(RbSelect.name, RbSelect)
   app.component(RbResourceSelect.name, RbResourceSelect)
+  app.component(RbDateTimeInput.name, RbDateTimeInput)
 }

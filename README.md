@@ -18,6 +18,7 @@ quasar ext add rb-ui
 | `RbDataCard`                  | A default card with header, content and footer |
 | `RbDataGrid`                  | A grid layout, usually used with `RbDataCard` |
 | `RbDataTable`                 | A data table with column filters            |
+| `RbDateTimeInput`             | An input widget to set a date, time or datetime |
 | `RbEmptyBanner`               | A banner to be used to show "empty" status  |
 | `RbFormWrapper`               | A default card-based form wrapper           |
 | `RbMedia`                     | Used to show a media file preview           |
