@@ -9,15 +9,17 @@
       @click="onToggleMenu"
     />
 
-    <q-toolbar-title class="row col-auto items-center q-gutter-md">
+    <q-toolbar-title
+      class="row col-auto items-center q-gutter-md cursor-pointer"
+      @click="onGoHome"
+    >
       <img
+        v-if="logoSrc"
         :src="logoSrc"
-        class="cursor-pointer"
         height="40"
         :alt="title || 'logo'"
-        @click="onGoHome"
       />
-      <span class="gt-xs">{{ title }}</span>
+      <span :class="{ 'gt-xs': !!logoSrc }">{{ title }}</span>
     </q-toolbar-title>
 
     <slot
