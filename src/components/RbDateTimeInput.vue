@@ -1,5 +1,5 @@
 <template>
-    <q-input v-model="value" :mask="inputMask" :placeholder="mask" :label="label" :error="error" @blur="$emit('blur')">
+    <q-input v-model="value" :mask="inputMask" :placeholder="mask" @blur="$emit('blur')">
       <template v-slot:append>
         <div class="row q-col-gutter-xs" :class="{ reverse: timeFirst }">
           <q-icon
@@ -75,11 +75,6 @@
         default: false
       },
   
-      label: {
-        type: String,
-        default: ' '
-      },
-  
       parse: {
         type: Function,
         default: val => `${val}`
@@ -93,11 +88,6 @@
       options: {
         type: [Array, Function],
         default: null
-      },
-  
-      error: {
-        type: Boolean,
-        default: false
       }
     },
   
