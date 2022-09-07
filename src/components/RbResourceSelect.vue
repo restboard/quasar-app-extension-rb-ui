@@ -5,7 +5,7 @@
   >
     <rb-select
       v-bind="$attrs"
-      :items="props.items"
+      :items="extraOptions.concat(props.items)"
       :loading="props.loading"
       :label-key="$attrs.labelKey || resource.displayAttr || resource.key"
       :value-key="$attrs.valueKey || resource.key"
@@ -47,6 +47,11 @@ export default defineComponent({
 
     paginated: {
       type: Boolean
+    },
+
+    extraOptions: {
+      type: Array,
+      default: () => []
     }
   }
 })
