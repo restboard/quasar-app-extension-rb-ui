@@ -139,9 +139,21 @@ export default defineComponent({
   computed: {
     title () {
       if (this.id) {
-        return this.$t(this.resource.ui.updateTitle || 'Update')
+        if (!this.resource.ui.updateTitle) {
+          return this.$t(`Update #${this.id}`)
+        }
+        if (typeof this.resource.ui.updateTitle === 'function') {
+          return this.resource.ui.updateTitle(this.modelValue)
+        }
+        return this.$t(this.resource.ui.updateTitle)
       } else {
-        return this.$t(this.resource.ui.createTitle || 'Create')
+        if (!this.resource.ui.createTitle) {
+          return this.$t(`Create`)
+        }
+        if (typeof this.resource.ui.createTitle === 'function') {
+          return this.resource.ui.createTitle(this.modelValue)
+        }
+        return this.$t(this.resource.ui.createTitle)
       }
     },
 
