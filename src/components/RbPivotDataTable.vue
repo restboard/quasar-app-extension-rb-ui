@@ -199,7 +199,7 @@ export default defineComponent({
       }
 
       let colList = Array.from(cols)
-      colList.sort(sortColumnsFn)
+      colList.sort(this.sortColumnsFn)
       colList = colList.map(name => ({
         name,
         align: 'right'
