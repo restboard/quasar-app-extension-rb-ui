@@ -99,6 +99,10 @@ export default defineComponent({
       default: 'id'
     },
 
+    sortColumnsFn: {
+      type: Function
+    },
+
     withRowTotal: {
       type: Boolean
     },
@@ -195,7 +199,7 @@ export default defineComponent({
       }
 
       let colList = Array.from(cols)
-      colList.sort()
+      colList.sort(sortColumnsFn)
       colList = colList.map(name => ({
         name,
         align: 'right'
