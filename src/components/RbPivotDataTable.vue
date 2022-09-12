@@ -2,7 +2,10 @@
   <rb-data-table
     class="rb-pivot-data-table"
     dense
-    :class="{ 'with-row-total': withRowTotal || withTotal, 'with-col-total': withColumnTotal || withTotal}"
+    :class="{
+      'with-row-total': withRowTotal || withTotal,
+      'with-col-total': withColumnTotal || withTotal,
+    }"
     :rows-per-page-options="[0]"
     :row-key="rowKey"
     :rows="rows"
@@ -11,7 +14,14 @@
     <template #header-cell="props">
       <th v-bind="props.col">
         {{ props.col.label }}
-        <div class="row" v-if="cellKeys.length > 1 && props.col.name !== rowKey && props.col.field !== rowKey">
+        <div
+          class="row"
+          v-if="
+            cellKeys.length > 1 &&
+            props.col.name !== rowKey &&
+            props.col.field !== rowKey
+          "
+        >
           <div v-for="key in cellKeys" :key="key" class="col">
             {{ key }}
           </div>
@@ -21,9 +31,19 @@
 
     <template #body-cell="props">
       <td v-bind="props.col">
-        <slot v-if="props.col.field !== rowKey && props.col.name !== rowKey" name="body-cell-cellKey" v-bind="props">
+        <slot
+          v-if="props.col.field !== rowKey && props.col.name !== rowKey"
+          name="body-cell-cellKey"
+          v-bind="props"
+        >
           <div v-if="props.row[props.col.field || props.col.name]" class="row">
-            <div v-for="key in Object.keys(props.row[props.col.field || props.col.name])" :key="key" class="col">
+            <div
+              v-for="key in Object.keys(
+                props.row[props.col.field || props.col.name]
+              )"
+              :key="key"
+              class="col"
+            >
               <slot :name="`body-cell-cellKey-${key}`" v-bind="props">
                 {{ props.row[props.col.field || props.col.name][key] }}
               </slot>
@@ -36,18 +56,15 @@
       </td>
     </template>
 
-    <template
-      v-if="withColumnTotal || withTotal"
-      #bottom-row="props"
-    >
+    <template v-if="withColumnTotal || withTotal" #bottom-row="props">
       <q-tr :props="props">
-        <q-td
-          v-for="column in columns"
-          :key="column.name"
-          class="text-right"
-        >
+        <q-td v-for="column in columns" :key="column.name" class="text-right">
           <div v-if="colTotals[column.field || column.name]" class="row">
-            <div v-for="key in Object.keys(colTotals[column.field || column.name])" :key="key" class="col">
+            <div
+              v-for="key in Object.keys(colTotals[column.field || column.name])"
+              :key="key"
+              class="col"
+            >
               {{ colTotals[column.field || column.name][key] }}
             </div>
           </div>
@@ -58,183 +75,202 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import RbDataTable from '../components/RbDataTable.vue'
+import { defineComponent } from "vue";
+import RbDataTable from "../components/RbDataTable.vue";
 
 export default defineComponent({
-  name: 'RbPivotDataTable',
+  name: "RbPivotDataTable",
 
   components: {
-    RbDataTable
+    RbDataTable,
   },
 
   props: {
     modelValue: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
 
     accumulate: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     header: {
       type: String,
-      default: null
+      default: null,
     },
 
     rowKey: {
       type: [String, Function],
-      default: 'id'
+      default: "id",
     },
 
     columnKey: {
       type: [String, Function],
-      default: 'id'
+      default: "id",
     },
 
     cellKey: {
       type: [String, Function, Array],
-      default: 'id'
+      default: "id",
     },
 
     sortColumnsFn: {
-      type: Function
+      type: Function,
+    },
+
+    sumRowTotalFn: {
+      type: Function,
+      default: (val, total) => Number(total || 0) + Number(val || 0),
+    },
+
+    sumColumnTotalFn: {
+      type: Function,
+      default: (val, total) => Number(total || 0) + Number(val || 0),
     },
 
     withRowTotal: {
-      type: Boolean
+      type: Boolean,
     },
 
     withColumnTotal: {
-      type: Boolean
+      type: Boolean,
     },
 
     withTotal: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
 
   computed: {
-    cellKeys () {
-      return Array.isArray(this.cellKey) ? this.cellKey : [this.cellKey]
-    }
+    cellKeys() {
+      return Array.isArray(this.cellKey) ? this.cellKey : [this.cellKey];
+    },
   },
 
-  mounted () {
-    this.reloadColumnsAndRows()
+  mounted() {
+    this.reloadColumnsAndRows();
   },
 
-  data () {
+  data() {
     return {
       columns: [],
       rows: [],
-      colTotals: {}
-    }
+      colTotals: {},
+    };
   },
 
   methods: {
-    reloadColumnsAndRows () {
-      const rows = {}
-      const cols = new Set()
+    reloadColumnsAndRows() {
+      const rows = {};
+      const cols = new Set();
       const colTotals = {
-        'row-total': {}
-      }
+        "row-total": {},
+      };
 
-      for (const row of this.modelValue) {
-        const rowValue = typeof this.rowKey === 'function'
-          ? this.rowKey(row)
-          : row[this.rowKey]
-        const colValue = typeof this.columnKey === 'function'
-          ? this.columnKey(row)
-          : row[this.columnKey]
-        const cellValue = typeof this.cellKey === 'function'
-          ? this.cellKey(row)
-          : Object.fromEntries(this.cellKeys.map(key => [key, row[key]]))
+      if (Array.isArray(this.modelValue)) {
+        for (const row of this.modelValue) {
+          const rowValue =
+            typeof this.rowKey === "function"
+              ? this.rowKey(row)
+              : row[this.rowKey];
+          const colValue =
+            typeof this.columnKey === "function"
+              ? this.columnKey(row)
+              : row[this.columnKey];
+          const cellValue =
+            typeof this.cellKey === "function"
+              ? this.cellKey(row)
+              : Object.fromEntries(this.cellKeys.map((key) => [key, row[key]]));
 
-        const colKey = `${colValue}`
-        cols.add(colKey)
+          const colKey = `${colValue}`;
+          cols.add(colKey);
 
-        rows[rowValue] = rows[rowValue] || {}
-        rows[rowValue][colKey] = rows[rowValue][colKey] || {}
-        rows[rowValue]['row-total'] = rows[rowValue]['row-total'] || {}
+          rows[rowValue] = rows[rowValue] || {};
+          rows[rowValue][colKey] = rows[rowValue][colKey] || {};
+          rows[rowValue]["row-total"] = rows[rowValue]["row-total"] || {};
 
-        for (const key of Object.keys(cellValue)) {
-          const value = cellValue[key]
+          for (const key of Object.keys(cellValue)) {
+            const value = cellValue[key];
 
-          if (key in rows[rowValue][colKey] && this.accumulate) {
-            rows[rowValue][colKey][key] += value
-          } else {
-            rows[rowValue][colKey][key] = value
-          }
-
-
-          if (this.withRowTotal) {
-            rows[rowValue]['row-total'][key] = rows[rowValue]['row-total'][key]
-              ? Number(rows[rowValue]['row-total'][key]) + Number(value)
-              : value
-          } else {
-            rows[rowValue]['row-total'][key] = ''
-          }
-
-          if (this.withColumnTotal) {
-            if (colKey in colTotals) {
-              colTotals[colKey][key] = colTotals[colKey][key]
-                ? Number(colTotals[colKey][key]) + Number(value)
-                : value
+            if (key in rows[rowValue][colKey] && this.accumulate) {
+              rows[rowValue][colKey][key] += value;
             } else {
-              colTotals[colKey] = { [key]: value }
+              rows[rowValue][colKey][key] = value;
             }
-          } else {
-            colTotals[colKey] = ''
-          }
 
-          if (this.withTotal) {
-            colTotals['row-total'][key] = colTotals['row-total'][key]
-                ? Number(colTotals['row-total'][key]) + Number(value)
-                : value
+            if (this.withRowTotal) {
+              rows[rowValue]["row-total"][key] = this.sumRowTotalFn(
+                rows[rowValue]["row-total"][key],
+                value
+              );
+            } else {
+              rows[rowValue]["row-total"][key] = "";
+            }
+
+            if (this.withColumnTotal) {
+              if (colKey in colTotals) {
+                colTotals[colKey][key] = this.sumColumnTotalFn(
+                  colTotals[colKey][key],
+                  value
+                );
+              } else {
+                colTotals[colKey] = { [key]: value };
+              }
+            } else {
+              colTotals[colKey] = "";
+            }
+
+            if (this.withTotal) {
+              colTotals["row-total"][key] = this.sumRowTotalFn(
+                colTotals["row-total"][key],
+                value
+              );
+            }
           }
         }
       }
 
-      let colList = Array.from(cols)
-      colList.sort(this.sortColumnsFn)
-      colList = colList.map(name => ({
+      let colList = Array.from(cols);
+      colList.sort(this.sortColumnsFn);
+      colList = colList.map((name) => ({
         name,
-        align: 'right'
-      }))
+        align: "right",
+      }));
       colList.unshift({
         name: this.header || `${this.rowKey} / ${this.columnKey}`,
         field: `${this.rowKey}`,
         required: true,
-      })
+      });
 
       if (this.withRowTotal || this.withTotal) {
         colList.push({
-          name: '',
-          align: 'right',
-          field: 'row-total',
-        })
+          name: "",
+          align: "right",
+          field: "row-total",
+        });
       }
 
-      const rowList = Array.from(Object.keys(rows).map(rowKey => ({
-        [this.rowKey]: rowKey,
-        ...rows[rowKey]
-      })))
+      const rowList = Array.from(
+        Object.keys(rows).map((rowKey) => ({
+          [this.rowKey]: rowKey,
+          ...rows[rowKey],
+        }))
+      );
 
-      this.rows =  rowList
-      this.colTotals = colTotals
-      this.columns = colList
-    }
+      this.rows = rowList;
+      this.colTotals = colTotals;
+      this.columns = colList;
+    },
   },
 
   watch: {
-    modelValue () {
-      this.reloadColumnsAndRows()
-    }
-  }
-})
+    modelValue() {
+      this.reloadColumnsAndRows();
+    },
+  },
+});
 </script>
 
 <style lang="sass">
