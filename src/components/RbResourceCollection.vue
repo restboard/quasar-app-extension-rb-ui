@@ -8,11 +8,16 @@
       :loading="loading"
       :hasMore="hasMore"
       :pagination="pagination"
+      :reloadData="reloadData"
+      :clearAndReloadData="clearAndReloadData"
     >
     </slot>
     <slot
       v-else
       name="empty"
+      v-bind="$props"
+      :reloadData="reloadData"
+      :clearAndReloadData="clearAndReloadData"
     >
       {{ $t("No results") }}
     </slot>

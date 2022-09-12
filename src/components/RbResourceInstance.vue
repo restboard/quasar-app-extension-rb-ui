@@ -8,11 +8,16 @@
       :instance="instance"
       :loading="loading"
       :saving="saving"
+      :reloadData="reloadData"
+      :saveData="saveData"
     >
     </slot>
     <slot
       v-else
       name="empty"
+      v-bind="$props"
+      :schema="schema"
+      :saveData="saveData"
     >
       {{ $t("Invalid or missing instance") }}
     </slot>
