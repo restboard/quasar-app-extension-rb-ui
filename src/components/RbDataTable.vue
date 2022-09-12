@@ -20,6 +20,7 @@
     <template v-slot:top="props">
       <slot name="top" v-bind="props">
         <div class="row full-width q-gutter-sm justify-end">
+          <slot name="top-actions" v-bind="props"></slot>
           <q-input
             v-if="showSearch"
             borderless
