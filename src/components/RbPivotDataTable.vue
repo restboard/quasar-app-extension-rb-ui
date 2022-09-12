@@ -172,7 +172,7 @@ export default defineComponent({
 
           if (this.withRowTotal) {
             rows[rowValue]['row-total'][key] = rows[rowValue]['row-total'][key]
-              ? rows[rowValue]['row-total'][key] + value
+              ? Number(rows[rowValue]['row-total'][key]) + Number(value)
               : value
           } else {
             rows[rowValue]['row-total'][key] = ''
@@ -181,7 +181,7 @@ export default defineComponent({
           if (this.withColumnTotal) {
             if (colKey in colTotals) {
               colTotals[colKey][key] = colTotals[colKey][key]
-                ? colTotals[colKey][key] + value
+                ? Number(colTotals[colKey][key]) + Number(value)
                 : value
             } else {
               colTotals[colKey] = { [key]: value }
@@ -192,7 +192,7 @@ export default defineComponent({
 
           if (this.withTotal) {
             colTotals['row-total'][key] = colTotals['row-total'][key]
-                ? colTotals['row-total'][key] + value
+                ? Number(colTotals['row-total'][key]) + Number(value)
                 : value
           }
         }
