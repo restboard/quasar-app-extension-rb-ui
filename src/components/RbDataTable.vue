@@ -22,6 +22,7 @@
         <div class="row full-width q-gutter-sm justify-end">
           <q-input
             v-if="showSearch"
+            borderless
             dense
             clearable
             clear-icon="close"
