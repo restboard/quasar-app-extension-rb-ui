@@ -2,7 +2,7 @@
   <q-popup-proxy>
     <q-card style="min-width:280px">
       <div class="row no-gutter">
-        <div class="col-xs-6">
+        <div class="col">
           <q-btn
             flat
             dense
@@ -12,7 +12,7 @@
             {{ $t("Select all") }}
           </q-btn>
         </div>
-        <div class="col-xs-6">
+        <div class="col">
           <q-btn
             flat
             dense
@@ -24,25 +24,30 @@
         </div>
       </div>
       <q-separator />
-      <q-list dense>
+      <q-virtual-scroll
+        style="max-height:350px"
+        :items="filterKeys"
+        separator
+        v-slot="{ item }"
+      >
         <q-item
-          v-for="itemKey in filterKeys"
-          :key="itemKey"
+          :key="item"
           clickable
-          @click="toggleFilter(itemKey)"
+          dense
+          @click="toggleFilter(item)"
         >
           <q-item-section
             side
             top
           >
             <q-checkbox
-              :model-value="filters[itemKey]"
-              @update:model-value="toggleFilter(itemKey)"
+              :model-value="filters[item]"
+              @update:model-value="toggleFilter(item)"
             />
           </q-item-section>
-          <q-item-section>{{ labels[itemKey] }}</q-item-section>
+          <q-item-section>{{ labels[item] }}</q-item-section>
         </q-item>
-      </q-list>
+      </q-virtual-scroll>
     </q-card>
   </q-popup-proxy>
 </template>
@@ -94,19 +99,21 @@ export default defineComponent({
     reloadFilters () {
       const _filters = {}
       const _labels = {}
-      for (const row of this.rows) {
-        const rowKey = row[this.field]
-        if (!rowKey) {
-          continue
+      if (Array.isArray(this.rows)) {
+        for (const row of this.rows) {
+          const rowKey = row[this.field]
+          if (!rowKey) {
+            continue
+          }
+          if (rowKey in this.modelValue) {
+            _filters[rowKey] = this.modelValue[rowKey]
+          } else {
+            _filters[rowKey] = true
+          }
+          _labels[rowKey] = this.format
+            ? this.format(rowKey, row)
+            : (row[rowKey] || rowKey)
         }
-        if (rowKey in this.modelValue) {
-          _filters[rowKey] = this.modelValue[rowKey]
-        } else {
-          _filters[rowKey] = true
-        }
-        _labels[rowKey] = this.format
-          ? this.format(rowKey, row)
-          : (row[rowKey] || rowKey)
       }
       this.filters = _filters
       this.labels = _labels

@@ -173,7 +173,7 @@ export default defineComponent({
     },
 
     filteredRows () {
-      let rows = this.rows ? [...this.rows] : []
+      let rows = Array.isArray(this.rows) ? this.rows : []
       this.columnsWithFilters.forEach(col => {
         const filters = this.colFilters[col.field] || {}
         rows = rows.filter(row => {
@@ -198,13 +198,23 @@ export default defineComponent({
 
   methods: {
     reloadColFilters () {
-      this.columnsWithFilters.forEach(col => {
+      for (const col of this.columnsWithFilters) {
+        if (!col.field) {
+          continue
+        }
         this.colFilters[col.field] = {}
-        this.rows.forEach(row => {
-          const key = row[col.field]
-          this.colFilters[col.field][key] = true
-        })
-      })
+      }
+      if (!Array.isArray(this.rows)) {
+        return
+      }
+      for (const row of this.rows) {
+        for (const col of this.columnsWithFilters) {
+          if (col.field && col.field in row) {
+            const key = row[col.field]
+            this.colFilters[col.field][key] = true
+          }
+        }
+      }
     },
 
     onRowClicked (evt, row) {
