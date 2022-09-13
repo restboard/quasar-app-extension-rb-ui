@@ -15,12 +15,12 @@
       <th v-bind="props.col">
         {{ props.col.label }}
         <div
-          class="row"
           v-if="
             cellKeys.length > 1 &&
             props.col.name !== rowKey &&
             props.col.field !== rowKey
           "
+          class="row"
         >
           <div v-for="key in cellKeys" :key="key" class="col">
             {{ key }}
@@ -118,6 +118,7 @@ export default defineComponent({
 
     sortColumnsFn: {
       type: Function,
+      default: null,
     },
 
     sumRowTotalFn: {
@@ -143,22 +144,28 @@ export default defineComponent({
     },
   },
 
-  computed: {
-    cellKeys() {
-      return Array.isArray(this.cellKey) ? this.cellKey : [this.cellKey];
-    },
-  },
-
-  mounted() {
-    this.reloadColumnsAndRows();
-  },
-
   data() {
     return {
       columns: [],
       rows: [],
       colTotals: {},
     };
+  },
+
+  computed: {
+    cellKeys() {
+      return Array.isArray(this.cellKey) ? this.cellKey : [this.cellKey];
+    },
+  },
+
+  watch: {
+    modelValue() {
+      this.reloadColumnsAndRows();
+    },
+  },
+
+  mounted() {
+    this.reloadColumnsAndRows();
   },
 
   methods: {
@@ -262,12 +269,6 @@ export default defineComponent({
       this.rows = rowList;
       this.colTotals = colTotals;
       this.columns = colList;
-    },
-  },
-
-  watch: {
-    modelValue() {
-      this.reloadColumnsAndRows();
     },
   },
 });

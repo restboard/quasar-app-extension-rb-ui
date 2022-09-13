@@ -8,53 +8,59 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbSelect',
+  name: "RbSelect",
 
   props: {
     items: {
-      type: Array
+      type: Array,
+      default: () => [],
     },
 
     loading: {
-      type: Boolean
+      type: Boolean,
     },
 
     valueKey: {
       type: String,
-      default: 'id'
+      default: "id",
     },
 
     labelKey: {
       type: String,
-      default: 'name'
-    }
+      default: "name",
+    },
+  },
+
+  data() {
+    return {
+      query: "",
+    };
   },
 
   computed: {
-    options () {
+    options() {
       return (this.items || [])
-        .map(item => ({
+        .map((item) => ({
           value: item[this.valueKey],
-          label: item[this.labelKey]
+          label: item[this.labelKey],
         }))
-        .filter(item => !this.query || item.label.toLowerCase().indexOf(this.query) > -1)
-    }
-  },
-
-  data () {
-    return {
-      query: ''
-    }
+        .filter(
+          (item) =>
+            !this.query || item.label.toLowerCase().indexOf(this.query) > -1
+        );
+    },
   },
 
   methods: {
-    onFilter (val, update) {
-      const needle = (val || '').toLowerCase()
-      update(() => { this.query = needle })
-    }
-  }
-})
+    onFilter(val, update) {
+      const needle = (val || "").toLowerCase();
+      update(() => {
+        this.query = needle;
+      });
+    },
+  },
+});
 </script>

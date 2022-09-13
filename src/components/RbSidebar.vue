@@ -3,26 +3,20 @@
     <slot
       name="header"
       :resources="resources"
-      :visibileResources="visibileResources"
-    ></slot>
+      :visibile-resources="visibileResources"
+    />
 
     <slot
       name="menu"
       :resources="resources"
-      :visibileResources="visibileResources"
+      :visibile-resources="visibileResources"
     >
       <slot name="menu-root-item">
-        <q-item
-          clickable
-          v-ripple
-          to="/"
-          exact
-          v-if="!hideRootLink"
-        >
+        <q-item v-if="!hideRootLink" v-ripple clickable to="/" exact>
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
-          <q-item-section>{{ $t('Dashboard') }}</q-item-section>
+          <q-item-section>{{ $t("Dashboard") }}</q-item-section>
         </q-item>
       </slot>
       <slot
@@ -31,11 +25,7 @@
         :name="`menu-resource-${resource.name}-item`"
         :resource="resource"
       >
-        <q-item
-          :to="`/${resource.name}`"
-          clickable
-          v-ripple
-        >
+        <q-item v-ripple :to="`/${resource.name}`" clickable>
           <q-item-section avatar>
             <q-icon :name="resource.ui.icon" />
           </q-item-section>
@@ -47,38 +37,40 @@
     <slot
       name="footer"
       :resources="resources"
-      :visibileResources="visibileResources"
-    ></slot>
+      :visibile-resources="visibileResources"
+    />
   </q-list>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbSidebar',
+  name: "RbSidebar",
 
   props: {
     resources: {
-      type: Array
+      type: Array,
+      default: () => [],
     },
 
     separator: {
       type: Boolean,
-      default: true
+      default: true,
     },
 
     hideRootLink: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   computed: {
-    visibileResources () {
-      return Array.from(this.resources || [])
-        .filter(resource => !resource.ui.excludeSidebar)
-    }
-  }
-})
+    visibileResources() {
+      return Array.from(this.resources || []).filter(
+        (resource) => !resource.ui.excludeSidebar
+      );
+    },
+  },
+});
 </script>

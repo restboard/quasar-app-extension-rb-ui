@@ -4,11 +4,11 @@
     input-style="min-height:200px;min-width:200px"
     @update:model-value="onFileSelection"
   >
-    <template v-slot:append>
+    <template #append>
       <div
         v-if="previewSrc"
         class="fit relative no-pointer-events"
-        style="opacity:.7"
+        style="opacity: 0.7"
       >
         <rb-media
           v-if="isVideoOrImage"
@@ -20,12 +20,7 @@
           :src="previewSrc"
           :type="type"
         />
-        <q-icon
-          v-else
-          name="description"
-          size="xl"
-          class="absolute-center"
-        />
+        <q-icon v-else name="description" size="xl" class="absolute-center" />
       </div>
       <q-btn
         v-if="!file"
@@ -55,79 +50,81 @@
 </template>
 
 <script>
-import RbMedia from '../components/RbMedia'
+import RbMedia from "../components/RbMedia";
 
 export default {
-  name: 'RbUploadArea',
+  name: "RbUploadArea",
 
   components: {
-    RbMedia
+    RbMedia,
   },
 
   props: {
     clearable: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
+  },
+
+  emits: ["update:modelValue"],
+
+  data() {
+    return {
+      file: null,
+      previewSrc: null,
+    };
   },
 
   computed: {
-    isVideoOrImage () {
+    isVideoOrImage() {
       return (
-        this.type.indexOf('video') === 0 || this.type.indexOf('image') === 0
-      )
+        this.type.indexOf("video") === 0 || this.type.indexOf("image") === 0
+      );
     },
 
-    isFile () {
-      return this.file && this.file instanceof File
+    isFile() {
+      return this.file && this.file instanceof File;
     },
 
-    filename () {
-      return this.file && this.file.name
+    filename() {
+      return this.file && this.file.name;
     },
 
-    type () {
-      return this.isFile ? this.file.type : ''
-    }
+    type() {
+      return this.isFile ? this.file.type : "";
+    },
   },
 
-  data () {
-    return {
-      file: null,
-      previewSrc: null
-    }
-  },
-
-  mounted () {
-    this.updatePreview()
+  mounted() {
+    this.updatePreview();
   },
 
   methods: {
-    updatePreview () {
+    updatePreview() {
       if (this.isFile) {
-        const reader = new FileReader()
+        const reader = new FileReader();
         const _eventHandler = () => {
-          this.previewSrc = reader.result
-          reader.removeEventListener('load', _eventHandler)
-        }
-        reader.addEventListener('load', _eventHandler, false)
-        reader.readAsDataURL(this.file)
+          this.previewSrc = reader.result;
+          reader.removeEventListener("load", _eventHandler);
+        };
+        reader.addEventListener("load", _eventHandler, false);
+        reader.readAsDataURL(this.file);
       } else {
-        this.previewSrc = null
+        this.previewSrc = null;
       }
     },
 
-    onFileSelection (file) {
-      this.file = file
-      this.updatePreview()
-      this.$emit('update:modelValue', file)
+    onFileSelection(file) {
+      this.file = file;
+      this.updatePreview();
+      this.$emit("update:modelValue", file);
     },
 
-    onClear () {
-      this.$refs.fileInput.removeAtIndex(0)
-      this.file = null
-      this.updatePreview()
-      this.$emit('update:modelValue', null)
-    }
-  }
-}
+    onClear() {
+      this.$refs.fileInput.removeAtIndex(0);
+      this.file = null;
+      this.updatePreview();
+      this.$emit("update:modelValue", null);
+    },
+  },
+};
 </script>

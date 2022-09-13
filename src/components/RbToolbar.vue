@@ -13,55 +13,47 @@
       class="row col-auto items-center q-gutter-md cursor-pointer"
       @click="onGoHome"
     >
-      <img
-        v-if="logoSrc"
-        :src="logoSrc"
-        height="40"
-        :alt="title || 'logo'"
-      />
+      <img v-if="logoSrc" :src="logoSrc" height="40" :alt="title || 'logo'" />
       <span :class="{ 'gt-xs': !!logoSrc }">{{ title }}</span>
     </q-toolbar-title>
 
-    <slot
-      name="left"
-      v-bind="$props"
-    >
-    </slot>
+    <slot name="left" v-bind="$props" />
 
     <q-space />
 
-    <slot
-      name="default"
-      v-bind="$props"
-    >
-    </slot>
+    <slot name="default" v-bind="$props" />
   </q-toolbar>
 </template>
 
 <script>
 export default {
-  name: 'RbToolbar',
+  name: "RbToolbar",
 
   props: {
     isMenuOpen: {
-      type: Boolean
+      type: Boolean,
     },
+
     title: {
-      type: String
+      type: String,
+      default: null,
     },
+
     logoSrc: {
-      type: String
-    }
+      type: String,
+      default: null,
+    },
   },
+  emits: ["toggle-menu"],
 
   methods: {
-    onGoHome () {
-      this.$router.push('/')
+    onGoHome() {
+      this.$router.push("/");
     },
 
-    onToggleMenu () {
-      this.$emit('toggle-menu')
-    }
-  }
-}
+    onToggleMenu() {
+      this.$emit("toggle-menu");
+    },
+  },
+};
 </script>

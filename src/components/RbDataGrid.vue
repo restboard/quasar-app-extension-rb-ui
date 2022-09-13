@@ -1,19 +1,16 @@
 <template>
   <div>
-    <slot
-      name="empty"
-      v-if="isEmpty && !loading"
-    >
-      {{ $t('No results') }}
+    <slot v-if="isEmpty && !loading" name="empty">
+      {{ $t("No results") }}
     </slot>
     <div
+      v-for="(itemRow, rowIdx) in itemRows"
       v-else
-      v-for="itemRow, rowIdx in itemRows"
       :key="rowIdx"
       :class="`row q-col-gutter-${gutter} q-mb-${gutter}`"
     >
       <div
-        v-for="item, colIdx in itemRow"
+        v-for="(item, colIdx) in itemRow"
         :key="colIdx"
         class="col"
         :style="`min-height:${itemHeight}`"
@@ -21,29 +18,16 @@
         <template v-if="loading">
           <slot name="skeleton">
             <div class="fit flex flex-center">
-              <q-spinner
-                color="primary"
-                size="3em"
-              />
+              <q-spinner color="primary" size="3em" />
             </div>
           </slot>
         </template>
         <template v-else>
-          <slot
-            v-if="item"
-            :item="item"
-            :row="rowIdx"
-            :col="colIdx"
-          >
+          <slot v-if="item" :item="item" :row="rowIdx" :col="colIdx">
             {{ rowIdx }} / {{ colIdx }}
           </slot>
-          <slot
-            name="empty-item"
-            v-else
-            :row="rowIdx"
-            :col="colIdx"
-          >
-            <div class="empty-item fit"></div>
+          <slot v-else name="empty-item" :row="rowIdx" :col="colIdx">
+            <div class="empty-item fit" />
           </slot>
         </template>
       </div>
@@ -52,79 +36,79 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbDataGrid',
+  name: "RbDataGrid",
 
   props: {
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
 
     itemsPerRow: {
       type: Number,
-      default: 4
+      default: 4,
     },
 
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     gutter: {
       type: String,
-      default: 'md'
+      default: "md",
     },
 
     itemHeight: {
       type: String,
-      default: '280px'
+      default: "280px",
     },
 
     skeletonRows: {
       type: Number,
-      default: 2
+      default: 2,
     },
   },
 
   computed: {
-    itemCount () {
-      return this.items && this.items.length
+    itemCount() {
+      return this.items && this.items.length;
     },
 
-    isEmpty () {
-      return !this.itemCount
+    isEmpty() {
+      return !this.itemCount;
     },
 
-    rowCount () {
+    rowCount() {
       if (!this.itemsPerRow) {
-        return 0
+        return 0;
       }
-      return Math.ceil(this.itemCount / this.itemsPerRow)
+      return Math.ceil(this.itemCount / this.itemsPerRow);
     },
 
-    itemRows () {
+    itemRows() {
       if (this.loading) {
-        return Array(this.skeletonRows).fill(Array(this.itemsPerRow))
+        return Array(this.skeletonRows).fill(Array(this.itemsPerRow));
       }
 
-      const res = []
-      const size = this.itemsPerRow
-      const rowCount = this.rowCount
+      const res = [];
+      const size = this.itemsPerRow;
+      const rowCount = this.rowCount;
       for (let i = 0; i < rowCount; ++i) {
-        const start = i * size
-        const end = start + size
-        const rowItems = this.items.slice(start, end)
-        const filler = new Array(size - rowItems.length).fill(null)
-        res.push(rowItems.concat(filler))
+        const start = i * size;
+        const end = start + size;
+        const rowItems = this.items.slice(start, end);
+        const filler = new Array(size - rowItems.length).fill(null);
+        res.push(rowItems.concat(filler));
       }
 
-      return res
-    }
-  }
-})
+      return res;
+    },
+  },
+});
 </script>
 
 <style scoped lang="sass">

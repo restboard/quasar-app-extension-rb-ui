@@ -10,24 +10,24 @@
         :name="icon"
         size="xl"
         class="q-mb-sm"
-        style="opacity:.5"
+        style="opacity: 0.5"
       />
-      <slot></slot>
+      <slot />
     </div>
   </q-banner>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbEmptyBanner',
+  name: "RbEmptyBanner",
 
   props: {
     icon: {
       type: String,
-      default: 'not_interested'
-    }
-  }
-})
+      default: "not_interested",
+    },
+  },
+});
 </script>

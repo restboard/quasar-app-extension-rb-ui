@@ -6,18 +6,17 @@
       v-bind="$props"
       :items="items"
       :loading="loading"
-      :hasMore="hasMore"
+      :has-more="hasMore"
       :pagination="pagination"
-      :reloadData="reloadData"
-      :clearAndReloadData="clearAndReloadData"
-    >
-    </slot>
+      :reload-data="reloadData"
+      :clear-and-reload-data="clearAndReloadData"
+    />
     <slot
       v-else
       name="empty"
       v-bind="$props"
-      :reloadData="reloadData"
-      :clearAndReloadData="clearAndReloadData"
+      :reload-data="reloadData"
+      :clear-and-reload-data="clearAndReloadData"
     >
       {{ $t("No results") }}
     </slot>
@@ -25,137 +24,139 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbResourceCollection',
+  name: "RbResourceCollection",
 
   props: {
     resource: {
       type: Object,
-      required: true
+      required: true,
     },
 
     filters: {
-      type: Object
+      type: Object,
+      default: null,
     },
 
     offset: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     limit: {
-      type: Number
+      type: Number,
+      default: null,
     },
 
     infinite: {
-      type: Boolean
+      type: Boolean,
     },
 
     keepOnEmpty: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
 
-  computed: {
-    key () {
-      return this.resource.key || 'id'
-    },
+  emits: ["loaded", "error"],
 
-    itemCount () {
-      return this.items ? this.items.length : 0
-    },
-
-    pagination () {
-      return {
-        rowsPerPage: this.limit || 0,
-        page: this.limit
-          ? (Math.ceil(this.offset / this.limit) + 1)
-          : 1
-      }
-    }
-  },
-
-  data () {
+  data() {
     return {
       items: [],
       loading: true,
-      hasMore: true
-    }
+      hasMore: true,
+    };
+  },
+
+  computed: {
+    key() {
+      return this.resource.key || "id";
+    },
+
+    itemCount() {
+      return this.items ? this.items.length : 0;
+    },
+
+    pagination() {
+      return {
+        rowsPerPage: this.limit || 0,
+        page: this.limit ? Math.ceil(this.offset / this.limit) + 1 : 1,
+      };
+    },
+  },
+
+  watch: {
+    resource: {
+      handler(val, old) {
+        if (val !== old) {
+          val && val.addListener(this.clearAndReloadData);
+          old && old.removeListener(this.clearAndReloadData);
+          this.clearAndReloadData();
+        }
+      },
+      // force registering listener on first load
+      immediate: true,
+    },
+
+    filters: function () {
+      this.clearAndReloadData();
+    },
+
+    offset: function () {
+      this.clearAndReloadData();
+    },
+
+    limit: function () {
+      this.clearAndReloadData();
+    },
   },
 
   methods: {
-    clear () {
-      this.items = []
-      this.hasMore = true
+    clear() {
+      this.items = [];
+      this.hasMore = true;
     },
 
-    async reloadData () {
+    async reloadData() {
       if (!this.resource) {
-        return
+        return;
       }
-      this.loading = true
-      let newItems = []
+      this.loading = true;
+      let newItems = [];
       try {
         const opts = {
           offset: this.offset || 0,
           filters: {
             ...this.filters,
-            ...this.resource.defaultParams.filters
-          }
-        }
+            ...this.resource.defaultParams.filters,
+          },
+        };
         if (this.infinite) {
-          opts.offset += this.itemCount
+          opts.offset += this.itemCount;
         }
         if (this.limit) {
-          opts.limit = this.limit
+          opts.limit = this.limit;
         }
-        const res = await this.resource.getMany(opts)
-        newItems = res.data || []
-        this.hasMore = newItems.length === opts.limit
+        const res = await this.resource.getMany(opts);
+        newItems = res.data || [];
+        this.hasMore = newItems.length === opts.limit;
         if (this.infinite) {
-          this.items = this.items.concat(newItems)
+          this.items = this.items.concat(newItems);
         } else {
-          this.items = newItems
+          this.items = newItems;
         }
       } catch (err) {
-        this.$emit('error', err)
+        this.$emit("error", err);
       }
-      this.loading = false
-      this.$emit('loaded', newItems ? newItems.length : 0)
+      this.loading = false;
+      this.$emit("loaded", newItems ? newItems.length : 0);
     },
 
-    async clearAndReloadData () {
-      this.clear()
-      return this.reloadData()
-    }
+    async clearAndReloadData() {
+      this.clear();
+      return this.reloadData();
+    },
   },
-
-  watch: {
-    resource: {
-      handler (val, old) {
-        if (val !== old) {
-          val && val.addListener(this.clearAndReloadData)
-          old && old.removeListener(this.clearAndReloadData)
-          this.clearAndReloadData()
-        }
-      },
-      // force registering listener on first load
-      immediate: true
-    },
-
-    filters: function () {
-      this.clearAndReloadData()
-    },
-
-    offset: function () {
-      this.clearAndReloadData()
-    },
-
-    limit: function () {
-      this.clearAndReloadData()
-    }
-  }
-})
+});
 </script>

@@ -1,11 +1,7 @@
 <template>
   <div v-intersection.once="onIntersection">
     <template v-if="intersected">
-      <q-responsive
-        class="fit"
-        v-if="isVideo"
-        :ratio="ratio"
-      >
+      <q-responsive v-if="isVideo" class="fit" :ratio="ratio">
         <video
           :autoplay="autoplay"
           :loop="loop"
@@ -14,10 +10,7 @@
           :poster="poster"
           :style="cover ? 'object-fit:cover' : 'object-fit:contain'"
         >
-          <source
-            :src="src"
-            :type="type"
-          >
+          <source :src="src" :type="type" />
         </video>
       </q-responsive>
       <q-img
@@ -33,71 +26,74 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbMedia',
+  name: "RbMedia",
 
   props: {
     src: {
-      type: String
+      type: String,
+      default: null,
     },
 
     type: {
-      type: String
+      type: String,
+      default: null,
     },
 
     cover: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     poster: {
-      auto: String
+      type: String,
+      default: null,
     },
 
     autoplay: {
-      auto: Boolean,
-      default: false
+      type: Boolean,
+      default: false,
     },
 
     loop: {
-      auto: Boolean,
-      default: false
+      type: Boolean,
+      default: false,
     },
 
     mute: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     controls: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     ratio: {
       type: [String, Number],
-      default: 1
-    }
+      default: 1,
+    },
+  },
+
+  data() {
+    return {
+      intersected: false,
+    };
   },
 
   computed: {
-    isVideo () {
-      return this.type && this.type.indexOf('video/') === 0
-    }
-  },
-
-  data () {
-    return {
-      intersected: false
-    }
+    isVideo() {
+      return this.type && this.type.indexOf("video/") === 0;
+    },
   },
 
   methods: {
-    onIntersection (entry) {
-      this.intersected = entry.isIntersecting
-    }
-  }
-})
+    onIntersection(entry) {
+      this.intersected = entry.isIntersecting;
+    },
+  },
+});
 </script>

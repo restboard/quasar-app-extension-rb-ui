@@ -3,23 +3,14 @@
     <div v-if="showIdentity">
       {{ userIdentity }}
     </div>
-    <q-btn
-      class="q-ml-sm"
-      flat
-      round
-      dense
-      :icon="icon"
-    >
-      <slot
-        name="menu"
-        v-bind="$props"
-      >
+    <q-btn class="q-ml-sm" flat round dense :icon="icon">
+      <slot name="menu" v-bind="$props">
         <rb-user-menu
           :avatar="userAvatar"
           :identity="userIdentity"
-          :tenantIdentity="tenantIdentity"
-          @profile="evt => $emit('profile', evt)"
-          @logout="evt => $emit('logout', evt)"
+          :tenant-identity="tenantIdentity"
+          @profile="(evt) => $emit('profile', evt)"
+          @logout="(evt) => $emit('logout', evt)"
         />
       </slot>
     </q-btn>
@@ -27,33 +18,42 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import RbUserMenu from '../components/RbUserMenu.vue'
+import { defineComponent } from "vue";
+import RbUserMenu from "../components/RbUserMenu.vue";
 
 export default defineComponent({
-  name: 'RbUserArea',
+  name: "RbUserArea",
 
   components: {
-    RbUserMenu
+    RbUserMenu,
   },
 
   props: {
     showIdentity: {
-      type: Boolean
+      type: Boolean,
     },
+
     userAvatar: {
-      type: String
+      type: String,
+      default: null,
     },
+
     userIdentity: {
-      type: String
+      type: String,
+      default: null,
     },
+
     tenantIdentity: {
-      type: String
+      type: String,
+      default: null,
     },
+
     icon: {
       type: String,
-      default: 'account_circle'
-    }
-  }
-})
+      default: "account_circle",
+    },
+  },
+
+  emits: ["profile", "logout"],
+});
 </script>

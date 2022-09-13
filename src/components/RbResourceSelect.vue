@@ -1,8 +1,5 @@
 <template>
-  <rb-resource-collection
-    v-bind="$props"
-    v-slot="props"
-  >
+  <rb-resource-collection v-slot="props" v-bind="$props">
     <rb-select
       v-bind="$attrs"
       :items="extraOptions.concat(props.items)"
@@ -14,45 +11,47 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import RbResourceCollection from './RbResourceCollection.vue'
-import RbSelect from './RbSelect.vue'
+import { defineComponent } from "vue";
+import RbResourceCollection from "./RbResourceCollection.vue";
+import RbSelect from "./RbSelect.vue";
 
 export default defineComponent({
-  name: 'RbResourceSelect',
+  name: "RbResourceSelect",
 
   components: {
     RbResourceCollection,
-    RbSelect
+    RbSelect,
   },
 
   props: {
     resource: {
       type: Object,
-      required: true
+      required: true,
     },
 
     filters: {
-      type: Object
+      type: Object,
+      default: null,
     },
 
     offset: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     limit: {
-      type: Number
+      type: Number,
+      default: null,
     },
 
     paginated: {
-      type: Boolean
+      type: Boolean,
     },
 
     extraOptions: {
       type: Array,
-      default: () => []
-    }
-  }
-})
+      default: () => [],
+    },
+  },
+});
 </script>

@@ -1,36 +1,23 @@
 <template>
-  <rb-data-card
-    :loading="loading"
-    :title="resource.stringify(item)"
-  >
-    <template v-slot:actions>
-      <rb-action-menu
-        :actions="resource.actions"
-        :instance="item"
-      />
+  <rb-data-card :loading="loading" :title="resource.stringify(item)">
+    <template #actions>
+      <rb-action-menu :actions="resource.actions" :instance="item" />
     </template>
-    <template v-slot:default>
+    <template #default>
       <slot>
         <q-separator />
-        <q-list
-          separator
-          v-if="resource.ui.columns"
-        >
-          <q-item
-            v-for="col of resource.ui.columns"
-            :key="col.name"
-          >
+        <q-list v-if="resource.ui.columns" separator>
+          <q-item v-for="col of resource.ui.columns" :key="col.name">
             <q-item-section>
-              <div class="text-caption text-uppercase">{{ $t(col.label || col.name) }}</div>
-              <div
-                v-if="item"
-                class="text-body2"
-              >{{ col.format ? col.format(item) : item[col.field || col.name] }}</div>
-              <q-skeleton
-                v-else
-                type="text"
-                style="max-width:150px"
-              />
+              <div class="text-caption text-uppercase">
+                {{ $t(col.label || col.name) }}
+              </div>
+              <div v-if="item" class="text-body2">
+                {{
+                  col.format ? col.format(item) : item[col.field || col.name]
+                }}
+              </div>
+              <q-skeleton v-else type="text" style="max-width: 150px" />
             </q-item-section>
           </q-item>
         </q-list>
@@ -40,24 +27,25 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RbResourceCard',
+  name: "RbResourceCard",
 
   props: {
     resource: {
       type: Object,
-      required: true
+      required: true,
     },
 
     item: {
-      type: Object
+      type: Object,
+      default: null,
     },
 
     loading: {
-      type: Boolean
-    }
-  }
-})
+      type: Boolean,
+    },
+  },
+});
 </script>
