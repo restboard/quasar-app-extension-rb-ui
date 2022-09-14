@@ -3,7 +3,7 @@
   "version": "0.28.10",
   "main": "src/index.js",
   "scripts": {
-    "docs:gen": "npx vuelentino",
+    "docs:gen": "npx vuelentino -i src/components/**/*.vue -o docs/components",
     "test": "echo \"No test specified\" && exit 0"
   },
   "repository": {
@@ -23,6 +23,6 @@
     "eslint-plugin-prettier-vue": "^4.2.0",
     "eslint-plugin-vue": "^9.4.0",
     "prettier": "^2.7.1",
-    "vuelentino": "^0.0.2"
+    "vuelentino": "^0.0.3"
   }
 }
