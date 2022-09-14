@@ -1,20 +1,20 @@
 # RbMedia
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `src` | string |  |
-| `type` | string |  |
-| `cover` | boolean |  |
-| `poster` | string |  |
-| `autoplay` | boolean |  |
-| `loop` | boolean |  |
-| `mute` | boolean |  |
-| `controls` | boolean |  |
-| `ratio` | string|number |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `src` | `string` |  | `null` |
+| `type` | `string` |  | `null` |
+| `cover` | `boolean` |  | `false` |
+| `poster` | `string` |  | `null` |
+| `autoplay` | `boolean` |  | `false` |
+| `loop` | `boolean` |  | `false` |
+| `mute` | `boolean` |  | `false` |
+| `controls` | `boolean` |  | `false` |
+| `ratio` | `string, number` |  | `1` |
 
 ## Slots
 
@@ -25,3 +25,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

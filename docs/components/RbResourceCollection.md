@@ -1,17 +1,17 @@
 # RbResourceCollection
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resource` | object |  |
-| `filters` | object |  |
-| `offset` | number |  |
-| `limit` | number |  |
-| `infinite` | boolean |  |
-| `keepOnEmpty` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resource` | `object` |  | `` |
+| `filters` | `object` |  | `null` |
+| `offset` | `number` |  | `0` |
+| `limit` | `number` |  | `null` |
+| `infinite` | `boolean` |  | `` |
+| `keepOnEmpty` | `boolean` |  | `` |
 
 ## Slots
 
@@ -26,3 +26,8 @@
 |------------|
 | `loaded` |
 | `error` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

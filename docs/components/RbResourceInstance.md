@@ -1,13 +1,13 @@
 # RbResourceInstance
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resource` | object |  |
-| `id` | number|string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resource` | `object` |  | `` |
+| `id` | `number, string` |  | `` |
 
 ## Slots
 
@@ -23,3 +23,8 @@
 | `error` |
 | `loaded` |
 | `saved` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

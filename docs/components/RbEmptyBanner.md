@@ -1,12 +1,12 @@
 # RbEmptyBanner
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `icon` | string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `icon` | `string` |  | `"not_interested"` |
 
 ## Slots
 
@@ -18,3 +18,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

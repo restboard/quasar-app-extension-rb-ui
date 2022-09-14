@@ -1,18 +1,18 @@
 # RbFormWrapper
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resource` | object |  |
-| `id` | number|string |  |
-| `modelValue` | object |  |
-| `loading` | boolean |  |
-| `saving` | boolean |  |
-| `dismissible` | boolean |  |
-| `formClass` | string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resource` | `object` |  | `` |
+| `id` | `number, string` |  | `` |
+| `modelValue` | `object` |  | `` |
+| `loading` | `boolean` |  | `false` |
+| `saving` | `boolean` |  | `false` |
+| `dismissible` | `boolean` |  | `false` |
+| `formClass` | `string` |  | `"full-width column q-gutter-y-md"` |
 
 ## Slots
 
@@ -29,3 +29,8 @@
 |------------|
 | `submit` |
 | `dismiss` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

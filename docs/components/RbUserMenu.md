@@ -1,14 +1,14 @@
 # RbUserMenu
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `avatar` | string |  |
-| `identity` | string |  |
-| `tenantIdentity` | string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `avatar` | `string` |  | `null` |
+| `identity` | `string` |  | `null` |
+| `tenantIdentity` | `string` |  | `null` |
 
 ## Slots
 
@@ -22,3 +22,8 @@
 |------------|
 | `profile` |
 | `logout` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

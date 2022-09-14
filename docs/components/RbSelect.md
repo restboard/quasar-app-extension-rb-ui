@@ -1,15 +1,15 @@
 # RbSelect
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `items` | array |  |
-| `loading` | boolean |  |
-| `valueKey` | string |  |
-| `labelKey` | string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `items` | `array` |  | `[]` |
+| `loading` | `boolean` |  | `` |
+| `valueKey` | `string` |  | `"id"` |
+| `labelKey` | `string` |  | `"name"` |
 
 ## Slots
 
@@ -20,3 +20,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

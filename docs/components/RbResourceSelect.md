@@ -1,17 +1,17 @@
 # RbResourceSelect
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resource` | object |  |
-| `filters` | object |  |
-| `offset` | number |  |
-| `limit` | number |  |
-| `paginated` | boolean |  |
-| `extraOptions` | array |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resource` | `object` |  | `` |
+| `filters` | `object` |  | `null` |
+| `offset` | `number` |  | `0` |
+| `limit` | `number` |  | `null` |
+| `paginated` | `boolean` |  | `` |
+| `extraOptions` | `array` |  | `[]` |
 
 ## Slots
 
@@ -22,3 +22,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

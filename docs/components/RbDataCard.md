@@ -1,18 +1,18 @@
 # RbDataCard
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `overline` | string |  |
-| `title` | string |  |
-| `subtitle` | string |  |
-| `overlineClass` | string|object |  |
-| `titleClass` | string|object |  |
-| `subtitleClass` | string|object |  |
-| `loading` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `overline` | `string` |  | `null` |
+| `title` | `string` |  | `null` |
+| `subtitle` | `string` |  | `null` |
+| `overlineClass` | `string, object` |  | `null` |
+| `titleClass` | `string, object` |  | `null` |
+| `subtitleClass` | `string, object` |  | `null` |
+| `loading` | `boolean` |  | `` |
 
 ## Slots
 
@@ -29,3 +29,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

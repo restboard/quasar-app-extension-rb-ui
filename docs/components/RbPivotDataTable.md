@@ -1,23 +1,23 @@
 # RbPivotDataTable
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `modelValue` | array |  |
-| `accumulate` | boolean |  |
-| `header` | string |  |
-| `rowKey` | string|func |  |
-| `columnKey` | string|func |  |
-| `cellKey` | string|func|array |  |
-| `sortColumnsFn` | func |  |
-| `sumRowTotalFn` | func |  |
-| `sumColumnTotalFn` | func |  |
-| `withRowTotal` | boolean |  |
-| `withColumnTotal` | boolean |  |
-| `withTotal` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `modelValue` | `array` |  | `[]` |
+| `accumulate` | `boolean` |  | `false` |
+| `header` | `string` |  | `null` |
+| `rowKey` | `string, func` |  | `"id"` |
+| `columnKey` | `string, func` |  | `"id"` |
+| `cellKey` | `string, func|array` |  | `"id"` |
+| `sortColumnsFn` | `func` |  | `null` |
+| `sumRowTotalFn` | `func` |  | `` |
+| `sumColumnTotalFn` | `func` |  | `` |
+| `withRowTotal` | `boolean` |  | `` |
+| `withColumnTotal` | `boolean` |  | `` |
+| `withTotal` | `boolean` |  | `` |
 
 ## Slots
 
@@ -31,3 +31,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

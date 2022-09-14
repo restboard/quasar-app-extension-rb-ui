@@ -1,17 +1,17 @@
 # RbDataGrid
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `items` | array |  |
-| `itemsPerRow` | number |  |
-| `loading` | boolean |  |
-| `gutter` | string |  |
-| `itemHeight` | string |  |
-| `skeletonRows` | number |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `items` | `array` |  | `[]` |
+| `itemsPerRow` | `number` |  | `4` |
+| `loading` | `boolean` |  | `false` |
+| `gutter` | `string` |  | `"md"` |
+| `itemHeight` | `string` |  | `"280px"` |
+| `skeletonRows` | `number` |  | `2` |
 
 ## Slots
 
@@ -26,3 +26,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

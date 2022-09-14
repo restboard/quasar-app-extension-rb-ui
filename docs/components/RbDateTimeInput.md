@@ -1,19 +1,19 @@
 # RbDateTimeInput
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `modelValue` | string |  |
-| `dateMask` | string |  |
-| `timeMask` | string |  |
-| `maskSeparator` | string |  |
-| `timeFirst` | boolean |  |
-| `parse` | func |  |
-| `serialize` | func |  |
-| `options` | array|func |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `modelValue` | `string` |  | `""` |
+| `dateMask` | `string` |  | `"YYYY-MM-DD"` |
+| `timeMask` | `string` |  | `"HH:mm"` |
+| `maskSeparator` | `string` |  | `" "` |
+| `timeFirst` | `boolean` |  | `false` |
+| `parse` | `func` |  | `` |
+| `serialize` | `func` |  | `` |
+| `options` | `array, func` |  | `null` |
 
 ## Slots
 
@@ -26,3 +26,8 @@
 |------------|
 | `blur` |
 | `update:modelValue` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

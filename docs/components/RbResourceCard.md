@@ -1,14 +1,14 @@
 # RbResourceCard
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resource` | object |  |
-| `item` | object |  |
-| `loading` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resource` | `object` |  | `` |
+| `item` | `object` |  | `null` |
+| `loading` | `boolean` |  | `` |
 
 ## Slots
 
@@ -20,3 +20,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

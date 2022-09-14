@@ -1,15 +1,15 @@
 # RbColumnAutoFilter
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `rows` | array |  |
-| `field` | string |  |
-| `modelValue` | object |  |
-| `format` | func |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `rows` | `array` |  | `` |
+| `field` | `string` |  | `` |
+| `modelValue` | `object` |  | `null` |
+| `format` | `func` |  | `null` |
 
 ## Slots
 
@@ -21,3 +21,8 @@
 | Name       |
 |------------|
 | `update:modelValue` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

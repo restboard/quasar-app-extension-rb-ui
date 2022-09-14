@@ -1,13 +1,13 @@
 # RbContainer
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `maxWidth` | string |  |
-| `fullWidth` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `maxWidth` | `string` |  | `"1000px"` |
+| `fullWidth` | `boolean` |  | `false` |
 
 ## Slots
 
@@ -19,3 +19,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

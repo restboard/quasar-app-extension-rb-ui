@@ -1,14 +1,14 @@
 # RbSidebar
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `resources` | array |  |
-| `separator` | boolean |  |
-| `hideRootLink` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `resources` | `array` |  | `[]` |
+| `separator` | `boolean` |  | `true` |
+| `hideRootLink` | `boolean` |  | `false` |
 
 ## Slots
 
@@ -24,3 +24,8 @@
 
 | Name       |
 |------------|
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

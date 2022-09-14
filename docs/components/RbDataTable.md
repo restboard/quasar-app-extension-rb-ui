@@ -1,20 +1,20 @@
 # RbDataTable
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `title` | string |  |
-| `rowKey` | string |  |
-| `columns` | array |  |
-| `rows` | array |  |
-| `actions` | object |  |
-| `loading` | boolean |  |
-| `selection` | string |  |
-| `searchDebounce` | number |  |
-| `showSearch` | boolean |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `title` | `string` |  | `""` |
+| `rowKey` | `string` |  | `"id"` |
+| `columns` | `array` |  | `[]` |
+| `rows` | `array` |  | `[]` |
+| `actions` | `object` |  | `{}` |
+| `loading` | `boolean` |  | `false` |
+| `selection` | `string` |  | `null` |
+| `searchDebounce` | `number` |  | `250` |
+| `showSearch` | `boolean` |  | `true` |
 
 ## Slots
 
@@ -32,3 +32,8 @@
 |------------|
 | `row-click` |
 | `update:selected` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|

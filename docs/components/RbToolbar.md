@@ -1,14 +1,14 @@
 # RbToolbar
 
-
+> 
 
 ## Props
 
-| Name       | Type          | Description     |
-|------------|---------------|-----------------|
-| `isMenuOpen` | boolean |  |
-| `title` | string |  |
-| `logoSrc` | string |  |
+| Name       | Type          | Description     | Default                  |
+|------------|---------------|-----------------|--------------------------|
+| `isMenuOpen` | `boolean` |  | `` |
+| `title` | `string` |  | `null` |
+| `logoSrc` | `string` |  | `null` |
 
 ## Slots
 
@@ -22,3 +22,8 @@
 | Name       |
 |------------|
 | `toggle-menu` |
+
+## Methods
+
+| Name       | Description     |
+|------------|-----------------|
