@@ -23,6 +23,7 @@
       <component
         :is="formComponent"
         v-model="model"
+        :resource="resource"
         :class="formClass"
         :loading="loading"
         :saving="saving"
