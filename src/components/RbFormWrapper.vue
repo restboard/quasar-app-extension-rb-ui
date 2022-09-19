@@ -107,7 +107,7 @@ export default defineComponent({
 
     formClass: {
       type: String,
-      default: "full-width row q-gutter-md",
+      default: "row q-gutter-md",
     },
 
     formProps: {
