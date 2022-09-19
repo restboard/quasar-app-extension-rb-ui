@@ -12,7 +12,8 @@
 | `loading` | `boolean` |  | `false` |
 | `saving` | `boolean` |  | `false` |
 | `dismissible` | `boolean` |  | `false` |
-| `formClass` | `string` |  | `"full-width column q-gutter-y-md"` |
+| `formClass` | `string` |  | `"full-width row q-gutter-md"` |
+| `formProps` | `object` |  | `{}` |
 
 ## Slots
 

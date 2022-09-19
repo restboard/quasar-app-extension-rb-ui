@@ -22,6 +22,7 @@
     <q-card-section class="scroll" style="flex: 1; max-width: 100%">
       <component
         :is="formComponent"
+        v-bind="formProps"
         v-model="model"
         :resource="resource"
         :schema="schema"
@@ -106,7 +107,12 @@ export default defineComponent({
 
     formClass: {
       type: String,
-      default: "full-width column q-gutter-y-md",
+      default: "full-width row q-gutter-md",
+    },
+
+    formProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
 
