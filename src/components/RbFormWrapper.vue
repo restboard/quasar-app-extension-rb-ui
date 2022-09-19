@@ -149,9 +149,7 @@ export default defineComponent({
 
     schema() {
       const key = this.resource.getKey(this.model);
-      return key
-        ? this.resource.ui.updateFormSchema
-        : this.resource.ui.createFormSchema;
+      return key ? this.resource.updateSchema : this.resource.createSchema;
     },
 
     hasChanges() {
