@@ -24,6 +24,7 @@
         :is="formComponent"
         v-model="model"
         :resource="resource"
+        :schema="schema"
         :class="formClass"
         :loading="loading"
         :saving="saving"
@@ -144,6 +145,13 @@ export default defineComponent({
       return key
         ? this.resource.ui.updateFormComponent
         : this.resource.ui.createFormComponent;
+    },
+
+    schema() {
+      const key = this.resource.getKey(this.model);
+      return key
+        ? this.resource.ui.updateFormSchema
+        : this.resource.ui.createFormSchema;
     },
 
     hasChanges() {
