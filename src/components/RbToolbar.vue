@@ -26,7 +26,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "RbToolbar",
 
   props: {
@@ -56,5 +58,5 @@ export default {
       this.$emit("toggle-menu");
     },
   },
-};
+});
 </script>
