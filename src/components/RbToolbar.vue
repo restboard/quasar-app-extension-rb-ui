@@ -44,6 +44,7 @@ export default {
       default: null,
     },
   },
+
   emits: ["toggle-menu"],
 
   methods: {
