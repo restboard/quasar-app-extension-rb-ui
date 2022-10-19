@@ -15,7 +15,7 @@
         :disable="action.disable"
         :icon="action.icon"
         :label="action.alwaysShowLabel && $t(action.label)"
-        @click.stop="onActionClick(action)"
+        @click.stop="executeAction(action)"
       />
     </template>
     <q-btn
