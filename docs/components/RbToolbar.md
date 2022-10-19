@@ -8,12 +8,12 @@
 |------------|---------------|-----------------|--------------------------|
 | `isMenuOpen` | `boolean` |  | `` |
 | `title` | `string` |  | `null` |
-| `logoSrc` | `string` |  | `null` |
 
 ## Slots
 
 | Name       | Scoped        |
 |------------|---------------|
+| `logo` | true |
 | `left` | true |
 | `default` | true |
 

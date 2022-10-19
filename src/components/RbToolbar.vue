@@ -13,8 +13,8 @@
       class="row col-auto items-center q-gutter-md cursor-pointer"
       @click="onGoHome"
     >
-      <img v-if="logoSrc" :src="logoSrc" height="40" :alt="title || 'logo'" />
-      <span :class="{ 'gt-xs': !!logoSrc }">{{ title }}</span>
+      <slot name="logo" v-bind="$props" />
+      <span>{{ title }}</span>
     </q-toolbar-title>
 
     <slot name="left" v-bind="$props" />
@@ -37,11 +37,6 @@ export default defineComponent({
     },
 
     title: {
-      type: String,
-      default: null,
-    },
-
-    logoSrc: {
       type: String,
       default: null,
     },
