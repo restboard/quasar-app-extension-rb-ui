@@ -7,7 +7,7 @@
     :loading="loading"
     :grid="$q.screen.xs"
     :filter="searchQuery"
-    :selection="selection"
+    :selection="selection || 'none'"
   >
     <template v-for="(index, name) in $slots" :key="index" #[name]="props">
       <slot :name="name" v-bind="props" />
