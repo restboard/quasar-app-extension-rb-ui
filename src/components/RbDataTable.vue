@@ -134,8 +134,6 @@ export default defineComponent({
     },
   },
 
-  emits: ["row-click", "update:selected"],
-
   data() {
     return {
       searchQuery: "",
@@ -221,14 +219,6 @@ export default defineComponent({
           }
         }
       }
-    },
-
-    onRowClicked(evt, row) {
-      this.$emit("row-click", evt, row);
-    },
-
-    onSelectionChanged(evt) {
-      this.$emit("update:selected", evt);
     },
 
     onFilterChange(columnName, evt) {
