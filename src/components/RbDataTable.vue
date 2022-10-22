@@ -18,7 +18,7 @@
         <div class="row full-width q-gutter-sm justify-end">
           <slot name="top-actions" v-bind="props" />
           <q-input
-            v-if="showSearch"
+            v-if="!hideSearch"
             v-model="searchQuery"
             borderless
             dense
@@ -128,9 +128,9 @@ export default defineComponent({
       default: 250,
     },
 
-    showSearch: {
+    hideSearch: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
 
