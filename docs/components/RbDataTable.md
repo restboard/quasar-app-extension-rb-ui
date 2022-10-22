@@ -14,7 +14,7 @@
 | `loading` | `boolean` |  | `false` |
 | `selection` | `string` |  | `null` |
 | `searchDebounce` | `number` |  | `250` |
-| `showSearch` | `boolean` |  | `true` |
+| `hideSearch` | `boolean` |  | `false` |
 
 ## Slots
 
@@ -30,8 +30,6 @@
 
 | Name       |
 |------------|
-| `row-click` |
-| `update:selected` |
 
 ## Methods
 
