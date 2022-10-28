@@ -5,7 +5,6 @@
     :rows="filteredRows"
     :columns="tableColumns"
     :loading="loading"
-    :grid="$q.screen.xs"
     :filter="searchQuery"
     :selection="selection || 'none'"
   >
