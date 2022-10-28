@@ -150,7 +150,7 @@ export default defineComponent({
         this.$emit("error", err);
       }
       this.loading = false;
-      this.$emit("loaded", newItems ? newItems.length : 0);
+      this.$emit("loaded", newItems);
     },
 
     async clearAndReloadData() {
