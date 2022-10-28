@@ -6,6 +6,11 @@
           <q-skeleton v-if="loading" type="text" width="150px" />
           <span v-else class="text-h6">{{ title }}</span>
         </q-toolbar-title>
+        <rb-action-menu
+          v-if="!hideResourceActions"
+          :actions="resource.actions"
+          :instance="model"
+        />
         <q-btn
           v-if="dismissible"
           flat
@@ -70,9 +75,14 @@
 
 <script>
 import { defineComponent } from "vue";
+import RbActionMenu from "../components/RbActionMenu.vue";
 
 export default defineComponent({
   name: "RbFormWrapper",
+
+  components: {
+    RbActionMenu,
+  },
 
   props: {
     resource: {
@@ -101,6 +111,11 @@ export default defineComponent({
     },
 
     dismissible: {
+      type: Boolean,
+      default: false,
+    },
+
+    hideResourceActions: {
       type: Boolean,
       default: false,
     },

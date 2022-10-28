@@ -12,6 +12,7 @@
 | `loading` | `boolean` |  | `false` |
 | `saving` | `boolean` |  | `false` |
 | `dismissible` | `boolean` |  | `false` |
+| `hideResourceActions` | `boolean` |  | `false` |
 | `formClass` | `string` |  | `""` |
 | `formProps` | `object` |  | `{}` |
 
