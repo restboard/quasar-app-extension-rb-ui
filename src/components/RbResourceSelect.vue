@@ -1,11 +1,15 @@
 <template>
-  <rb-resource-collection v-slot="props" v-bind="$props">
+  <rb-resource-collection
+    v-slot="props"
+    v-bind="$props"
+    @loaded="onLoadedItems"
+  >
     <rb-select
       v-bind="$attrs"
-      :items="extraOptions.concat(props.items)"
+      :items="options"
       :loading="props.loading"
-      :label-key="$attrs.labelKey || resource.displayAttr || resource.key"
-      :value-key="$attrs.valueKey || resource.key"
+      :label-key="labelKey"
+      :value-key="valueKey"
     />
   </rb-resource-collection>
 </template>
@@ -51,6 +55,39 @@ export default defineComponent({
     extraOptions: {
       type: Array,
       default: () => [],
+    },
+  },
+
+  data() {
+    return {
+      items: [],
+    };
+  },
+
+  computed: {
+    labelKey() {
+      return (
+        this.$attrs.labelKey || this.resource.displayAttr || this.resource.key
+      );
+    },
+
+    valueKey() {
+      return this.$attrs.valueKey || this.resource.key;
+    },
+
+    options() {
+      return this.extraOptions.concat(
+        this.items.map((item) => ({
+          [this.valueKey]: item[this.valueKey],
+          [this.labelKey]: this.resource.stringify(item),
+        }))
+      );
+    },
+  },
+
+  methods: {
+    onLoadedItems(items) {
+      this.items = items;
     },
   },
 });
