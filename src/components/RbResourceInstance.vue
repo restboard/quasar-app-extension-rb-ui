@@ -95,6 +95,10 @@ export default defineComponent({
     },
   },
 
+  beforeUnmount() {
+    this.resource.removeListener(this.reloadData);
+  },
+
   methods: {
     async reloadData() {
       if (!this.resource) {

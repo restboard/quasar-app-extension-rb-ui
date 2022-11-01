@@ -112,6 +112,10 @@ export default defineComponent({
     },
   },
 
+  beforeUnmount() {
+    this.resource.removeListener(this.clearAndReloadData);
+  },
+
   methods: {
     clear() {
       this.items = [];
