@@ -14,7 +14,7 @@
 
     <template #top="props">
       <slot name="top" v-bind="props">
-        <div class="row full-width q-gutter-sm justify-end">
+        <div class="row full-width q-gutter-sm justify-end print-hide">
           <slot name="top-actions" v-bind="props" />
           <q-input
             v-if="!hideSearch"
