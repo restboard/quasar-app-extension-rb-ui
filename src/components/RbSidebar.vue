@@ -27,9 +27,21 @@
       >
         <q-item v-ripple :to="`/${resource.name}`" clickable>
           <q-item-section avatar>
-            <q-icon :name="resource.ui.icon" />
+            <slot
+              :name="`menu-resource-${resource.name}-item-icon`"
+              :resource="resource"
+            >
+              <q-icon :name="resource.ui.icon" />
+            </slot>
           </q-item-section>
-          <q-item-section>{{ resource.label || resource.name }}</q-item-section>
+          <q-item-section>
+            <slot
+              :name="`menu-resource-${resource.name}-item-label`"
+              :resource="resource"
+            >
+              {{ $t(resource.label || resource.name) }}
+            </slot>
+          </q-item-section>
         </q-item>
       </slot>
     </slot>
