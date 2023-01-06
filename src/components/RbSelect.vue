@@ -34,7 +34,7 @@ export default defineComponent({
   computed: {
     filteredOptions() {
       return (this.$attrs.options || []).filter((item) =>
-        this.searchFn(item, this.query)
+        this.filterFn(item, this.query)
       );
     },
   },
