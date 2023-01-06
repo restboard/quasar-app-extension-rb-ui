@@ -4,13 +4,7 @@
     v-bind="$props"
     @loaded="onLoadedItems"
   >
-    <rb-select
-      v-bind="$attrs"
-      :items="options"
-      :loading="props.loading"
-      :label-key="labelKey"
-      :value-key="valueKey"
-    />
+    <rb-select v-bind="$attrs" :options="options" :loading="props.loading" />
   </rb-resource-collection>
 </template>
 
@@ -65,21 +59,11 @@ export default defineComponent({
   },
 
   computed: {
-    labelKey() {
-      return (
-        this.$attrs.labelKey || this.resource.displayAttr || this.resource.key
-      );
-    },
-
-    valueKey() {
-      return this.$attrs.valueKey || this.resource.key;
-    },
-
     options() {
       return this.extraOptions.concat(
-        this.items.map((item) => ({
-          [this.valueKey]: item[this.valueKey],
-          [this.labelKey]: this.resource.stringify(item),
+        (this.items || []).map((item) => ({
+          value: this.resource.getKey(item),
+          label: this.resource.stringify(item),
         }))
       );
     },
@@ -87,7 +71,7 @@ export default defineComponent({
 
   methods: {
     onLoadedItems(items) {
-      this.items = items;
+      this.items = items || [];
     },
   },
 });

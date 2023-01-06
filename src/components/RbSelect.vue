@@ -1,7 +1,7 @@
 <template>
   <q-select
     use-input
-    :options="options"
+    :options="filteredOptions"
     :loading="loading"
     @filter="onFilter"
   />
@@ -14,23 +14,14 @@ export default defineComponent({
   name: "RbSelect",
 
   props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
-
     loading: {
       type: Boolean,
     },
 
-    valueKey: {
-      type: String,
-      default: "id",
-    },
-
-    labelKey: {
-      type: String,
-      default: "name",
+    filterFn: {
+      type: Function,
+      default: (item, query) =>
+        !query || item.label.toLowerCase().indexOf(query) > -1,
     },
   },
 
@@ -41,16 +32,10 @@ export default defineComponent({
   },
 
   computed: {
-    options() {
-      return (this.items || [])
-        .map((item) => ({
-          value: item[this.valueKey],
-          label: item[this.labelKey],
-        }))
-        .filter(
-          (item) =>
-            !this.query || item.label.toLowerCase().indexOf(this.query) > -1
-        );
+    filteredOptions() {
+      return (this.$attrs.options || []).filter((item) =>
+        this.searchFn(item, this.query)
+      );
     },
   },
 

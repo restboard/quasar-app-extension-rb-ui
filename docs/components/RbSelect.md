@@ -6,10 +6,8 @@
 
 | Name       | Type          | Description     | Default                  |
 |------------|---------------|-----------------|--------------------------|
-| `items` | `array` |  | `[]` |
 | `loading` | `boolean` |  | `` |
-| `valueKey` | `string` |  | `"id"` |
-| `labelKey` | `string` |  | `"name"` |
+| `filterFn` | `func` |  | `` |
 
 ## Slots
 
