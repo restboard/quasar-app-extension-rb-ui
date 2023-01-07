@@ -4,26 +4,23 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `isMenuOpen` | `boolean` |  | `` |
 | `title` | `string` |  | `null` |
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `logo` | true |
-| `left` | true |
-| `default` | true |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `logo` |  | true |
+| `left` |  | true |
+| `default` |  | true |
 
 ## Events
 
-| Name       |
-|------------|
-| `toggle-menu` |
+| Name | Description |
+| ---- | ----------- |
+| `toggle-menu` |  |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

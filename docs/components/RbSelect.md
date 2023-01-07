@@ -4,22 +4,19 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `loading` | `boolean` |  | `` |
 | `filterFn` | `func` |  | `` |
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

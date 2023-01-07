@@ -9,11 +9,10 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import RbResourceCollection from "./RbResourceCollection.vue";
 import RbSelect from "./RbSelect.vue";
 
-export default defineComponent({
+export default {
   name: "RbResourceSelect",
 
   components: {
@@ -74,5 +73,5 @@ export default defineComponent({
       this.items = items || [];
     },
   },
-});
+};
 </script>

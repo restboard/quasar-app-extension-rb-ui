@@ -24,9 +24,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "RbResourceInstance",
 
   props: {
@@ -142,5 +140,5 @@ export default defineComponent({
       this.$emit("saved", this.instance);
     },
   },
-});
+};
 </script>

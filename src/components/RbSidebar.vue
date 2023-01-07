@@ -55,9 +55,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "RbSidebar",
 
   props: {
@@ -84,5 +82,5 @@ export default defineComponent({
       );
     },
   },
-});
+};
 </script>

@@ -4,8 +4,8 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `resource` | `object` |  | `` |
 | `id` | `number, string` |  | `` |
 | `modelValue` | `object` |  | `` |
@@ -18,21 +18,18 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `header` | true |
-| `actions` | true |
-| `submit-action` | true |
-| `reset-action` | true |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `header` |  | true |
+| `actions` |  | true |
+| `submit-action` |  | true |
+| `reset-action` |  | true |
 
 ## Events
 
-| Name       |
-|------------|
-| `submit` |
-| `dismiss` |
+| Name | Description |
+| ---- | ----------- |
+| `submit` |  |
+| `dismiss` |  |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

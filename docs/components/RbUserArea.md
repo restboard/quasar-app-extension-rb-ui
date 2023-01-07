@@ -4,8 +4,8 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `showIdentity` | `boolean` |  | `` |
 | `userAvatar` | `string` |  | `null` |
 | `userIdentity` | `string` |  | `null` |
@@ -14,18 +14,15 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `menu` | true |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `menu` |  | true |
 
 ## Events
 
-| Name       |
-|------------|
-| `profile` |
-| `logout` |
+| Name | Description |
+| ---- | ----------- |
+| `profile` |  |
+| `logout` |  |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

@@ -9,12 +9,15 @@
     :selection="selection || 'none'"
   >
     <template v-for="(index, name) in $slots" :key="index" #[name]="props">
+      <!-- @slot https://quasar.dev/vue-components/table -->
       <slot :name="name" v-bind="props" />
     </template>
 
     <template #top="props">
+      <!-- @slot https://quasar.dev/vue-components/table -->
       <slot name="top" v-bind="props">
         <div class="row full-width q-gutter-sm justify-end print-hide">
+          <!-- @slot Use this slot to render additional actions on the top-right corner -->
           <slot name="top-actions" v-bind="props" />
           <q-input
             v-if="!hideSearch"
@@ -35,6 +38,7 @@
     </template>
 
     <template #header-cell="props">
+      <!-- @slot https://quasar.dev/vue-components/table -->
       <slot name="header-cell" v-bind="props">
         <q-th :props="props">
           <q-btn
@@ -61,6 +65,7 @@
     </template>
 
     <template #body-cell-actions="props">
+      <!-- @slot Use this slot to customize how the row actions should look like -->
       <slot name="body-cell-actions" v-bind="props">
         <q-td v-if="actions" auto-width :props="props">
           <rb-action-menu :actions="actions" :instance="props.row" />
@@ -71,14 +76,16 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import { format } from "quasar";
 import RbActionMenu from "../components/RbActionMenu";
 import RbColumnAutoFilter from "../components/RbColumnAutoFilter";
 
 const { capitalize } = format;
 
-export default defineComponent({
+/**
+ * A data table with support for search, column filters and row actions
+ */
+export default {
   name: "RbDataTable",
 
   components: {
@@ -87,46 +94,73 @@ export default defineComponent({
   },
 
   props: {
+    /**
+     * The title of the table
+     */
     title: {
       type: String,
       default: "",
     },
 
+    /**
+     * The field to be used as identifier of each row in the table
+     */
     rowKey: {
       type: String,
       default: "id",
     },
 
+    /**
+     * The list of columns to show in the table
+     */
     columns: {
       type: Array,
       default: () => [],
     },
 
+    /**
+     * The list of rows to show in the table
+     */
     rows: {
       type: Array,
       default: () => [],
     },
 
+    /**
+     * The list of actions to show for each row in the table
+     */
     actions: {
       type: Object,
       default: () => ({}),
     },
 
+    /**
+     * Put the table into 'loading' state
+     */
     loading: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * The table selection type
+     */
     selection: {
       type: String,
       default: null,
     },
 
+    /**
+     * The time (in ms) to use for debounce a search request
+     */
     searchDebounce: {
       type: Number,
       default: 250,
     },
 
+    /**
+     * If true, hide the search input
+     */
     hideSearch: {
       type: Boolean,
       default: false,
@@ -228,5 +262,5 @@ export default defineComponent({
       }
     },
   },
-});
+};
 </script>

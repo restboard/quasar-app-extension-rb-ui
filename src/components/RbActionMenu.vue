@@ -1,6 +1,6 @@
 <template>
   <div v-if="visibleActions" class="row no-wrap items-center">
-    <!-- Use this slot to add additional content before the action menu -->
+    <!-- @slot Use this slot to add additional content before the action menu -->
     <slot name="before" />
     <template v-if="visibleActions.length <= collpaseAfter">
       <q-btn
@@ -51,26 +51,25 @@
         </q-card>
       </q-popup-proxy>
     </q-btn>
-    <!-- Use this slot to add additional content after the action menu -->
+    <!-- @slot Use this slot to add additional content after the action menu -->
     <slot name="after" />
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import { format } from "quasar";
 
 const { capitalize } = format;
 
 /**
- * A dropdown menu of executable actions.
+ * A dropdown menu of executable actions
  */
-export default defineComponent({
+export default {
   name: "RbActionMenu",
 
   props: {
     /**
-     * A dictionary of actions to show.
+     * A dictionary of actions to show
      */
     actions: {
       type: Object,
@@ -78,7 +77,7 @@ export default defineComponent({
     },
 
     /**
-     * The instance the actions will be executed on.
+     * The instance the actions will be executed on
      */
     instance: {
       type: Object,
@@ -173,7 +172,8 @@ export default defineComponent({
     /**
      * Execute the given action on the current instance
      *
-     * @param {Object, Function} action
+     * @public
+     * @param {Object|Function} action - The action to execute
      * @returns {mixed} The action result (if any)
      */
     executeAction(action) {
@@ -184,7 +184,7 @@ export default defineComponent({
       }
     },
   },
-});
+};
 </script>
 
 <style scoped lang="sass">

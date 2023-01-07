@@ -4,24 +4,21 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `resource` | `object` |  | `` |
 | `item` | `object` |  | `null` |
 | `loading` | `boolean` |  | `` |
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `default` |  |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `default` |  |  |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

@@ -75,10 +75,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import RbDataTable from "../components/RbDataTable.vue";
 
-export default defineComponent({
+export default {
   name: "RbPivotDataTable",
 
   components: {
@@ -271,7 +270,7 @@ export default defineComponent({
       this.columns = colList;
     },
   },
-});
+};
 </script>
 
 <style lang="sass">

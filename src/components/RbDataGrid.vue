@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- @slot Use this slot to customize what should be rendered when the grid is empty -->
     <slot v-if="isEmpty && !loading" name="empty">
       {{ $t("No results") }}
     </slot>
@@ -16,6 +17,7 @@
         :style="`min-height:${itemHeight}`"
       >
         <template v-if="loading">
+          <!-- @slot Use this slot to customize what should be rendered during loading -->
           <slot name="skeleton">
             <div class="fit flex flex-center">
               <q-spinner color="primary" size="3em" />
@@ -23,9 +25,11 @@
           </slot>
         </template>
         <template v-else>
+          <!-- @slot Use this slot to customize what should be rendered for each element of the grid -->
           <slot v-if="item" :item="item" :row="rowIdx" :col="colIdx">
             {{ rowIdx }} / {{ colIdx }}
           </slot>
+          <!-- @slot Use this slot to customize how an empty item in a grid row should look like -->
           <slot v-else name="empty-item" :row="rowIdx" :col="colIdx">
             <div class="empty-item fit" />
           </slot>
@@ -36,37 +40,56 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+/**
+ * A responsive grid showing block-like items (e.g. an image gallery)
+ */
+export default {
   name: "RbDataGrid",
 
   props: {
+    /**
+     * The list of items to show in the grid
+     */
     items: {
       type: Array,
       default: () => [],
     },
 
+    /**
+     * The number of items to show in a row
+     */
     itemsPerRow: {
       type: Number,
       default: 4,
     },
 
+    /**
+     * If true, render the skeleton loading section instead
+     */
     loading: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * The gutter used to space rows and columns
+     */
     gutter: {
       type: String,
       default: "md",
     },
 
+    /**
+     * The default height of the grid items
+     */
     itemHeight: {
       type: String,
       default: "280px",
     },
 
+    /**
+     * The number of rows to show during loading
+     */
     skeletonRows: {
       type: Number,
       default: 2,
@@ -108,7 +131,7 @@ export default defineComponent({
       return res;
     },
   },
-});
+};
 </script>
 
 <style scoped lang="sass">

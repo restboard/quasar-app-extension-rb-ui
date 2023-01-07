@@ -4,22 +4,19 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `clearable` | `boolean` |  | `` |
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
 
 ## Events
 
-| Name       |
-|------------|
-| `update:modelValue` |
+| Name | Description |
+| ---- | ----------- |
+| `update:modelValue` |  |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

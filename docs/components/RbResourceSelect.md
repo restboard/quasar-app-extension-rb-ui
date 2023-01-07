@@ -4,8 +4,8 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `resource` | `object` |  | `` |
 | `filters` | `object` |  | `null` |
 | `offset` | `number` |  | `0` |
@@ -15,15 +15,12 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

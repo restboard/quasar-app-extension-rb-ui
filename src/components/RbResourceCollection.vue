@@ -24,9 +24,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "RbResourceCollection",
 
   props: {
@@ -162,5 +160,5 @@ export default defineComponent({
       return this.reloadData();
     },
   },
-});
+};
 </script>

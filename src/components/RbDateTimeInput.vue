@@ -48,46 +48,73 @@
   </q-input>
 </template>
   
-  <script>
+<script>
+/**
+ * A date and/or time input with support for custom formats
+ */
 export default {
   name: "RbDateTimeInput",
 
   props: {
+    /**
+     * The current date and/or time value
+     */
     modelValue: {
       type: String,
       default: "",
     },
 
+    /**
+     * The mask used to format the date part (if null, the input will disable the selection of the date)
+     */
     dateMask: {
       type: String,
       default: "YYYY-MM-DD",
     },
 
+    /**
+     * The mask used to format the time part (if null, the input will disable the selection of the time)
+     */
     timeMask: {
       type: String,
       default: "HH:mm",
     },
 
+    /**
+     * The separator used between the date and time masks
+     */
     maskSeparator: {
       type: String,
       default: " ",
     },
 
+    /**
+     * Move the time part in front of the date part
+     */
     timeFirst: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * A function used to parse the value to the correct internal format
+     */
     parse: {
       type: Function,
       default: (val) => `${val}`,
     },
 
+    /**
+     * A function used to serialize the internal value to the correct external format
+     */
     serialize: {
       type: Function,
       default: (val) => `${val}`,
     },
 
+    /**
+     * An array of valid date/time values to show as enabled (if a function is given, it should follow this signature: `val => boolean`)
+     */
     options: {
       type: [Array, Function],
       default: null,
@@ -139,10 +166,13 @@ export default {
 
   methods: {
     optionsFn(val) {
-      if (this.options) {
-        return this.options(val);
+      if (!this.options) {
+        return !!val;
       }
-      return !!val;
+      if (Array.isArray(this.options)) {
+        return this.options.includes(val);
+      }
+      return this.options(val);
     },
   },
 };

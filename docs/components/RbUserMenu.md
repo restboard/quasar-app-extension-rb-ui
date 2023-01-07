@@ -4,26 +4,23 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `avatar` | `string` |  | `null` |
 | `identity` | `string` |  | `null` |
 | `tenantIdentity` | `string` |  | `null` |
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `links` |  |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `links` |  |  |
 
 ## Events
 
-| Name       |
-|------------|
-| `profile` |
-| `logout` |
+| Name | Description |
+| ---- | ----------- |
+| `profile` |  |
+| `logout` |  |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

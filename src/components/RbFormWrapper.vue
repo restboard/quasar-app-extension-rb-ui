@@ -74,10 +74,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import RbActionMenu from "../components/RbActionMenu.vue";
 
-export default defineComponent({
+export default {
   name: "RbFormWrapper",
 
   components: {
@@ -246,5 +245,5 @@ export default defineComponent({
       });
     },
   },
-});
+};
 </script>

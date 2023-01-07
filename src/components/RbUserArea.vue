@@ -18,10 +18,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import RbUserMenu from "../components/RbUserMenu.vue";
 
-export default defineComponent({
+export default {
   name: "RbUserArea",
 
   components: {
@@ -55,5 +54,5 @@ export default defineComponent({
   },
 
   emits: ["profile", "logout"],
-});
+};
 </script>

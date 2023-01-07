@@ -27,9 +27,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "RbResourceCard",
 
   props: {
@@ -47,5 +45,5 @@ export default defineComponent({
       type: Boolean,
     },
   },
-});
+};
 </script>

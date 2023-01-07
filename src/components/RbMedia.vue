@@ -26,9 +26,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "RbMedia",
 
   props: {
@@ -95,5 +93,5 @@ export default defineComponent({
       this.intersected = entry.isIntersecting;
     },
   },
-});
+};
 </script>

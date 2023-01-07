@@ -4,8 +4,8 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `modelValue` | `array` |  | `[]` |
 | `accumulate` | `boolean` |  | `false` |
 | `header` | `string` |  | `null` |
@@ -21,18 +21,15 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `body-cell-cellKey` | true |
-| `default` | true |
-| `body-cell-rowKey` | true |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `body-cell-cellKey` |  | true |
+| `&#x60;body-cell-cellKey-${key}&#x60;` |  | true |
+| `body-cell-rowKey` |  | true |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

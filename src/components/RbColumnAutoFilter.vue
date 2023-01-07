@@ -35,27 +35,40 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+/**
+ * An Excel-like table dropdown column filter
+ */
+export default {
   name: "RbColumnAutoFilter",
 
   props: {
+    /**
+     * The row dataset shown in he column to filter
+     */
     rows: {
       type: Array,
       required: true,
     },
 
+    /**
+     * The name of the field to filter by
+     */
     field: {
       type: String,
       required: true,
     },
 
+    /**
+     * The filter model to apply
+     */
     modelValue: {
       type: Object,
       default: null,
     },
 
+    /**
+     * The function to use to format the row values
+     */
     format: {
       type: Function,
       default: null,
@@ -136,5 +149,5 @@ export default defineComponent({
       this.$emit("update:modelValue", { ...this.filters });
     },
   },
-});
+};
 </script>

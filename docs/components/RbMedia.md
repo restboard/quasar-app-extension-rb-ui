@@ -4,8 +4,8 @@
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
 | `src` | `string` |  | `null` |
 | `type` | `string` |  | `null` |
 | `cover` | `boolean` |  | `false` |
@@ -18,15 +18,12 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
-
-| Name       | Description     |
-|------------|-----------------|

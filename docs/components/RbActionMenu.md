@@ -1,13 +1,13 @@
 # RbActionMenu
 
-> A dropdown menu of executable actions.
+> A dropdown menu of executable actions
 
 ## Props
 
-| Name       | Type          | Description     | Default                  |
-|------------|---------------|-----------------|--------------------------|
-| `actions` | `object` | A dictionary of actions to show. | `null` |
-| `instance` | `object` | The instance the actions will be executed on. | `null` |
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
+| `actions` | `object` | A dictionary of actions to show | `null` |
+| `instance` | `object` | The instance the actions will be executed on | `null` |
 | `transitionShow` | `string` | The transition used when showing the action menu. | `"scale"` |
 | `transitionHide` | `string` | The transition used when hiding the action menu | `"scale"` |
 | `collpaseAfter` | `number` | The number of actions to show before collapsing them in the action menu | `3` |
@@ -16,17 +16,28 @@
 
 ## Slots
 
-| Name       | Scoped        |
-|------------|---------------|
-| `before` |  |
-| `after` |  |
+| Name | Description | Scoped |
+| ---- | ----------- | ------ |
+| `before` | Use this slot to add additional content before the action menu |  |
+| `after` | Use this slot to add additional content after the action menu |  |
 
 ## Events
 
-| Name       |
-|------------|
+| Name | Description |
+| ---- | ----------- |
 
 ## Methods
 
-| Name       | Description     |
-|------------|-----------------|
+### `executeAction(action)`
+
+Execute the given action on the current instance
+
+#### Params
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `action` | `Object, Function` | The action to execute |
+
+#### Returns
+
+`mixed` The action result (if any)
