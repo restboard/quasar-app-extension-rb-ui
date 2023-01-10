@@ -1,11 +1,17 @@
 <template>
   <q-card class="column">
+    <!-- @slot Use this slot to customize the header section -->
     <slot name="header" v-bind="{ ...$props, ...$attrs }">
-      <q-toolbar>
+      <q-toolbar :class="headerClass">
         <q-toolbar-title>
-          <q-skeleton v-if="loading" type="text" width="150px" />
-          <span v-else class="text-h6">{{ title }}</span>
+          <!-- @slot Use this slot to customize the title section of the header -->
+          <slot name="header-title" v-bind="{ ...$props, ...$attrs, title }">
+            <q-skeleton v-if="loading" type="text" width="150px" />
+            <template v-else>{{ title }}</template>
+          </slot>
         </q-toolbar-title>
+        <!-- @slot Use this slot to render additional actions in the header -->
+        <slot name="header-actions" v-bind="{ ...$props, ...$attrs }"></slot>
         <rb-action-menu
           v-if="!hideResourceActions"
           :actions="resource.actions"
@@ -38,37 +44,38 @@
       />
     </q-card-section>
 
+    <!-- @slot Use this slot to customize the bottom actions section -->
     <slot name="actions" v-bind="{ ...$props, ...$attrs }">
       <q-separator />
 
-      <q-card-section>
-        <div class="flex row reverse justify-between">
-          <slot name="submit-action" v-bind="{ ...$props, ...$attrs }">
-            <q-skeleton v-if="loading" type="QBtn" />
-            <q-btn
-              v-else
-              type="submit"
-              color="primary"
-              :label="$t('Save')"
-              :loading="saving"
-              :disable="!canSave"
-              @click="onSave"
-            />
-          </slot>
-          <slot name="reset-action" v-bind="{ ...$props, ...$attrs }">
-            <q-skeleton v-if="loading" type="QBtn" />
-            <q-btn
-              v-else
-              flat
-              type="reset"
-              color="primary"
-              :label="$t('Reset')"
-              :disable="!canReset"
-              @click="onReset"
-            />
-          </slot>
-        </div>
-      </q-card-section>
+      <q-card-actions :class="actionsClass">
+        <!-- @slot Use this slot to customize the submit action -->
+        <slot name="submit-action" v-bind="{ ...$props, ...$attrs }">
+          <q-skeleton v-if="loading" type="QBtn" />
+          <q-btn
+            v-else
+            type="submit"
+            color="primary"
+            :label="$t('Save')"
+            :loading="saving"
+            :disable="!canSave"
+            @click="onSave"
+          />
+        </slot>
+        <!-- @slot Use this slot to customize the reset action -->
+        <slot name="reset-action" v-bind="{ ...$props, ...$attrs }">
+          <q-skeleton v-if="loading" type="QBtn" />
+          <q-btn
+            v-else
+            flat
+            type="reset"
+            color="primary"
+            :label="$t('Reset')"
+            :disable="!canReset"
+            @click="onReset"
+          />
+        </slot>
+      </q-card-actions>
     </slot>
   </q-card>
 </template>
@@ -76,6 +83,9 @@
 <script>
 import RbActionMenu from "../components/RbActionMenu.vue";
 
+/**
+ * A card-like wrapper for a resource form
+ */
 export default {
   name: "RbFormWrapper",
 
@@ -84,49 +94,84 @@ export default {
   },
 
   props: {
+    /**
+     * The resource to show the form for
+     */
     resource: {
       type: Object,
       required: true,
     },
 
-    id: {
-      type: [Number, String],
-      required: true,
-    },
-
+    /**
+     * The resource instance shown in the form
+     */
     modelValue: {
       type: Object,
       required: true,
     },
 
+    /**
+     * Put the form into 'loading' state
+     */
     loading: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Put the form into 'saving' state
+     */
     saving: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * If true, show a form dismiss button
+     */
     dismissible: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Hide the resource action menu in the header
+     */
     hideResourceActions: {
       type: Boolean,
       default: false,
     },
 
-    formClass: {
-      type: String,
+    /**
+     * The CSS classes to apply to the header section
+     */
+    headerClass: {
+      type: [String, Object],
       default: "",
     },
 
+    /**
+     * The CSS classes to apply to the form section
+     */
+    formClass: {
+      type: [String, Object],
+      default: "",
+    },
+
+    /**
+     * The additional props to pass to the form section
+     */
     formProps: {
       type: Object,
       default: () => ({}),
+    },
+
+    /**
+     * The CSS classes to apply to the bottom actions section
+     */
+    actionsClass: {
+      type: [String, Object],
+      default: "row reverse items-center justify-between q-gutter-md q-pa-md",
     },
   },
 
@@ -141,9 +186,9 @@ export default {
 
   computed: {
     title() {
-      if (this.id) {
+      if (this.isUpdating) {
         if (!this.resource.ui.updateTitle) {
-          return this.$t(`Update #${this.id}`);
+          return this.resource.stringify(this.modelValue) || this.$t("Update");
         }
         if (typeof this.resource.ui.updateTitle === "function") {
           return this.resource.ui.updateTitle(this.modelValue);
@@ -151,7 +196,7 @@ export default {
         return this.$t(this.resource.ui.updateTitle);
       } else {
         if (!this.resource.ui.createTitle) {
-          return this.$t(`Create`);
+          return this.$t("Create");
         }
         if (typeof this.resource.ui.createTitle === "function") {
           return this.resource.ui.createTitle(this.modelValue);
@@ -160,16 +205,20 @@ export default {
       }
     },
 
+    isUpdating() {
+      return !!this.resource.getKey(this.model);
+    },
+
     formComponent() {
-      const key = this.resource.getKey(this.model);
-      return key
+      return this.isUpdating
         ? this.resource.ui.updateFormComponent
         : this.resource.ui.createFormComponent;
     },
 
     schema() {
-      const key = this.resource.getKey(this.model);
-      return key ? this.resource.updateSchema : this.resource.createSchema;
+      return this.isUpdating
+        ? this.resource.updateSchema
+        : this.resource.createSchema;
     },
 
     hasChanges() {
