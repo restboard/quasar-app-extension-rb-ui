@@ -7,7 +7,6 @@
         v-for="action in visibleActions"
         :key="action.name"
         flat
-        class="action-color"
         :size="size"
         :round="!action.alwaysShowLabel || !action.label"
         :rounded="!!(action.alwaysShowLabel && action.label)"
@@ -186,10 +185,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="sass">
-.action-color
-  color: $input-label-color
-  :hover
-    color: $primary
-</style>
