@@ -22,7 +22,6 @@
       round
       flat
       icon="more_vert"
-      class="action-color"
       :class="actionClass"
       :size="size"
       @click.stop
