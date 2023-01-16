@@ -2,7 +2,7 @@
   <div v-if="visibleActions" class="row no-wrap items-center">
     <!-- @slot Use this slot to add additional content before the action menu -->
     <slot name="before" />
-    <template v-if="visibleActions.length <= collpaseAfter">
+    <template v-if="visibleActions.length <= collapseAfter">
       <q-btn
         v-for="action in visibleActions"
         :key="action.name"
@@ -102,7 +102,7 @@ export default {
     /**
      * The number of actions to show before collapsing them in the action menu
      */
-    collpaseAfter: {
+    collapseAfter: {
       type: Number,
       default: 3,
     },

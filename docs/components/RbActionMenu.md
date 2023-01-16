@@ -10,7 +10,7 @@
 | `instance` | `object` | The instance the actions will be executed on | `null` |
 | `transitionShow` | `string` | The transition used when showing the action menu. | `"scale"` |
 | `transitionHide` | `string` | The transition used when hiding the action menu | `"scale"` |
-| `collpaseAfter` | `number` | The number of actions to show before collapsing them in the action menu | `3` |
+| `collapseAfter` | `number` | The number of actions to show before collapsing them in the action menu | `3` |
 | `size` | `string` | The size used for action buttons | `"sm"` |
 | `actionClass` | `string, object` | The CSS classes used for action buttons | `""` |
 
