@@ -14,7 +14,7 @@
         <slot name="header-actions" v-bind="{ ...$props, ...$attrs }"></slot>
         <rb-action-menu
           v-if="!hideResourceActions"
-          :actions="resource.actions"
+          :actions="resource.getActions()"
           :instance="model"
         />
         <q-btn

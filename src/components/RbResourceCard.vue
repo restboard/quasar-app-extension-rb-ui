@@ -1,7 +1,7 @@
 <template>
   <rb-data-card :loading="loading" :title="resource.stringify(item)">
     <template #actions>
-      <rb-action-menu :actions="resource.actions" :instance="item" />
+      <rb-action-menu :actions="resource.getActions()" :instance="item" />
     </template>
     <template #default>
       <slot>
