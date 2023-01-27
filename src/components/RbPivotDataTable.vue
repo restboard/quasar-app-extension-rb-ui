@@ -1,7 +1,7 @@
 <template>
   <rb-data-table
-    class="rb-pivot-data-table"
     dense
+    class="rb-pivot-data-table"
     :class="{
       'with-row-total': withRowTotal || withTotal,
       'with-col-total': withColumnTotal || withTotal,
@@ -45,7 +45,9 @@
               class="col"
             >
               <slot :name="`body-cell-cellKey-${key}`" v-bind="props">
-                {{ props.row[props.col.field || props.col.name][key] }}
+                {{
+                  formatFn(props.row[props.col.field || props.col.name][key])
+                }}
               </slot>
             </div>
           </div>
@@ -65,7 +67,7 @@
               :key="key"
               class="col"
             >
-              {{ colTotals[column.field || column.name][key] }}
+              {{ formatFn(colTotals[column.field || column.name][key]) }}
             </div>
           </div>
         </q-td>
@@ -97,7 +99,7 @@ export default {
 
     header: {
       type: String,
-      default: null,
+      default: "",
     },
 
     rowKey: {
@@ -128,6 +130,11 @@ export default {
     sumColumnTotalFn: {
       type: Function,
       default: (val, total) => Number(total || 0) + Number(val || 0),
+    },
+
+    formatFn: {
+      type: Function,
+      default: (value) => value,
     },
 
     withRowTotal: {
