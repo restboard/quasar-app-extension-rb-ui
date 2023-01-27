@@ -8,13 +8,14 @@
 | ---- | ---- | ----------- | ------- |
 | `modelValue` | `array` |  | `[]` |
 | `accumulate` | `boolean` |  | `false` |
-| `header` | `string` |  | `null` |
+| `header` | `string` |  | `""` |
 | `rowKey` | `string, func` |  | `"id"` |
 | `columnKey` | `string, func` |  | `"id"` |
 | `cellKey` | `string, func|array` |  | `"id"` |
 | `sortColumnsFn` | `func` |  | `null` |
 | `sumRowTotalFn` | `func` |  | `` |
 | `sumColumnTotalFn` | `func` |  | `` |
+| `formatFn` | `func` |  | `` |
 | `withRowTotal` | `boolean` |  | `` |
 | `withColumnTotal` | `boolean` |  | `` |
 | `withTotal` | `boolean` |  | `` |
