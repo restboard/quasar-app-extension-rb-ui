@@ -144,7 +144,7 @@ export default {
             const action = this.actions[actionName];
             return (
               // An action is visible if there are no specific rules set...
-              Object.keys(action).indexOf("isVisible") === -1 ||
+              !action.isVisible ||
               // ...or if the "isVisible" method returns true
               action.isVisible(this.instance, this.actionParams)
             );
