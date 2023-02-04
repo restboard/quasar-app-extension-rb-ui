@@ -37,6 +37,11 @@ export default {
       type: [Number, String],
       required: true,
     },
+
+    filters: {
+      type: Object,
+      default: null,
+    },
   },
 
   emits: ["error", "loaded", "saved"],
@@ -88,6 +93,10 @@ export default {
       immediate: true,
     },
 
+    filters() {
+      this.reloadData();
+    },
+
     id() {
       this.reloadData();
     },
@@ -105,7 +114,13 @@ export default {
       this.loading = true;
       try {
         if (this.id) {
-          const res = await this.resource.getOne(this.id);
+          const params = {
+            filters: {
+              ...this.filters,
+              ...this.resource.defaultParams.filters,
+            },
+          };
+          const res = await this.resource.getOne(this.id, params);
           this.instance = res.data;
         } else {
           this.instance = {};

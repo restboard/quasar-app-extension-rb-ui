@@ -8,6 +8,7 @@
 | ---- | ---- | ----------- | ------- |
 | `resource` | `object` |  | `` |
 | `id` | `number, string` |  | `` |
+| `filters` | `object` |  | `null` |
 
 ## Slots
 
