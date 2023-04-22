@@ -206,7 +206,7 @@ export default {
     },
 
     isUpdating() {
-      return !!this.resource.getKey(this.model);
+      return !!this.resource.getKey(this.modelValue || {});
     },
 
     formComponent() {
