@@ -16,6 +16,11 @@ export default {
       type: Boolean,
     },
 
+    options: {
+      type: Array,
+      default: () => [],
+    },
+
     filterFn: {
       type: Function,
       default: (item, query) =>
@@ -31,7 +36,7 @@ export default {
 
   computed: {
     filteredOptions() {
-      return (this.$attrs.options || []).filter((item) =>
+      return (this.options || []).filter((item) =>
         this.filterFn(item, this.query)
       );
     },
@@ -39,9 +44,8 @@ export default {
 
   methods: {
     onFilter(val, update) {
-      const needle = (val || "").toLowerCase();
       update(() => {
-        this.query = needle;
+        this.query = (val || "").toLowerCase();
       });
     },
   },
