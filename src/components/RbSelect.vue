@@ -8,19 +8,32 @@
 </template>
 
 <script>
+/**
+ * A select input with filter-on-type support
+ */
 export default {
   name: "RbSelect",
 
   props: {
+    /**
+     * If set to true, the input will show a loading indicator
+     */
     loading: {
       type: Boolean,
+      default: false,
     },
 
+    /**
+     * The list of options to display
+     */
     options: {
       type: Array,
       default: () => [],
     },
 
+    /**
+     * A function to filter the list of available options
+     */
     filterFn: {
       type: Function,
       default: (item, query) =>
