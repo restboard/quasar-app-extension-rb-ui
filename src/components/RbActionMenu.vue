@@ -75,6 +75,14 @@ export default {
     },
 
     /**
+     * The list of actions to hide
+     */
+    hiddenActions: {
+      type: Array,
+      default: null,
+    },
+
+    /**
      * The instance the actions will be executed on
      */
     instance: {
@@ -142,6 +150,9 @@ export default {
           // Filter out invisible actions
           .filter((actionName) => {
             const action = this.actions[actionName];
+            if (this.hiddenActions?.includes(actionName)) {
+              return false;
+            }
             return (
               // An action is visible if there are no specific rules set...
               !action.isVisible ||

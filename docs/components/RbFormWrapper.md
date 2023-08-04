@@ -12,6 +12,7 @@
 | `saving` | `boolean` | Put the form into &#39;saving&#39; state | `false` |
 | `dismissible` | `boolean` | If true, show a form dismiss button | `false` |
 | `hideResourceActions` | `boolean` | Hide the resource action menu in the header | `false` |
+| `hiddenResourceActions` | `array` | The list of resource actions to always hide | `["create", "edit"]` |
 | `headerClass` | `string, object` | The CSS classes to apply to the header section | `""` |
 | `formClass` | `string, object` | The CSS classes to apply to the form section | `""` |
 | `formProps` | `object` | The additional props to pass to the form section | `{}` |

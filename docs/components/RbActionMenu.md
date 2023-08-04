@@ -7,6 +7,7 @@
 | Name | Type | Description | Default |
 | ---- | ---- | ----------- | ------- |
 | `actions` | `object` | A dictionary of actions to show | `null` |
+| `hiddenActions` | `array` | The list of actions to hide | `null` |
 | `instance` | `object` | The instance the actions will be executed on | `null` |
 | `transitionShow` | `string` | The transition used when showing the action menu. | `"scale"` |
 | `transitionHide` | `string` | The transition used when hiding the action menu | `"scale"` |

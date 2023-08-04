@@ -11,12 +11,14 @@
           </slot>
         </q-toolbar-title>
         <!-- @slot Use this slot to render additional actions in the header -->
-        <slot name="header-actions" v-bind="{ ...$props, ...$attrs }"></slot>
-        <rb-action-menu
-          v-if="!hideResourceActions"
-          :actions="resource.getActions()"
-          :instance="model"
-        />
+        <slot name="header-actions" v-bind="{ ...$props, ...$attrs }">
+          <rb-action-menu
+            v-if="!hideResourceActions"
+            :actions="resource.getActions()"
+            :hidden-actions="hiddenResourceActions"
+            :instance="model"
+          />
+        </slot>
         <q-btn
           v-if="dismissible"
           flat
@@ -140,6 +142,14 @@ export default {
     hideResourceActions: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * The list of resource actions to always hide
+     */
+    hiddenResourceActions: {
+      type: Array,
+      default: () => ["create", "edit"],
     },
 
     /**
