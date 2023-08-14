@@ -1,43 +1,53 @@
 <template>
-  <div>
-    <slot
-      v-if="instance || loading || saving"
-      name="default"
-      v-bind="$props"
-      :schema="schema"
-      :instance="instance"
-      :loading="loading"
-      :saving="saving"
-      :reload-data="reloadData"
-      :save-data="saveData"
-    />
-    <slot
-      v-else
-      name="empty"
-      v-bind="$props"
-      :schema="schema"
-      :save-data="saveData"
-    >
-      {{ $t("Invalid or missing instance") }}
-    </slot>
-  </div>
+  <slot
+    v-if="instance || loading || saving"
+    name="default"
+    v-bind="$props"
+    :schema="schema"
+    :instance="instance"
+    :loading="loading"
+    :saving="saving"
+    :reload-data="reloadData"
+    :save-data="saveData"
+  />
+  <slot
+    v-else
+    name="empty"
+    v-bind="$props"
+    :schema="schema"
+    :save-data="saveData"
+  >
+    {{ $t("Invalid or missing instance") }}
+  </slot>
 </template>
 
 <script>
+/**
+ * Fetch a single resource instance and provide it to its children
+ */
 export default {
   name: "RbResourceInstance",
 
   props: {
+    /**
+     * The resource to fetch an instance from
+     */
     resource: {
       type: Object,
       required: true,
     },
 
+    /**
+     * The identifier of the resource instance to fetch
+     */
     id: {
       type: [Number, String],
       required: true,
     },
 
+    /**
+     * A dictionary of filters to apply when fetching the resource instance
+     */
     filters: {
       type: Object,
       default: null,

@@ -1,48 +1,61 @@
 <template>
-  <div>
-    <slot
-      v-if="itemCount || loading || keepOnEmpty"
-      name="default"
-      v-bind="$props"
-      :items="items"
-      :loading="loading"
-      :has-more="hasMore"
-      :pagination="pagination"
-      :reload-data="reloadData"
-      :clear-and-reload-data="clearAndReloadData"
-    />
-    <slot
-      v-else
-      name="empty"
-      v-bind="$props"
-      :reload-data="reloadData"
-      :clear-and-reload-data="clearAndReloadData"
-    >
-      {{ $t("No results") }}
-    </slot>
-  </div>
+  <slot
+    v-if="itemCount || loading || keepOnEmpty"
+    name="default"
+    v-bind="$props"
+    :items="items"
+    :loading="loading"
+    :has-more="hasMore"
+    :pagination="pagination"
+    :reload-data="reloadData"
+    :clear-and-reload-data="clearAndReloadData"
+  />
+  <slot
+    v-else
+    name="empty"
+    v-bind="$props"
+    :reload-data="reloadData"
+    :clear-and-reload-data="clearAndReloadData"
+  >
+    {{ $t("No results") }}
+  </slot>
 </template>
 
 <script>
+/**
+ * Fetch a collection of a resource instances and provide them to its children
+ */
 export default {
   name: "RbResourceCollection",
 
   props: {
+    /**
+     * The resource to fetch instances from
+     */
     resource: {
       type: Object,
       required: true,
     },
 
+    /**
+     * A dictionary of filters to apply when fetching resource instances
+     */
     filters: {
       type: Object,
       default: null,
     },
 
+    /**
+     * The offset to apply when fetching resource instances
+     */
     offset: {
       type: Number,
       default: 0,
     },
 
+    /**
+     * The limit to apply when fetching resource instances
+     */
     limit: {
       type: Number,
       default: null,
