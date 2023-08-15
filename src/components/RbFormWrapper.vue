@@ -1,5 +1,5 @@
 <template>
-  <q-card class="column">
+  <q-card class="column no-wrap">
     <!-- @slot Use this slot to customize the header section -->
     <slot name="header" v-bind="{ ...$props, ...$attrs }">
       <q-toolbar :class="headerClass">
