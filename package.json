@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-rb-ui",
-  "version": "0.39.3",
+  "version": "0.39.4",
   "main": "src/index.js",
   "scripts": {
     "docs:gen": "npx vuelentino -i src/components/**/*.vue -o docs/components",
