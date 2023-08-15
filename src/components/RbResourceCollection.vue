@@ -1,4 +1,5 @@
 <template>
+  <!-- @slot Use this slot to render the fetched resource items -->
   <slot
     v-if="itemCount || loading || keepOnEmpty"
     name="default"
@@ -10,6 +11,7 @@
     :reload-data="reloadData"
     :clear-and-reload-data="clearAndReloadData"
   />
+  <!-- @slot Use this slot to render a component when no results are fetched -->
   <slot
     v-else
     name="empty"
@@ -61,10 +63,16 @@ export default {
       default: null,
     },
 
+    /**
+     * With infinite mode, new fetched items are appended to the previous ones
+     */
     infinite: {
       type: Boolean,
     },
 
+    /**
+     * Show the default slot even when no results are fecthed
+     */
     keepOnEmpty: {
       type: Boolean,
     },
@@ -128,18 +136,31 @@ export default {
   },
 
   methods: {
+    /**
+     * Clear all the fetched resource instances
+     *
+     * @public
+     */
     clear() {
       this.items = [];
       this.hasMore = true;
     },
 
+    /**
+     * Refetch resource instances
+     *
+     * On success, a `loaded` event is emitted.
+     * On error, a `error` event is emitted.
+     *
+     * @public
+     */
     async reloadData() {
       if (!this.resource) {
         return;
       }
-      this.loading = true;
-      let newItems = [];
       try {
+        this.loading = true;
+        let newItems = [];
         const opts = {
           offset: this.offset || 0,
           filters: {
@@ -161,13 +182,19 @@ export default {
         } else {
           this.items = newItems;
         }
+        this.$emit("loaded", newItems);
       } catch (err) {
         this.$emit("error", err);
+      } finally {
+        this.loading = false;
       }
-      this.loading = false;
-      this.$emit("loaded", newItems);
     },
 
+    /**
+     * Clear and reload resource instances
+     *
+     * @public
+     */
     async clearAndReloadData() {
       this.clear();
       return this.reloadData();

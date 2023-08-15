@@ -10,15 +10,15 @@
 | `filters` | `object` | A dictionary of filters to apply when fetching resource instances | `null` |
 | `offset` | `number` | The offset to apply when fetching resource instances | `0` |
 | `limit` | `number` | The limit to apply when fetching resource instances | `null` |
-| `infinite` | `boolean` | Fetch a collection of a resource instances and provide them to its children | `` |
-| `keepOnEmpty` | `boolean` | Fetch a collection of a resource instances and provide them to its children | `` |
+| `infinite` | `boolean` | With infinite mode, new fetched items are appended to the previous ones | `` |
+| `keepOnEmpty` | `boolean` | Show the default slot even when no results are fecthed | `` |
 
 ## Slots
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
-| `default` | Fetch a collection of a resource instances and provide them to its children | true |
-| `empty` | Fetch a collection of a resource instances and provide them to its children | true |
+| `default` | Use this slot to render the fetched resource items | true |
+| `empty` | Use this slot to render a component when no results are fetched | true |
 
 ## Events
 
@@ -28,3 +28,42 @@
 | `error` | Fetch a collection of a resource instances and provide them to its children |
 
 ## Methods
+
+### `clear()`
+
+Clear all the fetched resource instances
+
+#### Params
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+
+#### Returns
+
+
+### `reloadData()`
+
+Refetch resource instances
+
+On success, a &#x60;loaded&#x60; event is emitted.
+On error, a &#x60;error&#x60; event is emitted.
+
+#### Params
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+
+#### Returns
+
+
+### `clearAndReloadData()`
+
+Clear and reload resource instances
+
+#### Params
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+
+#### Returns
+

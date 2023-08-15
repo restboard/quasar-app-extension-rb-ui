@@ -117,12 +117,20 @@ export default {
   },
 
   methods: {
+    /**
+     * Refetch the current resource instance
+     *
+     * On success, a `loaded` event is emitted.
+     * On error, a `error` event is emitted.
+     *
+     * @public
+     */
     async reloadData() {
       if (!this.resource) {
         return;
       }
-      this.loading = true;
       try {
+        this.loading = true;
         if (this.id) {
           const params = {
             filters: {
@@ -135,21 +143,35 @@ export default {
         } else {
           this.instance = {};
         }
+        this.$emit("loaded", this.instance);
       } catch (err) {
         this.$emit("error", err);
-        this.instance = null;
+      } finally {
+        this.loading = false;
       }
-      this.loading = false;
-      this.$emit("loaded", this.instance);
     },
 
+    /**
+     * Store changes to the current resource instance
+     *
+     * If a `key` value is not set on the resource instance,
+     * the resource `createOne()` method will be called.
+     * If a `key` value is set, the resource `updateOne()`
+     * method will be called instaed.
+     *
+     * On success, a `loaded` event is emitted.
+     * On error, a `error` event is emitted.
+     *
+     * @public
+     * @param {Object} data The resource instance data to save
+     */
     async saveData(data) {
       if (!this.resource) {
         return;
       }
-      this.saving = true;
-      let res = {};
       try {
+        this.saving = true;
+        let res = {};
         if (this.id) {
           data[this.resource.key || "id"] = this.id;
           res = await this.resource.updateOne(this.id, data);
@@ -157,12 +179,12 @@ export default {
           res = await this.resource.createOne(data);
         }
         this.instance = res.data;
+        this.$emit("saved", this.instance);
       } catch (err) {
         this.$emit("error", err);
-        this.instance = null;
+      } finally {
+        this.saving = false;
       }
-      this.saving = false;
-      this.$emit("saved", this.instance);
     },
   },
 };
