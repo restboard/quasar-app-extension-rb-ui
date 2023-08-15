@@ -9,13 +9,14 @@
 | `resource` | `object` | The resource to fetch an instance from | `` |
 | `id` | `number, string` | The identifier of the resource instance to fetch | `` |
 | `filters` | `object` | A dictionary of filters to apply when fetching the resource instance | `null` |
+| `keepOnEmpty` | `boolean` | Show the default slot even when no result is fecthed | `false` |
 
 ## Slots
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
-| `default` | Fetch a single resource instance and provide it to its children | true |
-| `empty` | Fetch a single resource instance and provide it to its children | true |
+| `default` | Use this slot to render the fetched resource instance | true |
+| `empty` | Use this slot to render a component when no result is fetched | true |
 
 ## Events
 

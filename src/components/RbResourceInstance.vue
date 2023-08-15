@@ -1,6 +1,7 @@
 <template>
+  <!-- @slot Use this slot to render the fetched resource instance -->
   <slot
-    v-if="instance || loading || saving"
+    v-if="instance || loading || saving || keepOnEmpty"
     name="default"
     v-bind="$props"
     :schema="schema"
@@ -10,6 +11,7 @@
     :reload-data="reloadData"
     :save-data="saveData"
   />
+  <!-- @slot Use this slot to render a component when no result is fetched -->
   <slot
     v-else
     name="empty"
@@ -51,6 +53,14 @@ export default {
     filters: {
       type: Object,
       default: null,
+    },
+
+    /**
+     * Show the default slot even when no result is fecthed
+     */
+    keepOnEmpty: {
+      type: Boolean,
+      default: false,
     },
   },
 
