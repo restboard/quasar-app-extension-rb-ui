@@ -52,7 +52,7 @@ the resource &#x60;createOne()&#x60; method will be called.
 If a &#x60;key&#x60; value is set, the resource &#x60;updateOne()&#x60;
 method will be called instaed.
 
-On success, a &#x60;loaded&#x60; event is emitted.
+On success, a &#x60;saved&#x60; event is emitted.
 On error, a &#x60;error&#x60; event is emitted.
 
 #### Params

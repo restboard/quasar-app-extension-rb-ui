@@ -169,7 +169,7 @@ export default {
      * If a `key` value is set, the resource `updateOne()`
      * method will be called instaed.
      *
-     * On success, a `loaded` event is emitted.
+     * On success, a `saved` event is emitted.
      * On error, a `error` event is emitted.
      *
      * @public
