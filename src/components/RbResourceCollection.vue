@@ -1,5 +1,5 @@
 <template>
-  <!-- @slot Use this slot to render the fetched resource items -->
+  <!-- @slot Use this slot to render the fetched resource instances -->
   <slot
     v-if="itemCount || loading || keepOnEmpty"
     name="default"
@@ -68,6 +68,7 @@ export default {
      */
     infinite: {
       type: Boolean,
+      default: false,
     },
 
     /**
@@ -75,6 +76,7 @@ export default {
      */
     keepOnEmpty: {
       type: Boolean,
+      default: false,
     },
   },
 

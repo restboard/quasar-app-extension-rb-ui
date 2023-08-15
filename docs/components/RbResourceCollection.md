@@ -10,14 +10,14 @@
 | `filters` | `object` | A dictionary of filters to apply when fetching resource instances | `null` |
 | `offset` | `number` | The offset to apply when fetching resource instances | `0` |
 | `limit` | `number` | The limit to apply when fetching resource instances | `null` |
-| `infinite` | `boolean` | With infinite mode, new fetched items are appended to the previous ones | `` |
-| `keepOnEmpty` | `boolean` | Show the default slot even when no results are fecthed | `` |
+| `infinite` | `boolean` | With infinite mode, new fetched items are appended to the previous ones | `false` |
+| `keepOnEmpty` | `boolean` | Show the default slot even when no results are fecthed | `false` |
 
 ## Slots
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
-| `default` | Use this slot to render the fetched resource items | true |
+| `default` | Use this slot to render the fetched resource instances | true |
 | `empty` | Use this slot to render a component when no results are fetched | true |
 
 ## Events
