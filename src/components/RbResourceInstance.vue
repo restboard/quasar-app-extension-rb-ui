@@ -113,12 +113,16 @@ export default {
       immediate: true,
     },
 
-    filters() {
-      this.reloadData();
+    filters(val, old) {
+      if (JSON.stringify(val) !== JSON.stringify(old)) {
+        this.reloadData();
+      }
     },
 
-    id() {
-      this.reloadData();
+    id(val, old) {
+      if (val !== old) {
+        this.reloadData();
+      }
     },
   },
 

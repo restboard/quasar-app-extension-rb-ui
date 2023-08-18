@@ -120,16 +120,22 @@ export default {
       immediate: true,
     },
 
-    filters: function () {
-      this.clearAndReloadData();
+    filters: function (val, old) {
+      if (JSON.stringify(val) !== JSON.stringify(old)) {
+        this.clearAndReloadData();
+      }
     },
 
-    offset: function () {
-      this.clearAndReloadData();
+    offset: function (val, old) {
+      if (val !== old) {
+        this.clearAndReloadData();
+      }
     },
 
-    limit: function () {
-      this.clearAndReloadData();
+    limit: function (val, old) {
+      if (val !== old) {
+        this.clearAndReloadData();
+      }
     },
   },
 
