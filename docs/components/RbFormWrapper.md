@@ -17,6 +17,8 @@
 | `formClass` | `string, object` | The CSS classes to apply to the form section | `""` |
 | `formProps` | `object` | The additional props to pass to the form section | `{}` |
 | `actionsClass` | `string, object` | The CSS classes to apply to the bottom actions section | `"row reverse items-center justify-between q-gutter-md q-pa-md"` |
+| `discardChangesTitle` | `string, object` | The title of the confirm dialog to show when the form has pending changes | `"Are you sure?"` |
+| `discardChangesMsg` | `string, object` | The message of the confirm dialog to show when the form has pending changes | `"All pending, unsaved changes will be permanently lost!"` |
 
 ## Slots
 
@@ -33,7 +35,7 @@
 
 | Name | Description |
 | ---- | ----------- |
-| `submit` | A card-like wrapper for a resource form |
-| `dismiss` | A card-like wrapper for a resource form |
+| `submit` | This event is sent when the form has been submitted |
+| `dismiss` | This event is sent when the form has been dismissed |
 
 ## Methods
