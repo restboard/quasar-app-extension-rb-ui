@@ -26,53 +26,86 @@
 </template>
 
 <script>
+/**
+ * A responsive viewer for media files like images or videos
+ *
+ * This component is useful to create a media gallery with mixed contents like
+ * images, videos, etc.
+ */
 export default {
   name: "RbMedia",
 
   props: {
+    /**
+     * The source URI of the media content
+     */
     src: {
       type: String,
       default: null,
     },
 
+    /**
+     * The mimetype of the media content (e.g. images/png)
+     */
     type: {
       type: String,
       default: null,
     },
 
+    /**
+     * If set to true, a CSS cover positioning will be applied to the media
+     */
     cover: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * The aspect ratio of the media content
+     */
+    ratio: {
+      type: [String, Number],
+      default: 1,
+    },
+
+    /**
+     * If set to true, the video will show a poster when not playing
+     */
     poster: {
       type: String,
       default: null,
     },
 
+    /**
+     * If set to true, the video will play automatically after loading
+     */
     autoplay: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * If set to true, the video will play in loop
+     */
     loop: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * If set to true, the video will play muted
+     */
     mute: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * If set to true, the default player controls will be displayed
+     */
     controls: {
       type: Boolean,
       default: false,
-    },
-
-    ratio: {
-      type: [String, Number],
-      default: 1,
     },
   },
 
