@@ -16,7 +16,7 @@
             v-if="!hideResourceActions"
             :actions="resource.getActions()"
             :hidden-actions="hiddenResourceActions"
-            :instance="model"
+            :instance="modelValue"
           />
         </slot>
         <q-btn
@@ -36,13 +36,14 @@
       <component
         :is="formComponent"
         v-bind="formProps"
-        v-model="model"
+        :model-value="modelValue"
         :resource="resource"
         :schema="schema"
         :class="formClass"
         :loading="loading"
         :saving="saving"
         @validation="onValidation"
+        @update:model-value="onModelUpdate"
       />
     </q-card-section>
 
@@ -183,9 +184,31 @@ export default {
       type: [String, Object],
       default: "row reverse items-center justify-between q-gutter-md q-pa-md",
     },
+
+    /**
+     * The title of the confirm dialog to show when the form has pending changes
+     */
+    discardChangesTitle: {
+      type: [String, Object],
+      default: "Are you sure?",
+    },
+
+    /**
+     * The message of the confirm dialog to show when the form has pending changes
+     */
+    discardChangesMsg: {
+      type: [String, Object],
+      default: "All pending, unsaved changes will be permanently lost!",
+    },
   },
 
-  emits: ["submit", "dismiss"],
+  emits: [
+    /** This event is sent when the form has been submitted */
+    "submit",
+
+    /** This event is sent when the form has been dismissed */
+    "dismiss",
+  ],
 
   data() {
     return {
@@ -261,6 +284,10 @@ export default {
       this.model = { ...this.modelValue };
     },
 
+    onModelUpdate(val) {
+      this.model = val;
+    },
+
     async onValidation(val) {
       this.isValid = val;
     },
@@ -289,10 +316,8 @@ export default {
         try {
           this.$q
             .dialog({
-              title: this.$t("Are you really sure?"),
-              message: this.$t(
-                "All pending, unsaved changes will be permanently lost!"
-              ),
+              title: this.discardChangesTitle,
+              message: this.discradChangesMsg,
               cancel: true,
               persistent: true,
             })
