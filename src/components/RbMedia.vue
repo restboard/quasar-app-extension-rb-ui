@@ -65,7 +65,7 @@ export default {
      */
     ratio: {
       type: [String, Number],
-      default: 1,
+      default: "",
     },
 
     /**
