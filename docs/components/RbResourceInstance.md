@@ -59,7 +59,7 @@ On error, a &#x60;error&#x60; event is emitted.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `data` | `` | The resource instance data to save |
+| `data` | `Object` | The resource instance data to save |
 
 #### Returns
 

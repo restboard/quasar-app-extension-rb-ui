@@ -23,6 +23,6 @@
     "eslint-plugin-prettier-vue": "^4.2.0",
     "eslint-plugin-vue": "^9.4.0",
     "prettier": "^2.7.1",
-    "vuelentino": "^0.1.1"
+    "vuelentino": "^0.2.1"
   }
 }
