@@ -3,7 +3,9 @@
     <template #actions>
       <rb-action-menu :actions="resource.getActions()" :instance="item" />
     </template>
+
     <template #default>
+      <!-- @slot Use this slot to customize the body of the card -->
       <slot>
         <q-separator />
         <q-list v-if="resource.ui.columns" separator>
@@ -27,20 +29,32 @@
 </template>
 
 <script>
+/**
+ * A card component to show resource instances in a consistent way accross the app
+ */
 export default {
   name: "RbResourceCard",
 
   props: {
+    /**
+     * The resource used to configure the card appearance
+     */
     resource: {
       type: Object,
       required: true,
     },
 
+    /**
+     * The resource instance used to populate the card content
+     */
     item: {
       type: Object,
       default: null,
     },
 
+    /**
+     * A loading status flag
+     */
     loading: {
       type: Boolean,
     },
