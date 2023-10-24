@@ -31,6 +31,7 @@
 
     <template #body-cell="props">
       <td v-bind="props.col">
+        <!-- @slot Use this slot to customize the content of each table cell -->
         <slot
           v-if="props.col.field !== rowKey && props.col.name !== rowKey"
           name="body-cell-cellKey"
@@ -44,6 +45,7 @@
               :key="key"
               class="col"
             >
+              <!-- @slot Use this slot to customize the content of a specific table cell -->
               <slot :name="`body-cell-cellKey-${key}`" v-bind="props">
                 {{
                   formatFn(props.row[props.col.field || props.col.name][key])
@@ -52,6 +54,7 @@
             </div>
           </div>
         </slot>
+        <!-- @slot Use this slot to customize the content of each row header -->
         <slot v-else name="body-cell-rowKey" v-bind="props">
           {{ props.row[props.col.field || props.col.name] }}
         </slot>
@@ -79,6 +82,11 @@
 <script>
 import RbDataTable from "../components/RbDataTable.vue";
 
+/**
+ * A responsive pivot table to show aggregate groups of values
+ *
+ * This component is useful to create reports, statistics, etc.
+ */
 export default {
   name: "RbPivotDataTable",
 
@@ -87,64 +95,111 @@ export default {
   },
 
   props: {
+    /**
+     * The list of items to extract rows, columns and aggregate values from
+     */
     modelValue: {
       type: Array,
       default: () => [],
     },
 
+    /**
+     * If true, every cell will show the sum of values matching row and column
+     */
     accumulate: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * The string to show in the top-left cell of the pivot table
+     *
+     * If empty, the string `{rowKey} / {columnKey}` will be shown instead
+     */
     header: {
       type: String,
       default: "",
     },
 
+    /**
+     * The attribute to aggregate rows from, shown as row headers
+     *
+     * When a function is passed, it'll be evaluated for each row in `modelValue`
+     */
     rowKey: {
       type: [String, Function],
       default: "id",
     },
 
+    /**
+     * The attribute to aggregate columns from, shown as column headers
+     *
+     * When a function is passed, it'll be evaluated for each row in `modelValue`
+     */
     columnKey: {
       type: [String, Function],
       default: "id",
     },
 
+    /**
+     * The attribute to aggregate / extract table cells from
+     *
+     * When a function is passed, it'll be evaluated for each row in `modelValue`
+     */
     cellKey: {
       type: [String, Function, Array],
       default: "id",
     },
 
+    /**
+     * The function used to sort the table columns
+     */
     sortColumnsFn: {
       type: Function,
       default: null,
     },
 
+    /**
+     * The function used to sum each row total value
+     */
     sumRowTotalFn: {
       type: Function,
       default: (val, total) => Number(total || 0) + Number(val || 0),
     },
 
+    /**
+     * The function used to sum each column total value
+     */
     sumColumnTotalFn: {
       type: Function,
       default: (val, total) => Number(total || 0) + Number(val || 0),
     },
 
+    /**
+     * The function used to format each table cell value
+     */
     formatFn: {
       type: Function,
       default: (value) => value,
     },
 
+    /**
+     * If true, an additional total value will be shown for each row
+     */
     withRowTotal: {
       type: Boolean,
     },
 
+    /**
+     * If true, an additional total value will be shown for each column
+     */
     withColumnTotal: {
       type: Boolean,
     },
 
+    /**
+     * If true, a grand total value will be shown at the bottom-right corner
+     */
     withTotal: {
       type: Boolean,
     },
