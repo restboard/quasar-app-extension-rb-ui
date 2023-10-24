@@ -113,8 +113,6 @@ export default {
 
     /**
      * The string to show in the top-left cell of the pivot table
-     *
-     * If empty, the string `{rowKey} / {columnKey}` will be shown instead
      */
     header: {
       type: String,
@@ -123,8 +121,6 @@ export default {
 
     /**
      * The attribute to aggregate rows from, shown as row headers
-     *
-     * When a function is passed, it'll be evaluated for each row in `modelValue`
      */
     rowKey: {
       type: [String, Function],
@@ -133,8 +129,6 @@ export default {
 
     /**
      * The attribute to aggregate columns from, shown as column headers
-     *
-     * When a function is passed, it'll be evaluated for each row in `modelValue`
      */
     columnKey: {
       type: [String, Function],
@@ -143,8 +137,6 @@ export default {
 
     /**
      * The attribute to aggregate / extract table cells from
-     *
-     * When a function is passed, it'll be evaluated for each row in `modelValue`
      */
     cellKey: {
       type: [String, Function, Array],

@@ -10,18 +10,10 @@ This component is useful to create reports, statistics, etc.
 | ---- | ---- | ----------- | ------- |
 | `modelValue` | `array` | The list of items to extract rows, columns and aggregate values from | `[]` |
 | `accumulate` | `boolean` | If true, every cell will show the sum of values matching row and column | `false` |
-| `header` | `string` | The string to show in the top-left cell of the pivot table
-
-If empty, the string &#x60;{rowKey} &#x2F; {columnKey}&#x60; will be shown instead | `""` |
-| `rowKey` | `string, func` | The attribute to aggregate rows from, shown as row headers
-
-When a function is passed, it&#39;ll be evaluated for each row in &#x60;modelValue&#x60; | `"id"` |
-| `columnKey` | `string, func` | The attribute to aggregate columns from, shown as column headers
-
-When a function is passed, it&#39;ll be evaluated for each row in &#x60;modelValue&#x60; | `"id"` |
-| `cellKey` | `string, func|array` | The attribute to aggregate &#x2F; extract table cells from
-
-When a function is passed, it&#39;ll be evaluated for each row in &#x60;modelValue&#x60; | `"id"` |
+| `header` | `string` | The string to show in the top-left cell of the pivot table | `""` |
+| `rowKey` | `string, func` | The attribute to aggregate rows from, shown as row headers | `"id"` |
+| `columnKey` | `string, func` | The attribute to aggregate columns from, shown as column headers | `"id"` |
+| `cellKey` | `string, func|array` | The attribute to aggregate &#x2F; extract table cells from | `"id"` |
 | `sortColumnsFn` | `func` | The function used to sort the table columns | `null` |
 | `sumRowTotalFn` | `func` | The function used to sum each row total value | `` |
 | `sumColumnTotalFn` | `func` | The function used to sum each column total value | `` |
