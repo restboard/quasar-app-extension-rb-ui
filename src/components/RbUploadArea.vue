@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import RbMedia from "../components/RbMedia";
+import RbMedia from "../components/RbMedia.vue";
 
 export default {
   name: "RbUploadArea",

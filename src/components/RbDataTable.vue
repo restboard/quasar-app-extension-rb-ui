@@ -77,8 +77,8 @@
 
 <script>
 import { format } from "quasar";
-import RbActionMenu from "../components/RbActionMenu";
-import RbColumnAutoFilter from "../components/RbColumnAutoFilter";
+import RbActionMenu from "../components/RbActionMenu.vue";
+import RbColumnAutoFilter from "../components/RbColumnAutoFilter.vue";
 
 const { capitalize } = format;
 

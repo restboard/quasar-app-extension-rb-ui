@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import RbResourceCollection from "./RbResourceCollection.vue";
-import RbSelect from "./RbSelect.vue";
+import RbResourceCollection from "../components/RbResourceCollection.vue";
+import RbSelect from "../components/RbSelect.vue";
 
 /**
  * A select input populated by resource instances
