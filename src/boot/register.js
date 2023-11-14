@@ -14,11 +14,7 @@ import RbResourceCollection from "../components/RbResourceCollection.vue";
 import RbResourceInstance from "../components/RbResourceInstance.vue";
 import RbResourceSelect from "../components/RbResourceSelect.vue";
 import RbSelect from "../components/RbSelect.vue";
-import RbSidebar from "../components/RbSidebar.vue";
-import RbToolbar from "../components/RbToolbar.vue";
 import RbUploadArea from "../components/RbUploadArea.vue";
-import RbUserArea from "../components/RbUserArea.vue";
-import RbUserMenu from "../components/RbUserMenu.vue";
 
 export default ({ app }) => {
   app.component(RbResourceCollection.name, RbResourceCollection);
@@ -31,10 +27,6 @@ export default ({ app }) => {
   app.component(RbDataGrid.name, RbDataGrid);
   app.component(RbDataCard.name, RbDataCard);
   app.component(RbEmptyBanner.name, RbEmptyBanner);
-  app.component(RbUserArea.name, RbUserArea);
-  app.component(RbUserMenu.name, RbUserMenu);
-  app.component(RbToolbar.name, RbToolbar);
-  app.component(RbSidebar.name, RbSidebar);
   app.component(RbFormWrapper.name, RbFormWrapper);
   app.component(RbResourceCard.name, RbResourceCard);
   app.component(RbMedia.name, RbMedia);

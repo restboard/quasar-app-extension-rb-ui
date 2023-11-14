@@ -27,12 +27,8 @@ quasar ext add rb-ui
 | [RbResourceCollection](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbResourceCollection.md)        | Used to fetch a collection from an API resource |
 | [RbResourceInstance](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbResourceInstance.md)          | Used to fetch an instance from an API resource |
 | [RbResourceSelect](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbResourceSelect.md)            | A specific resource instance selector       |
-| [RbSelect](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbSelect.md)                    | A filterable selector widget                |    
-| [RbSidebar](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbSidebar.md)                   | A sidebar populated with links to resources |
-| [RbToolbar](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbToolbar.md)                   | A page toolbar with a built-in user area    |
+| [RbSelect](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbSelect.md)                    | A filterable selector widget                |
 | [RbUploadArea](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbUploadArea.md)                | Used to upload a new media file             |
-| [RbUserArea](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbUserArea.md)                  | An area used to show user details           |
-| [RbUserMenu](https://github.com/restboard/quasar-app-extension-rb-ui/blob/main/docs/components/RbUserMenu.md)                  | A menu used to show user-related actions    |
 
 ## Contribute
 
