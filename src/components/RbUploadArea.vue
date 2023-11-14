@@ -1,14 +1,14 @@
 <template>
   <q-file
     ref="fileInput"
-    input-style="min-height:200px;min-width:200px"
+    :input-style="`min-width:${minWidth};min-height:${minHeight}`"
     @update:model-value="onFileSelection"
   >
     <template #append>
       <div
         v-if="previewSrc"
         class="fit relative no-pointer-events"
-        style="opacity: 0.7"
+        :style="`opacity: ${previewOpacity}`"
       >
         <rb-media
           v-if="isVideoOrImage"
@@ -52,6 +52,9 @@
 <script>
 import RbMedia from "../components/RbMedia.vue";
 
+/**
+ * A drop area to perform a file upload with good UX
+ */
 export default {
   name: "RbUploadArea",
 
@@ -60,8 +63,35 @@ export default {
   },
 
   props: {
+    /**
+     * Show a clear button
+     */
     clearable: {
       type: Boolean,
+    },
+
+    /**
+     * The minimum width of the upload area
+     */
+    minWidth: {
+      type: String,
+      default: "200px",
+    },
+
+    /**
+     * The minimum height of the upload area
+     */
+    minHeight: {
+      type: String,
+      default: "200px",
+    },
+
+    /**
+     * The opacity of the media preview
+     */
+    previewOpacity: {
+      type: [String, Number],
+      default: "0.7",
     },
   },
 
