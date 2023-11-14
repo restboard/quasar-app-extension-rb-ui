@@ -101,7 +101,7 @@ export default {
      */
     parse: {
       type: Function,
-      default: (val) => `${val}`,
+      default: (val) => (val ? new Date(`${val}`) : null),
     },
 
     /**
@@ -109,7 +109,7 @@ export default {
      */
     serialize: {
       type: Function,
-      default: (val) => `${val}`,
+      default: (val) => (val ? new Date(`${val}`).toISOString() : null),
     },
 
     /**
