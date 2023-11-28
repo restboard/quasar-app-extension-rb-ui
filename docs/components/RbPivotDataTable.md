@@ -26,6 +26,7 @@ This component is useful to create reports, statistics, etc.
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
+| `top-actions` | Use this slot to render additional actions on the top-right corner | true |
 | `body-cell-cellKey` | Use this slot to customize the content of each table cell | true |
 | `&#x60;body-cell-cellKey-${key}&#x60;` | Use this slot to customize the content of a specific table cell | true |
 | `body-cell-rowKey` | Use this slot to customize the content of each row header | true |

@@ -11,6 +11,11 @@
     :rows="rows"
     :columns="columns"
   >
+    <template #top-actions="props">
+      <!-- @slot Use this slot to render additional actions on the top-right corner -->
+      <slot name="top-actions" v-bind="props" />
+    </template>
+
     <template #header-cell="props">
       <th v-bind="props.col">
         {{ props.col.label }}
