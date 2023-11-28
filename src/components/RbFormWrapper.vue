@@ -96,6 +96,14 @@ export default {
     RbActionMenu,
   },
 
+  beforeRouteUpdate(to, from, next) {
+    this.askForConfirm().then((ok) => (ok ? next() : next(false)));
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.askForConfirm().then((ok) => (ok ? next() : next(false)));
+  },
+
   props: {
     /**
      * The resource to show the form for
@@ -302,22 +310,22 @@ export default {
     },
 
     async onCancel() {
-      let confirmDismiss = true;
-      if (this.hasChanges) {
-        confirmDismiss = await this.askForConfirm();
-      }
+      const confirmDismiss = await this.askForConfirm();
       if (confirmDismiss) {
         this.$emit("dismiss");
       }
     },
 
     async askForConfirm() {
+      if (!this.hasChanges) {
+        return true;
+      }
       return new Promise((resolve, reject) => {
         try {
           this.$q
             .dialog({
               title: this.discardChangesTitle,
-              message: this.discradChangesMsg,
+              message: this.discardChangesMsg,
               cancel: true,
               persistent: true,
             })
