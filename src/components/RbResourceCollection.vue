@@ -87,6 +87,7 @@ export default {
       items: [],
       loading: true,
       hasMore: true,
+      abort: null,
     };
   },
 
@@ -140,6 +141,7 @@ export default {
   },
 
   beforeUnmount() {
+    this.abort?.abort();
     this.resource.removeListener(this.clearAndReloadData);
   },
 
@@ -163,9 +165,10 @@ export default {
      * @public
      */
     async reloadData() {
-      if (!this.resource) {
+      if (!this.resource || this.loading) {
         return;
       }
+      this.abort?.abort();
       try {
         this.loading = true;
         let newItems = [];
@@ -182,6 +185,7 @@ export default {
         if (this.limit) {
           opts.limit = this.limit;
         }
+        this.abort = opts.abort = new AbortController();
         const res = await this.resource.getMany(opts);
         newItems = res.data || [];
         this.hasMore = newItems.length === opts.limit;

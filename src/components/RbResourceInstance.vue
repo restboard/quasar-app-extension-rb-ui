@@ -127,6 +127,7 @@ export default {
   },
 
   beforeUnmount() {
+    this.abort?.abort();
     this.resource.removeListener(this.reloadData);
   },
 
@@ -140,9 +141,10 @@ export default {
      * @public
      */
     async reloadData() {
-      if (!this.resource) {
+      if (!this.resource || this.loading) {
         return;
       }
+      this.abort?.abort();
       try {
         this.loading = true;
         if (this.id) {
@@ -151,7 +153,9 @@ export default {
               ...this.filters,
               ...this.resource.defaultParams.filters,
             },
+            abort: new AbortController(),
           };
+          this.abort = params.abort;
           const res = await this.resource.getOne(this.id, params);
           this.instance = res.data;
         } else {
@@ -180,7 +184,7 @@ export default {
      * @param {Object} data The resource instance data to save
      */
     async saveData(data) {
-      if (!this.resource) {
+      if (!this.resource || this.saving) {
         return;
       }
       try {
