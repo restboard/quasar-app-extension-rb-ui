@@ -141,7 +141,7 @@ export default {
      * @public
      */
     async reloadData() {
-      if (!this.resource || this.loading) {
+      if (!this.resource) {
         return;
       }
       this.abort?.abort();
