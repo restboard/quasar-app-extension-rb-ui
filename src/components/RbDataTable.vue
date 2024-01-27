@@ -10,15 +10,15 @@
   >
     <template v-for="(index, name) in $slots" :key="index" #[name]="props">
       <!-- @slot https://quasar.dev/vue-components/table -->
-      <slot :name="name" v-bind="props" />
+      <slot :name="name" v-bind="{ ...props, filteredRows }" />
     </template>
 
     <template #top="props">
       <!-- @slot https://quasar.dev/vue-components/table -->
-      <slot name="top" v-bind="props">
+      <slot name="top" v-bind="{ ...props, filteredRows }">
         <div class="row full-width q-gutter-sm justify-end print-hide">
           <!-- @slot Use this slot to render additional actions on the top-right corner -->
-          <slot name="top-actions" v-bind="props" />
+          <slot name="top-actions" v-bind="{ ...props, filteredRows }" />
           <q-input
             v-if="!hideSearch"
             v-model="searchQuery"
@@ -39,7 +39,7 @@
 
     <template #header-cell="props">
       <!-- @slot https://quasar.dev/vue-components/table -->
-      <slot name="header-cell" v-bind="props">
+      <slot name="header-cell" v-bind="{ ...props, filteredRows }">
         <q-th :props="props">
           <q-btn
             v-if="props.col.filterable && colFilters[props.col.field]"
@@ -66,7 +66,7 @@
 
     <template #body-cell-actions="props">
       <!-- @slot Use this slot to customize how the row actions should look like -->
-      <slot name="body-cell-actions" v-bind="props">
+      <slot name="body-cell-actions" v-bind="{ ...props, filteredRows }">
         <q-td v-if="actions" auto-width :props="props">
           <rb-action-menu :actions="actions" :instance="props.row" />
         </q-td>
