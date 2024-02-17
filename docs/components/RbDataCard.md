@@ -21,13 +21,14 @@ for title, subtitle, overline and actions.
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
-| `skeleton` | Use this slot to customize what should be rendered during loading |  |
-| `header` | Use this slot to customize the card header |  |
-| `header-overline` | Use this slot to customize the header overline section |  |
-| `header-title` | Use this slot to customize the header title section |  |
-| `header-actions` | Use this slot to customize the header actions section |  |
-| `header-subtitle` | Use this slot to customize the header subtitle section |  |
-| `default` | Use this slot to add content to the card |  |
+| `skeleton` | Use this slot to customize what should be rendered during loading | true |
+| `header` | Use this slot to customize the card header | true |
+| `header-overline` | Use this slot to customize the header overline section | true |
+| `header-title` | Use this slot to customize the header title section | true |
+| `header-actions` | Use this slot to customize the header actions section | true |
+| `header-subtitle` | Use this slot to customize the header subtitle section | true |
+| `default` | Use this slot to add content to the card | true |
+| `footer` | Use this slot to add content to the card footer | true |
 
 ## Events
 

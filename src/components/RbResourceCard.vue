@@ -2,27 +2,28 @@
   <rb-data-card :loading="loading" :title="resource.stringify(item)">
     <template v-for="(index, name) in $slots" :key="index" #[name]="props">
       <!-- @slot see RbDataCard -->
-      <slot :name="name" v-bind="{ ...props }" />
+      <slot :name="name" v-bind="{ ...props, ...$props }" />
     </template>
 
-    <template #actions>
-      <rb-action-menu :actions="resource.getActions()" :instance="item" />
+    <template #header-actions="props">
+      <!-- @slot Use this slot to customize the header actions section -->
+      <slot name="header-actions" v-bind="{ ...props, ...$props }">
+        <rb-action-menu :actions="resource.getActions()" :instance="item" />
+      </slot>
     </template>
 
-    <template #default>
+    <template #default="props">
       <!-- @slot Use this slot to customize the body of the card -->
-      <slot>
+      <slot v-bind="{ ...props, ...$props, getLabel, getValue }">
         <q-separator />
         <q-list v-if="resource.ui.columns" separator>
           <q-item v-for="col of resource.ui.columns" :key="col.name">
             <q-item-section>
               <div class="text-caption text-uppercase">
-                {{ $t(col.label || col.name) }}
+                {{ getLabel(col) }}
               </div>
               <div v-if="item" class="text-body2">
-                {{
-                  col.format ? col.format(item) : item[col.field || col.name]
-                }}
+                {{ getValue(col) }}
               </div>
               <q-skeleton v-else type="text" style="max-width: 150px" />
             </q-item-section>
@@ -62,6 +63,25 @@ export default {
      */
     loading: {
       type: Boolean,
+    },
+  },
+
+  methods: {
+    getLabel(col) {
+      return col ? this.$t(col.label || col.name) : null;
+    },
+
+    getValue(col) {
+      if (!this.item || !col) {
+        return null;
+      }
+
+      const field =
+        typeof col.field === "function"
+          ? col.field(this.item)
+          : this.item[col.field || col.name];
+
+      return col.format ? col.format(field) : field;
     },
   },
 };
