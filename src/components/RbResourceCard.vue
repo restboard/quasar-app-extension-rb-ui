@@ -1,5 +1,10 @@
 <template>
   <rb-data-card :loading="loading" :title="resource.stringify(item)">
+    <template v-for="(index, name) in $slots" :key="index" #[name]="props">
+      <!-- @slot see RbDataCard -->
+      <slot :name="name" v-bind="{ ...props }" />
+    </template>
+
     <template #actions>
       <rb-action-menu :actions="resource.getActions()" :instance="item" />
     </template>

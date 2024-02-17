@@ -14,6 +14,7 @@
 
 | Name | Description | Scoped |
 | ---- | ----------- | ------ |
+| `name` | see RbDataCard | true |
 | `default` | Use this slot to customize the body of the card |  |
 
 ## Events
