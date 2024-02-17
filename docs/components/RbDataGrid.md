@@ -11,7 +11,7 @@
 | `loading` | `boolean` | If true, render the skeleton loading section instead | `false` |
 | `gutter` | `string` | The gutter used to space rows and columns | `"md"` |
 | `itemHeight` | `string` | The default height of the grid items | `"280px"` |
-| `skeletonRows` | `number` | The number of rows to show during loading | `2` |
+| `skeletonRows` | `number` | The number of rows to show during loading | `3` |
 
 ## Slots
 
