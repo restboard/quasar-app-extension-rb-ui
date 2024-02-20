@@ -289,7 +289,7 @@ export default {
 
   methods: {
     resetData() {
-      this.model = JSON.parse(this.valueRepr);
+      this.model = JSON.parse(JSON.stringify(this.modelValue));
     },
 
     onModelUpdate(val) {
