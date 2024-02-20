@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visibleActions" class="row no-wrap items-center">
+  <div v-if="visibleActions" class="row no-wrap justify-end items-center">
     <!-- @slot Use this slot to add additional content before the action menu -->
     <slot name="before" />
     <template v-if="visibleActions.length <= collapseAfter">
