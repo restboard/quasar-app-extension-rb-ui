@@ -36,7 +36,7 @@
       <component
         :is="formComponent"
         v-bind="formProps"
-        :model-value="modelValue"
+        :model-value="model"
         :resource="resource"
         :schema="schema"
         :class="formClass"
