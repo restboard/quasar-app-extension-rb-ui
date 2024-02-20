@@ -289,7 +289,7 @@ export default {
 
   methods: {
     resetData() {
-      this.model = { ...this.modelValue };
+      this.model = JSON.parse(this.valueRepr);
     },
 
     onModelUpdate(val) {
@@ -306,7 +306,10 @@ export default {
     },
 
     async onReset() {
-      this.resetData();
+      const confirmDismiss = await this.askForConfirm();
+      if (confirmDismiss) {
+        this.resetData();
+      }
     },
 
     async onCancel() {
