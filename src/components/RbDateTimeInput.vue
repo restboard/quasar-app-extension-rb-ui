@@ -31,7 +31,7 @@
           class="cursor-pointer"
         >
           <q-popup-proxy transition-show="scale" transition-hide="scale">
-            <q-time v-model="value" :mask="mask" format24h>
+            <q-time v-model="value" :mask="mask" :format24h="!ampm">
               <div class="row items-center justify-end">
                 <q-btn
                   v-close-popup
@@ -47,8 +47,10 @@
     </template>
   </q-input>
 </template>
-  
+
 <script>
+import { date } from "quasar";
+
 /**
  * A date and/or time input with support for custom formats
  */
@@ -60,8 +62,8 @@ export default {
      * The current date and/or time value
      */
     modelValue: {
-      type: String,
-      default: "",
+      type: [Date, String],
+      default: null,
     },
 
     /**
@@ -97,19 +99,11 @@ export default {
     },
 
     /**
-     * A function used to parse the value to the correct internal format
+     * Force AM/PM system instead of 24 hour time display
      */
-    parse: {
-      type: Function,
-      default: (val) => (val ? new Date(`${val}`) : null),
-    },
-
-    /**
-     * A function used to serialize the internal value to the correct external format
-     */
-    serialize: {
-      type: Function,
-      default: (val) => (val ? new Date(`${val}`).toISOString() : null),
+    ampm: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -119,13 +113,30 @@ export default {
       type: [Array, Function],
       default: null,
     },
+
+    /**
+     * A function used to parse the passed model value to a valid Date object
+     */
+    parse: {
+      type: Function,
+      default: (val, mask) =>
+        val ? (val instanceof Date ? val : date.extractDate(val, mask)) : null,
+    },
+
+    /**
+     * A function used to serialize the internal value to the correct external format
+     */
+    serialize: {
+      type: Function,
+      default: (val, mask) => val || null,
+    },
   },
 
-  emits: ["blur", "update:modelValue"],
+  emits: ["blur", "update:modelValue", "update:dt"],
 
   data() {
     return {
-      value: this.parse(this.modelValue),
+      value: null,
     };
   },
 
@@ -145,21 +156,28 @@ export default {
     },
 
     inputMask() {
-      return this.mask.replace(/[\w]/g, "#");
+      return this.mask?.replace(/[\w]/g, "#") || null;
     },
   },
 
   watch: {
-    modelValue() {
-      this.value = this.parse(this.modelValue);
+    modelValue: {
+      handler(val) {
+        const oldValue = this.value;
+        const dt = this.parse(val, this.mask);
+        this.value = dt ? date.formatDate(dt, this.mask) : null;
+        if (this.value !== oldValue) {
+          this.$emit("update:dt", dt);
+        }
+      },
+      immediate: true,
     },
 
-    value() {
-      if (!this.value) {
+    value(val) {
+      if (!val) {
         this.$emit("update:modelValue", null);
-      } else if (this.value.length === this.mask.length) {
-        const serialized = this.serialize(this.value);
-        this.$emit("update:modelValue", serialized);
+      } else if (val.length === this.mask.length) {
+        this.$emit("update:modelValue", this.serialize(val, this.mask));
       }
     },
   },
@@ -177,4 +195,3 @@ export default {
   },
 };
 </script>
-  
