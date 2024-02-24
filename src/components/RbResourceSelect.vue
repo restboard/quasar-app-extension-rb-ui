@@ -2,9 +2,6 @@
   <rb-resource-collection
     v-slot="props"
     :resource="resource"
-    :filters="filters"
-    :offset="offset"
-    :limit="limit"
     v-bind="$attrs"
     @loaded="onLoadedItems"
   >
