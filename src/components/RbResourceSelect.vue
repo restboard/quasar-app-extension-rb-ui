@@ -50,6 +50,8 @@ export default {
     },
   },
 
+  emits: ["loaded"],
+
   data() {
     return {
       items: [],
@@ -76,6 +78,7 @@ export default {
   methods: {
     onLoadedItems(items) {
       this.items = items || [];
+      this.$emit("loaded", [...this.items]);
     },
   },
 };
