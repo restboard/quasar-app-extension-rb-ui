@@ -19,5 +19,6 @@
 
 | Name | Description |
 | ---- | ----------- |
+| `loaded` | A select input populated by resource instances |
 
 ## Methods
