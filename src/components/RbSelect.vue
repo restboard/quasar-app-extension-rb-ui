@@ -4,7 +4,12 @@
     :options="filteredOptions"
     :loading="loading"
     @filter="onFilter"
-  />
+  >
+    <template v-for="(index, name) in $slots" :key="index" #[name]="props">
+      <!-- @slot https://quasar.dev/vue-components/select -->
+      <slot :name="name" v-bind="props" />
+    </template>
+  </q-select>
 </template>
 
 <script>
@@ -16,7 +21,7 @@ export default {
 
   props: {
     /**
-     * If set to true, the input will show a loading indicator
+     * if set to true, the input will show a loading indicator
      */
     loading: {
       type: Boolean,
@@ -24,7 +29,7 @@ export default {
     },
 
     /**
-     * The list of options to display
+     * the list of options to display
      */
     options: {
       type: Array,

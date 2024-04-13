@@ -5,7 +5,12 @@
     v-bind="$attrs"
     @loaded="onLoadedItems"
   >
-    <rb-select v-bind="$attrs" :options="options" :loading="props.loading" />
+    <rb-select v-bind="$attrs" :options="options" :loading="props.loading">
+      <template v-for="(index, name) in $slots" :key="index" #[name]="props">
+        <!-- @slot https://quasar.dev/vue-components/select -->
+        <slot :name="name" v-bind="props" />
+      </template>
+    </rb-select>
   </rb-resource-collection>
 </template>
 
