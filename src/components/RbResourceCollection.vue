@@ -72,7 +72,7 @@ export default {
     },
 
     /**
-     * Show the default slot even when no results are fecthed
+     * Show the default slot even when no results are fetched
      */
     keepOnEmpty: {
       type: Boolean,
@@ -80,7 +80,23 @@ export default {
     },
   },
 
-  emits: ["loaded", "error"],
+  emits: [
+    /**
+     * Emitted when new resource instances are loaded
+     *
+     * @event loaded
+     * @property {object} response The loaded response
+     */
+    "loaded",
+
+    /**
+     * Emitted when an error occurs during loading
+     *
+     * @event error
+     * @property {object} error The error occurred during loading
+     */
+    "error",
+  ],
 
   data() {
     return {
@@ -194,7 +210,7 @@ export default {
         } else {
           this.items = newItems;
         }
-        this.$emit("loaded", newItems);
+        this.$emit("loaded", res);
       } catch (err) {
         this.$emit("error", err);
       } finally {

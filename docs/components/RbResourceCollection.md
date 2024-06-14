@@ -11,7 +11,7 @@
 | `offset` | `number` | The offset to apply when fetching resource instances | `0` |
 | `limit` | `number` | The limit to apply when fetching resource instances | `null` |
 | `infinite` | `boolean` | With infinite mode, new fetched items are appended to the previous ones | `false` |
-| `keepOnEmpty` | `boolean` | Show the default slot even when no results are fecthed | `false` |
+| `keepOnEmpty` | `boolean` | Show the default slot even when no results are fetched | `false` |
 
 ## Slots
 
@@ -24,8 +24,8 @@
 
 | Name | Description |
 | ---- | ----------- |
-| `loaded` | Fetch a collection of a resource instances and provide them to its children |
-| `error` | Fetch a collection of a resource instances and provide them to its children |
+| `loaded` | Emitted when new resource instances are loaded |
+| `error` | Emitted when an error occurs during loading |
 
 ## Methods
 
