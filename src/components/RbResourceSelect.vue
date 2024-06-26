@@ -81,8 +81,8 @@ export default {
   },
 
   methods: {
-    onLoadedItems(items) {
-      this.items = items || [];
+    onLoadedItems(res) {
+      this.items = res?.data || [];
       this.$emit("loaded", [...this.items]);
     },
   },
