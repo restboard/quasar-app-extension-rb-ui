@@ -132,7 +132,7 @@ export default {
     },
   },
 
-  emits: ["blur", "update:modelValue", "update:dt"],
+  emits: ["blur", "update:model-value", "update:dt"],
 
   data() {
     return {
@@ -165,19 +165,23 @@ export default {
       handler(val) {
         const oldValue = this.value;
         const dt = this.parse(val, this.mask);
-        this.value = dt ? date.formatDate(dt, this.mask) : null;
-        if (this.value !== oldValue) {
+        const value = dt ? date.formatDate(dt, this.mask) : null;
+        if (value !== oldValue) {
+          this.value = value;
           this.$emit("update:dt", dt);
         }
       },
       immediate: true,
     },
 
-    value(val) {
+    value(val, old) {
+      if (val === old) {
+        return;
+      }
       if (!val) {
-        this.$emit("update:modelValue", null);
+        this.$emit("update:model-value", null);
       } else if (val.length === this.mask.length) {
-        this.$emit("update:modelValue", this.serialize(val, this.mask));
+        this.$emit("update:model-value", this.serialize(val, this.mask));
       }
     },
   },
