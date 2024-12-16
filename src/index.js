@@ -10,9 +10,9 @@ module.exports = function (api) {
   api.compatibleWith("quasar", "^2.0.0");
 
   if (api.hasVite) {
-    api.compatibleWith("@quasar/app-vite", "^1.0.0");
+    api.compatibleWith("@quasar/app-vite", "^1.0.0||^2.0.0");
   } else {
-    api.compatibleWith("@quasar/app-webpack", "^3.0.0");
+    api.compatibleWith("@quasar/app-webpack", "^3.0.0||^4.0.0");
   }
 
   api.extendQuasarConf((conf) => {
