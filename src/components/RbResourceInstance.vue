@@ -71,6 +71,7 @@ export default {
       instance: null,
       loading: true,
       saving: false,
+      abort: null,
     };
   },
 
@@ -165,6 +166,7 @@ export default {
       } catch (err) {
         this.$emit("error", err);
       } finally {
+        this.abort = null;
         this.loading = false;
       }
     },
